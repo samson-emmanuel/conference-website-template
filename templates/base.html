@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Evently{% endblock %}</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+
+</head>
+
+<body>
+    <!-- <header>
+        <nav class="navbar">
+            <div class="container">
+                <a href="#hero" class="logo">Evently</a>
+                <ul class="nav-links">
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#events">Events</a></li>
+                    <li><a href="#speakers">Speakers</a></li>
+                    <li><a href="#blog">Blog</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header> -->
+    <!-- <header>
+        <nav class="navbar">
+            <div class="container">
+                <a href="#" class="logo">Evently</a>
+                <button class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-links" id="nav-links">
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#events">Events</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header> -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="/" class="logo">Logo</a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/gallery">Gallery</a></li>
+                <li class="dropdown">
+                    <a href="#">More</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/contact">Contact</a></li>
+                    </ul>
+                </li>
+                <li><a href="/schedule">Schedule</a></li>
+            </ul>
+            <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
+        </div>
+    </nav>
+    
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- <footer>
+        <div class="container">
+            <p>&copy; 2024 Lafarge Conference. All rights reserved.</p>
+        </div>
+    </footer> -->
+    <footer class="footer">
+        <div class="footer-container">
+            <!-- <h3>Evently</h3> -->
+            <nav>
+                <ul class="footer-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Events</a></li>
+                    <li><a href="#">Speakers</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+            <div class="footer-credit">
+                <p>&copy; 2024 Lafarge Conference. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('nav-links');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+    </script>
+    <script src="/static/js/script.js"></script>
+
+</body>
+
+</html>

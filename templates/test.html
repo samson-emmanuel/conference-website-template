@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #2C2F72;
+            color: #fff;
+        }
+
+        .contact-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 50px;
+            text-align: center;
+        }
+
+        .contact-section h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .contact-section p {
+            font-size: 1rem;
+            margin-bottom: 40px;
+            color: #ccc;
+        }
+
+        .contact-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 20px;
+        }
+
+        .contact-form {
+            flex: 2;
+            text-align: left;
+        }
+
+        .contact-form form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .contact-form textarea {
+            grid-column: span 2;
+        }
+
+        .contact-form button {
+            grid-column: span 2;
+            padding: 15px;
+            border: none;
+            border-radius: 5px;
+            background-color: #4E65F6;
+            color: #fff;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .contact-form button:hover {
+            background-color: #3D55D6;
+        }
+
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 5px;
+            background-color: #1E215E;
+            color: #fff;
+            font-size: 1rem;
+        }
+
+        .contact-info {
+            flex: 1;
+            text-align: left;
+        }
+
+        .contact-info div {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .contact-info div i {
+            font-size: 1.5rem;
+            background-color: #1E215E;
+            padding: 10px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+        }
+
+        .contact-info div span {
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <section class="contact-section">
+        <h1>Get In Touch</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+
+        <div class="contact-container">
+            <!-- Contact Form -->
+            <div class="contact-form">
+                <form method="POST">
+                    <input type="text" name="name" placeholder="Name" required>
+                    <input type="email" name="email" placeholder="Email" required>
+                    <input type="text" name="number" placeholder="Number" required>
+                    <input type="text" name="subject" placeholder="Subject" required>
+                    <textarea name="message" placeholder="Message" required></textarea>
+                    <button type="submit">Send Message</button>
+                </form>
+            </div>
+
+            <!-- Contact Info -->
+            <div class="contact-info">
+                <div>
+                    <i>📞</i>
+                    <span>09483536457868<br>1308745622643</span>
+                </div>
+                <div>
+                    <i>📧</i>
+                    <span>hello@gmail.com<br>www.yourwebsite.com</span>
+                </div>
+                <div>
+                    <i>📍</i>
+                    <span>Porobi 60/1, Hospital Road,<br>Hasannagar, Sunamganj</span>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

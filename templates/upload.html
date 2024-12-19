@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="upload">
+    <h2>Upload Images</h2>
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+        <input type="file" name="file" accept="image/*" required>
+        <button type="submit">Upload</button>
+    </form>
+</section>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="schedule">
+    <h2>Event Schedule</h2>
+    <p>Here is the schedule for our upcoming event.</p>
+    <div class="schedule-timeline">
+        {% for item in schedule %}
+        <div class="schedule-item">
+            <h3>{{ item.time }}</h3>
+            <p>{{ item.activity }}</p>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
