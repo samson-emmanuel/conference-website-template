@@ -29,374 +29,378 @@
     </div>
 </section>
 
-<!-- Count Down for the event itself -->
+<section class="countdowns"
+    style="display: flex; justify-content: center; align-items: center; max-width: 1200px; margin: auto; flex-wrap: wrap;">
+    <!-- Left Image -->
+    <div class="image-section arrangement" style="flex: 1; text-align: center; margin: 20px;">
+        <img src="/static/images/countdown-img.png" alt="Conference Image"
+            style="width: 100%; max-width: 600px; border-radius: 12px;">
+    </div>
+
+    <!-- Right Countdown Section -->
+    <div class="arrangement2" style="flex: 1; text-align: center; padding: 20px;">
+        <h2 style="line-height: 1.5; font-size: 2rem;">Welcome to the World Largest Conference</h2>
+        <p style="color: white; margin-bottom: 2rem; font-size: 1rem; text-align: left; line-height: 1.6;">
+            Welcome to Eventdia, start with a greeting to your audience that's appropriate to the situation. Dolor sit
+            amet
+            consectetur elit sed do eiusmod tempor incididunt labore et dolore magna aliqua.
+        </p>
+    </div>
+</section>
+
+
 <section class="countdowns">
-    <section class="countdowns"
-        style="display: flex; justify-content: space-between; align-items: center; max-width: 1200px;">
-        <!-- Left Image -->
-        <div class="image-section arrangement" style="flex: 1; text-align: center; justify-content: space-between;">
-            <img src="/static/images/countdown-img.png" alt="Conference Image"
-                style="width: 1200px; max-width: 100%; border-radius: 12px; padding-right: 60px;">
+    <h2>Event Countdown</h2>
+
+    <!-- Day 1 -->
+    <h4>Day 1</h4>
+    <div class="event-container">
+        <div class="event-card">
+            <h3>Morning Session</h3>
+            <div class="countdown-timer" id="morning-session-timer"></div>
+        </div>
+        <div class="event-card">
+            <h3>Evening Session</h3>
+            <div class="countdown-timer" id="afternoon-session-timer"></div>
+        </div>
+    </div>
+
+    <!-- Day 2 -->
+    <h4>Day 2</h4>
+    <div class="event-container">
+        <div class="event-card">
+            <h3>Morning Session</h3>
+            <div class="countdown-timer" id="evening-session-timer"></div>
+        </div>
+        <div class="event-card">
+            <h3>Evening Session</h3>
+            <div class="countdown-timer" id="night-session-timer"></div>
+        </div>
+    </div>
+</section>
+
+
+
+
+<!-- Section for the what the program is about -->
+<section>
+    <h2>Upcoming Conference Schedule</h2>
+    <p style="color: white;">Click each day to see the speakers</p>
+
+    <!-- Tabs -->
+    <div class="tabs">
+        <div class="tab active" data-day="day1">1st Day - 29 Dec, 2025</div>
+        <div class="tab" data-day="day2">2nd Day - 30 Dec, 2025</div>
+        <div class="tab" data-day="day3">3rd Day - 31 Dec, 2025</div>
+    </div>
+
+    <!-- Speakers Containers -->
+    <div id="day1" class="speakers-container active">
+        <div class="speaker-card">
+            <img src="/static/images/schedule-1.png" alt="Speaker 1">
+            <h3>Speaker 1</h3>
+            <p>08:20 AM - 10:30 AM</p>
+            <p>Creating New Business</p>
+        </div>
+        <div class="speaker-card">
+            <img src="/static/images/schedule-1.png" alt="Speaker 2">
+            <h3>Speaker 2</h3>
+            <p>08:20 AM - 10:30 AM</p>
+            <p>Entrepreneurship Fundamentals</p>
+        </div>
+        <div class="speaker-card">
+            <img src="/static/images/schedule-1.png" alt="Speaker 2">
+            <h3>Speaker 2</h3>
+            <p>08:20 AM - 10:30 AM</p>
+            <p>Entrepreneurship Fundamentals</p>
+        </div>
+        <div class="speaker-card">
+            <img src="/static/images/schedule-1.png" alt="Speaker 2">
+            <h3>Speaker 2</h3>
+            <p>08:20 AM - 10:30 AM</p>
+            <p>Entrepreneurship Fundamentals</p>
+        </div>
+        <div class="speaker-card">
+            <img src="/static/images/schedule-1.png" alt="Speaker 2">
+            <h3>Speaker 2</h3>
+            <p>08:20 AM - 10:30 AM</p>
+            <p>Entrepreneurship Fundamentals</p>
+        </div>
+        <div class="speaker-card">
+            <img src="/static/images/schedule-1.png" alt="Speaker 2">
+            <h3>Speaker 2</h3>
+            <p>08:20 AM - 10:30 AM</p>
+            <p>Entrepreneurship Fundamentals</p>
+        </div>
+    </div>
+
+    <div id="day2" class="speakers-container">
+        <div class="speaker-card">
+            <img src="/static/images/schedule-1.png" alt="Speaker 3">
+            <h3>Speaker 3</h3>
+            <p>08:20 AM - 10:30 AM</p>
+            <p>Leadership in Tech</p>
+        </div>
+        <div class="speaker-card">
+            <img src="/static/images/schedule-1.png" alt="Speaker 4">
+            <h3>Speaker 4</h3>
+            <p>10:30 AM - 12:00 PM</p>
+            <p>Women in Business</p>
+        </div>
+        <div class="speaker-card">
+            <img src="/static/images/schedule-1.png" alt="Speaker 4">
+            <h3>Speaker 4</h3>
+            <p>10:30 AM - 12:00 PM</p>
+            <p>Women in Business</p>
+        </div>
+    </div>
+
+    <div id="day3" class="speakers-container">
+        <div class="speaker-card">
+            <img src="/static/images/schedule-1.png" alt="Speaker 5">
+            <h3>Speaker 5</h3>
+            <p>08:20 AM - 10:30 AM</p>
+            <p>Innovations in AI</p>
+        </div>
+        <div class="speaker-card">
+            <img src="/static/images/schedule-1.png" alt="Speaker 6">
+            <h3>Susan Green</h3>
+            <p>10:30 AM - 12:00 PM</p>
+            <p>Future of UI/UX</p>
+        </div>
+    </div>
+</section>
+
+<section class="conference-section">
+    <h2 class="section-title">Know More Upcoming <br> Conference</h2>
+    <p class="section-description">
+        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
+        invidunt ut labore et dolore magna,
+    </p>
+    <div class="conference-stats">
+        <div class="stat-box">
+            <div>
+                <i class="fas fa-user" style="color: white;"></i>
+            </div>
+            <h3>120</h3>
+            <p>Great Speakers</p>
+        </div>
+        <div class="stat-box">
+            <div><i class="fas fa-book" style="color: white;"></i></div>
+            <h3>320k</h3>
+            <p>Total Seats</p>
+        </div>
+        <div class="stat-box">
+            <div>
+                <i class="fas fa-microphone" style="color: white;"></i>
+            </div>
+            <h3>20+</h3>
+            <p>Total Topics</p>
+        </div>
+    </div>
+</section>
+
+
+<!-- Speakers section -->
+<section class="event-showcase">
+    <h2>See Our Speakers</h2>
+    <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+        dolore magna.
+    </p>
+    <div class="showcase-grid">
+        <!-- Profile 1 -->
+        <div class="profile-card">
+            <img src="/static/images/ceo.jpg" alt="Lolu Alade-Akinyemi">
+
+            <div class="icon-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+            <div class="card-details">
+                <h3>Lolu Alade-Akinyemi</h3>
+                <p>CEO</p>
+            </div>
         </div>
 
-        <!-- Right Countdown Section -->
-        <div class="arrangement2" style="flex: 1; text-align: center; padding: 40px">
-            <h2 style="line-height: 1.5; font-size: 35px;">Welcome to the World Largest Conference</h2>
-            <p style="color: white; margin-bottom: 2rem; font-size: large; text-align: left; line-height: 1.3;">
-                welcome to eventdia, start with a greeting to your audience that's appropriate to the situation. Dolor
-                sit amet consectetur elit sed do eiusmod tempor incd idunt labore et dolo.
-            </p>
-        </div>
-    </section>
-
-    <section class="countdowns">
-        <h2>Event Countdown</h2>
-
-        <!-- Day 1 -->
-        <h4>Day 1</h4>
-        <div class="event-container">
-            <div class="event-card">
-                <h3>Morning Session</h3>
-                <div class="countdown-timer" id="morning-session-timer"></div>
+        <!-- Profile 2 -->
+        <div class="profile-card">
+            <img src="/static/images/osaze-logistics-director.png" alt="Osazemen Aghatise">
+            <div class="card-details">
+                <h3>Osazemen Aghatise</h3>
+                <p>Logistics Director</p>
             </div>
-            <div class="event-card">
-                <h3>Evening Session</h3>
-                <div class="countdown-timer" id="afternoon-session-timer"></div>
+            <div class="icon-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
             </div>
         </div>
 
-        <!-- Day 2 -->
-        <h4>Day 2</h4>
-        <div class="event-container">
-            <div class="event-card">
-                <h3>Morning Session</h3>
-                <div class="countdown-timer" id="evening-session-timer"></div>
+        <!-- Profile 3 -->
+        <div class="profile-card">
+            <img src="/static/images/saeed-ande.png" alt="Saeed Ande">
+            <div class="card-details">
+                <h3>Saeed Ande</h3>
+                <p>Procurement Director</p>
             </div>
-            <div class="event-card">
-                <h3>Evening Session</h3>
-                <div class="countdown-timer" id="night-session-timer"></div>
-            </div>
-        </div>
-    </section>
-
-
-
-
-    <!-- Section for the what the program is about -->
-    <section>
-        <h2>Upcoming Conference Schedule</h2>
-        <p style="color: white;">Click each day to see the speakers</p>
-
-        <!-- Tabs -->
-        <div class="tabs">
-            <div class="tab active" data-day="day1">1st Day - 29 Dec, 2025</div>
-            <div class="tab" data-day="day2">2nd Day - 30 Dec, 2025</div>
-            <div class="tab" data-day="day3">3rd Day - 31 Dec, 2025</div>
-        </div>
-
-        <!-- Speakers Containers -->
-        <div id="day1" class="speakers-container active">
-            <div class="speaker-card">
-                <img src="/static/images/schedule-1.png" alt="Speaker 1">
-                <h3>Speaker 1</h3>
-                <p>08:20 AM - 10:30 AM</p>
-                <p>Creating New Business</p>
-            </div>
-            <div class="speaker-card">
-                <img src="/static/images/schedule-1.png" alt="Speaker 2">
-                <h3>Speaker 2</h3>
-                <p>08:20 AM - 10:30 AM</p>
-                <p>Entrepreneurship Fundamentals</p>
-            </div>
-            <div class="speaker-card">
-                <img src="/static/images/schedule-1.png" alt="Speaker 2">
-                <h3>Speaker 2</h3>
-                <p>08:20 AM - 10:30 AM</p>
-                <p>Entrepreneurship Fundamentals</p>
-            </div>
-            <div class="speaker-card">
-                <img src="/static/images/schedule-1.png" alt="Speaker 2">
-                <h3>Speaker 2</h3>
-                <p>08:20 AM - 10:30 AM</p>
-                <p>Entrepreneurship Fundamentals</p>
-            </div>
-            <div class="speaker-card">
-                <img src="/static/images/schedule-1.png" alt="Speaker 2">
-                <h3>Speaker 2</h3>
-                <p>08:20 AM - 10:30 AM</p>
-                <p>Entrepreneurship Fundamentals</p>
-            </div>
-            <div class="speaker-card">
-                <img src="/static/images/schedule-1.png" alt="Speaker 2">
-                <h3>Speaker 2</h3>
-                <p>08:20 AM - 10:30 AM</p>
-                <p>Entrepreneurship Fundamentals</p>
+            <div class="icon-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
             </div>
         </div>
 
-        <div id="day2" class="speakers-container">
-            <div class="speaker-card">
-                <img src="/static/images/schedule-1.png" alt="Speaker 3">
-                <h3>Speaker 3</h3>
-                <p>08:20 AM - 10:30 AM</p>
-                <p>Leadership in Tech</p>
+        <!-- Profile 4 -->
+        <div class="profile-card">
+            <img src="/static/images/gbemiga-owolabi.png" alt="Gbemiga Owolabi">
+            <div class="card-details">
+                <h3>Gbemiga Owolabi</h3>
+                <p>Organization & Human Resources Director</p>
             </div>
-            <div class="speaker-card">
-                <img src="/static/images/schedule-1.png" alt="Speaker 4">
-                <h3>Speaker 4</h3>
-                <p>10:30 AM - 12:00 PM</p>
-                <p>Women in Business</p>
-            </div>
-            <div class="speaker-card">
-                <img src="/static/images/schedule-1.png" alt="Speaker 4">
-                <h3>Speaker 4</h3>
-                <p>10:30 AM - 12:00 PM</p>
-                <p>Women in Business</p>
+            <div class="icon-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
             </div>
         </div>
 
-        <div id="day3" class="speakers-container">
-            <div class="speaker-card">
-                <img src="/static/images/schedule-1.png" alt="Speaker 5">
-                <h3>Speaker 5</h3>
-                <p>08:20 AM - 10:30 AM</p>
-                <p>Innovations in AI</p>
+        <!-- Profile 5 -->
+        <div class="profile-card">
+            <img src="/static/images/gbemiga-owolabi.png" alt="Gbemiga Owolabi">
+            <div class="card-details">
+                <h3>Gbemiga Owolabi</h3>
+                <p>Organization & Human Resources Director</p>
             </div>
-            <div class="speaker-card">
-                <img src="/static/images/schedule-1.png" alt="Speaker 6">
-                <h3>Susan Green</h3>
-                <p>10:30 AM - 12:00 PM</p>
-                <p>Future of UI/UX</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="conference-section">
-        <h2 class="section-title">Know More Upcoming <br> Conference</h2>
-        <p class="section-description">
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-            invidunt ut labore et dolore magna,
-        </p>
-        <div class="conference-stats">
-            <div class="stat-box">
-                <div class="icon">&#127908;</div> <!-- Microphone Icon -->
-                <h3>120</h3>
-                <p>Great Speakers</p>
-            </div>
-            <div class="stat-box">
-                <div class="icon">&#128214;</div> <!-- Book/Seats Icon -->
-                <h3>320k</h3>
-                <p>Total Seats</p>
-            </div>
-            <div class="stat-box">
-                <div class="icon">&#127897;</div> <!-- Microphone Topic Icon -->
-                <h3>20+</h3>
-                <p>Total Topics</p>
+            <div class="icon-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
             </div>
         </div>
-    </section>
 
-
-    <!-- Speakers section -->
-    <section class="event-showcase">
-        <h2>See Our Speakers</h2>
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna.
-        </p>
-        <div class="showcase-grid">
-            <!-- Profile 1 -->
-            <div class="profile-card">
-                <img src="/static/images/ceo.jpg" alt="Lolu Alade-Akinyemi">
-
-                <div class="icon-links">
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-linkedin"></i></a>
-                </div>
-                <div class="card-details">
-                    <h3>Lolu Alade-Akinyemi</h3>
-                    <p>CEO</p>
-                </div>
+        <!-- Profile 6 -->
+        <div class="profile-card">
+            <img src="/static/images/gbemiga-owolabi.png" alt="Gbemiga Owolabi">
+            <div class="card-details">
+                <h3>Gbemiga Owolabi</h3>
+                <p>Organization & Human Resources Director</p>
             </div>
-
-            <!-- Profile 2 -->
-            <div class="profile-card">
-                <img src="/static/images/osaze-logistics-director.png" alt="Osazemen Aghatise">
-                <div class="card-details">
-                    <h3>Osazemen Aghatise</h3>
-                    <p>Logistics Director</p>
-                </div>
-                <div class="icon-links">
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-linkedin"></i></a>
-                </div>
-            </div>
-
-            <!-- Profile 3 -->
-            <div class="profile-card">
-                <img src="/static/images/saeed-ande.png" alt="Saeed Ande">
-                <div class="card-details">
-                    <h3>Saeed Ande</h3>
-                    <p>Procurement Director</p>
-                </div>
-                <div class="icon-links">
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-linkedin"></i></a>
-                </div>
-            </div>
-
-            <!-- Profile 4 -->
-            <div class="profile-card">
-                <img src="/static/images/gbemiga-owolabi.png" alt="Gbemiga Owolabi">
-                <div class="card-details">
-                    <h3>Gbemiga Owolabi</h3>
-                    <p>Organization & Human Resources Director</p>
-                </div>
-                <div class="icon-links">
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-linkedin"></i></a>
-                </div>
-            </div>
-
-            <!-- Profile 5 -->
-            <div class="profile-card">
-                <img src="/static/images/gbemiga-owolabi.png" alt="Gbemiga Owolabi">
-                <div class="card-details">
-                    <h3>Gbemiga Owolabi</h3>
-                    <p>Organization & Human Resources Director</p>
-                </div>
-                <div class="icon-links">
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-linkedin"></i></a>
-                </div>
-            </div>
-
-            <!-- Profile 6 -->
-            <div class="profile-card">
-                <img src="/static/images/gbemiga-owolabi.png" alt="Gbemiga Owolabi">
-                <div class="card-details">
-                    <h3>Gbemiga Owolabi</h3>
-                    <p>Organization & Human Resources Director</p>
-                </div>
-                <div class="icon-links">
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-linkedin"></i></a>
-                </div>
-            </div>
-            <!-- Profile  -->
-            <div class="profile-card">
-                <img src="/static/images/gbemiga-owolabi.png" alt="Gbemiga Owolabi">
-                <div class="card-details">
-                    <h3>Gbemiga Owolabi</h3>
-                    <p>Organization & Human Resources Director</p>
-                </div>
-                <div class="icon-links">
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-linkedin"></i></a>
-                </div>
-            </div>
-            <!-- Profile 8 -->
-            <div class="profile-card">
-                <img src="/static/images/gbemiga-owolabi.png" alt="Gbemiga Owolabi">
-                <div class="card-details">
-                    <h3>Gbemiga Owolabi</h3>
-                    <p>Organization & Human Resources Director</p>
-                </div>
-                <div class="icon-links">
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-linkedin"></i></a>
-                </div>
+            <div class="icon-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
             </div>
         </div>
-        <!-- <div class="cta-wrapper">
+        <!-- Profile  -->
+        <div class="profile-card">
+            <img src="/static/images/gbemiga-owolabi.png" alt="Gbemiga Owolabi">
+            <div class="card-details">
+                <h3>Gbemiga Owolabi</h3>
+                <p>Organization & Human Resources Director</p>
+            </div>
+            <div class="icon-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+        <!-- Profile 8 -->
+        <div class="profile-card">
+            <img src="/static/images/gbemiga-owolabi.png" alt="Gbemiga Owolabi">
+            <div class="card-details">
+                <h3>Gbemiga Owolabi</h3>
+                <p>Organization & Human Resources Director</p>
+            </div>
+            <div class="icon-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="cta-wrapper">
             <a href="{{ url_for('about') }}" class="cta-button">View All Profiles</a>
         </div> -->
-    </section>
+</section>
 
 
 
 
-    <!-- Question asking section -->
+<!-- Question asking section -->
 
-    <section class="ask" id="ask">
-        <div class="container">
-            <h2>Ask a Question</h2>
-            <form onsubmit="handleAsk(event)">
-                <textarea name="question" placeholder="Your Question" required></textarea>
-                <button type="submit">Ask</button>
-            </form>
-            <p id="success-message"></p>
-        </div>
-    </section>
+<section class="ask" id="ask">
+    <div class="container">
+        <h2>Ask a Question</h2>
+        <form onsubmit="handleAsk(event)">
+            <textarea name="question" placeholder="Your Question" required></textarea>
+            <button type="submit">Ask</button>
+        </form>
+        <p id="success-message"></p>
+    </div>
+</section>
 
-    <script>
-        // Tab Functionality
-        const tabs = document.querySelectorAll(".tab");
-        const containers = document.querySelectorAll(".speakers-container");
+<script>
+    // Tab Functionality
+    const tabs = document.querySelectorAll(".tab");
+    const containers = document.querySelectorAll(".speakers-container");
 
-        tabs.forEach(tab => {
-            tab.addEventListener("click", () => {
-                const targetDay = tab.getAttribute("data-day");
+    tabs.forEach(tab => {
+        tab.addEventListener("click", () => {
+            const targetDay = tab.getAttribute("data-day");
 
-                // Update Active Tab
-                tabs.forEach(t => t.classList.remove("active"));
-                tab.classList.add("active");
+            // Update Active Tab
+            tabs.forEach(t => t.classList.remove("active"));
+            tab.classList.add("active");
 
-                // Update Active Content
-                containers.forEach(container => {
-                    if (container.id === targetDay) {
-                        container.classList.add("active");
-                    } else {
-                        container.classList.remove("active");
-                    }
-                });
+            // Update Active Content
+            containers.forEach(container => {
+                if (container.id === targetDay) {
+                    container.classList.add("active");
+                } else {
+                    container.classList.remove("active");
+                }
             });
         });
-    </script>
+    });
+</script>
 
-    <script>
-        async function handleAsk(event) {
-            event.preventDefault(); // Prevent form submission
+<script>
+    async function handleAsk(event) {
+        event.preventDefault(); // Prevent form submission
 
-            const textarea = document.querySelector('textarea[name="question"]');
-            const question = textarea.value.trim();
+        const textarea = document.querySelector('textarea[name="question"]');
+        const question = textarea.value.trim();
 
-            if (!question) {
-                alert("Please enter a question!");
-                return;
-            }
-
-            // Send question to the Flask backend
-            try {
-                const response = await fetch('/ask-question', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ question })
-                });
-
-                const data = await response.json();
-
-                if (data.status === "success") {
-                    // Display success message and clear textarea
-                    document.getElementById('success-message').textContent = "Question asked successfully!";
-                    textarea.value = ""; // Clear the textarea
-                } else {
-                    alert(data.message || "An error occurred.");
-                }
-            } catch (error) {
-                console.error("Error submitting question:", error);
-                alert("An error occurred while submitting your question.");
-            }
+        if (!question) {
+            alert("Please enter a question!");
+            return;
         }
-    </script>
-    {% endblock %}
+
+        // Send question to the Flask backend
+        try {
+            const response = await fetch('/ask-question', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ question })
+            });
+
+            const data = await response.json();
+
+            if (data.status === "success") {
+                // Display success message and clear textarea
+                document.getElementById('success-message').textContent = "Question asked successfully!";
+                textarea.value = ""; // Clear the textarea
+            } else {
+                alert(data.message || "An error occurred.");
+            }
+        } catch (error) {
+            console.error("Error submitting question:", error);
+            alert("An error occurred while submitting your question.");
+        }
+    }
+</script>
+{% endblock %}
