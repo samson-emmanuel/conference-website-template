@@ -1099,7 +1099,7 @@ button:focus {
     padding: 15px;
     border: none;
     border-radius: 5px;
-    background-color: #4E65F6;
+    background-color: #50E3C2;
     color: #fff;
     font-size: 1rem;
     cursor: pointer;
@@ -1168,6 +1168,17 @@ button:focus {
     .contact-info {
         width: 100%;
         margin-top: 20px;
+    }
+    .contact-form button {
+        grid-column: span 2;
+        padding: 7px;
+        border: none;
+        border-radius: 5px;
+        background-color: #50E3C2;
+        color: #fff;
+        font-size: 0.8rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
     }
 }
 
