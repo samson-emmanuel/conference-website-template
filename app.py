@@ -117,32 +117,6 @@ def schedule():
     ]
     return render_template("schedule.html", events=events)
 
-
-# @app.route("/contact", methods=["GET", "POST"])
-# def contact():
-#     """Contact Page - Handles Messages with Database"""
-#     if request.method == "POST":
-#         name = request.form.get("name")
-#         email = request.form.get("email")
-#         message = request.form.get("message")
-#         if name and email and message:
-#             # Insert the message into the database
-#             with sqlite3.connect(DATABASE_FILE) as conn:
-#                 cursor = conn.cursor()
-#                 cursor.execute("INSERT INTO messages (name, email, message) VALUES (?, ?, ?)",
-#                                (name, email, message))
-#                 conn.commit()
-#             flash("Message sent successfully!", "success")
-#         return redirect(url_for("contact"))
-
-#     # Retrieve all messages from the database
-#     with sqlite3.connect(DATABASE_FILE) as conn:
-#         cursor = conn.cursor()
-#         cursor.execute("SELECT name, email, message FROM messages")
-#         messages = [{"name": row[0], "email": row[1], "message": row[2]} for row in cursor.fetchall()]
-
-#     return render_template("contact.html", messages=messages)
-
 @app.route("/contact", methods=["GET", "POST"])
 def contact():
     """Contact Page - Handles Messages with Database"""
