@@ -107,16 +107,6 @@ def gallery():
     return render_template("gallery.html", images=gallery_images)
 
 
-# @app.route("/schedule")
-# def schedule():
-#     """Schedule Page"""
-#     events = [
-#         {"time": "10:00 AM", "title": "Opening Ceremony", "description": "Welcoming guests."},
-#         {"time": "11:00 AM", "title": "Keynote Speech", "description": "Speech by a renowned speaker."},
-#         {"time": "1:00 PM", "title": "Lunch Break", "description": "Buffet lunch for attendees."},
-#     ]
-#     return render_template("schedule.html", events=events)
-
 @app.route("/contact", methods=["GET", "POST"])
 def contact():
     """Contact Page - Handles Messages with Database"""
@@ -167,5 +157,5 @@ def contact():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()
 
