@@ -77,11 +77,11 @@ def about():
     return render_template("about.html")
 
 
-@app.route("/previous_year_images")
-def previous_images():
-    """Previous Year Images Page"""
-    return render_template("previous_year_images.html")
-
+@app.route('/previous_year_images')
+def previous_year_images():
+    image_folder = os.path.join(app.static_folder, 'conference2024')
+    images = [f for f in os.listdir(image_folder) if os.path.isfile(os.path.join(image_folder, f))]
+    return render_template('previous_year_images.html', images=images)
 
 @app.route("/gallery", methods=["GET", "POST"])
 def gallery():
@@ -107,15 +107,15 @@ def gallery():
     return render_template("gallery.html", images=gallery_images)
 
 
-@app.route("/schedule")
-def schedule():
-    """Schedule Page"""
-    events = [
-        {"time": "10:00 AM", "title": "Opening Ceremony", "description": "Welcoming guests."},
-        {"time": "11:00 AM", "title": "Keynote Speech", "description": "Speech by a renowned speaker."},
-        {"time": "1:00 PM", "title": "Lunch Break", "description": "Buffet lunch for attendees."},
-    ]
-    return render_template("schedule.html", events=events)
+# @app.route("/schedule")
+# def schedule():
+#     """Schedule Page"""
+#     events = [
+#         {"time": "10:00 AM", "title": "Opening Ceremony", "description": "Welcoming guests."},
+#         {"time": "11:00 AM", "title": "Keynote Speech", "description": "Speech by a renowned speaker."},
+#         {"time": "1:00 PM", "title": "Lunch Break", "description": "Buffet lunch for attendees."},
+#     ]
+#     return render_template("schedule.html", events=events)
 
 @app.route("/contact", methods=["GET", "POST"])
 def contact():
@@ -167,5 +167,5 @@ def contact():
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
 

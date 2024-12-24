@@ -36,7 +36,7 @@ const setupCountdown = (id, eventTime) => {
 };
 
 // Initialize countdowns for each session
-setupCountdown("morning-session-timer", new Date("2024-12-01T14:00:00").getTime());
+setupCountdown("morning-session-timer", new Date("2025-01-01T16:00:00").getTime());
 setupCountdown("afternoon-session-timer", new Date("2025-02-01T13:00:00").getTime());
 setupCountdown("evening-session-timer", new Date("2025-02-02T09:00:00").getTime());
 setupCountdown("night-session-timer", new Date("2025-02-02T13:00:00").getTime());

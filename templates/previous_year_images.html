@@ -1,68 +1,52 @@
 {% extends "base.html" %}
 {% block content %}
-<section class="gallery">
-    <h2>Image Gallery</h2>
-    <p>Browse through images in the galleries folder.</p>
-    <div class="gallery-grid">
+<div class="carousel-container">
+    <button class="arrow left" onclick="moveLeft()">&#10094;</button>
+    <div class="year_2024_pictures-carousel" id="carousel">
         {% for image in images %}
-        <div class="gallery-item" onclick="openModal({{ loop.index0 }})">
-            <img src="{{ url_for('static', filename='galleries/' + image) }}" alt="Gallery Image">
-            <div class="overlay">
-                <span>View Image</span>
-            </div>
+        <div class="slide">
+            <img src="{{ url_for('static', filename='conference2024/' + image) }}" alt="{{ image }}">
+
+            <div class="caption">Caption for {{ image }}</div>
         </div>
         {% endfor %}
     </div>
-</section>
-
-<!-- Image Modal -->
-<div id="imageModal" class="modal">
-    <span class="close" onclick="closeModal()">&times;</span>
-    <img class="modal-content" id="modalImage" alt="Gallery Image">
-
-    <!-- Navigation Arrows -->
-    <a class="prev" onclick="changeImage(-1)">&#10094;</a>
-    <a class="next" onclick="changeImage(1)">&#10095;</a>
+    <button class="arrow right" onclick="moveRight()">&#10095;</button>
 </div>
 
-<!-- JavaScript for Modal and Image Navigation -->
 <script>
-    const images = [
-        {% for image in images %}
-    "{{ url_for('static', filename='galleries/' + image) }}",
-        {% endfor %}
-    ];
+const carousel = document.getElementById('carousel');
+const slides = document.querySelectorAll('.slide');
+let currentIndex = 0;
 
-    let currentIndex = 0;
-
-    function openModal(index) {
-        currentIndex = index;
-        const modal = document.getElementById('imageModal');
-        const modalImg = document.getElementById('modalImage');
-        modal.style.display = "block";
-        modalImg.src = images[currentIndex];
-    }
-
-    function closeModal() {
-        document.getElementById('imageModal').style.display = "none";
-    }
-
-    function changeImage(step) {
-        currentIndex += step;
-        if (currentIndex >= images.length) currentIndex = 0; // Loop to first image
-        if (currentIndex < 0) currentIndex = images.length - 1; // Loop to last image
-
-        const modalImg = document.getElementById('modalImage');
-        modalImg.src = images[currentIndex];
-    }
-
-    // Close modal when clicking outside the image
-    window.onclick = function (event) {
-        const modal = document.getElementById('imageModal');
-        if (event.target === modal) {
-            modal.style.display = "none";
+function updateSlides() {
+    slides.forEach((slide, index) => {
+        slide.classList.remove('active');
+        if (index === currentIndex) {
+            slide.classList.add('active');
         }
-    };
+    });
+
+    // Scroll to the current slide smoothly
+    const slideWidth = slides[currentIndex].offsetWidth;
+    const scrollPosition = slideWidth * currentIndex - (carousel.clientWidth / 2) + (slideWidth / 2);
+    carousel.scrollTo({ left: scrollPosition, behavior: 'smooth' });
+}
+
+function moveRight() {
+    currentIndex = (currentIndex + 1) % slides.length;
+    updateSlides();
+}
+
+function moveLeft() {
+    currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+    updateSlides();
+}
+
+// Initialize the first slide as active
+updateSlides();
+
+
 </script>
 
 {% endblock %}

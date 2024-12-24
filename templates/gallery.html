@@ -2,12 +2,7 @@
 {% block content %}
 <section class="gallery">
     <h2>Event Gallery</h2>
-    <p>Explore some of the best moments captured during our events.</p>
-    <p>
-        You can also click <a href="{{ url_for('previous_images') }}"><span>here</span></a> 
-        to view images from last conference.
-    </p>
-    
+    <p>Explore some of the best moments captured during our events.</p>    
     <div class="gallery-grid">
         {% for image in images %}
         <div class="gallery-item" onclick="openModal('{{ url_for('static', filename='uploads/' + image) }}')">

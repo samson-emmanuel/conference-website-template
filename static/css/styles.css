@@ -1672,3 +1672,72 @@ p {
 	transform: scale(1.05);
 	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
 }
+/* Previous year gallery styling */
+.year_2024_pictures-carousel {
+    display: flex;
+    overflow: scroll;
+    scroll-behavior: smooth;
+    width: 80%;
+    margin: 50px auto;
+    position: relative;
+    gap: 10px;
+    perspective: 1000px;
+}
+
+.year_2024_pictures-carousel .slide {
+    flex: 0 0 auto;
+    width: 25%;
+    margin: 0 10px;
+    position: relative;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    opacity: 0.5;
+}
+
+.year_2024_pictures-carousel .slide img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.year_2024_pictures-carousel .slide .caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.year_2024_pictures-carousel .slide.active {
+    transform: scale(1.2);
+    opacity: 1;
+}
+
+.arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 24px;
+    color: white;
+    background: rgba(0, 0, 0, 0.5);
+    border: none;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+.arrow.left {
+    left: 10px;
+}
+
+.arrow.right {
+    right: 10px;
+}
+
+.year_2024_pictures-carousel::-webkit-scrollbar{
+    display: none;
+}
