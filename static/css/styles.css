@@ -1,7 +1,25 @@
-body {
-	background: #26294d;
-	/* background-color: #26294d; */
+/* body {
+	background: #26294d; */
+/* background-color: #26294d; */
+/* } */
+/* General Reset */
+/* body,
+h2,
+h3,
+h4,
+div {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: "Josefin Sans";
+} */
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
+
 /* General Reset */
 body,
 h2,
@@ -11,7 +29,92 @@ div {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
-	font-family: "Josefin Sans";
+	font-family: "Josefin Sans", sans-serif;
+}
+
+/* Body Styling */
+body {
+	background: #26294d;
+	color: #fff;
+}
+
+/* Typography */
+h2,
+h3,
+h4 {
+	line-height: 1.2;
+	margin-bottom: 10px;
+}
+
+body,
+.container,
+section {
+	width: 100%;
+	max-width: 100%;
+	margin: 0 auto;
+}
+
+/* Responsive Styling */
+@media screen and (max-width: 1024px) {
+	body {
+		background: #1f223b; /* Slightly darker background for medium screens */
+		font-size: 90%; /* Adjust font size for readability */
+	}
+}
+
+@media screen and (max-width: 768px) {
+	body {
+		background: #1a1c34;
+		font-size: 85%;
+		padding: 10px;
+	}
+
+	h2,
+	h3,
+	h4 {
+		font-size: 1.2rem;
+	}
+}
+
+@media screen and (max-width: 480px) {
+	body {
+		background: #12131f;
+		font-size: 80%;
+	}
+
+	h2,
+	h3,
+	h4 {
+		text-align: center;
+		font-size: 1rem;
+	}
+}
+
+@media (max-width: 480px) {
+	body {
+		padding: 5px;
+	}
+
+	.hero {
+		padding: 10px 5px;
+		height: auto; /* Allow content to dictate height */
+	}
+
+	.service-cards,
+	.contact-container {
+		flex-direction: column;
+		gap: 10px;
+	}
+
+	.contact-form input,
+	.contact-form textarea {
+		width: 100%;
+		margin: 5px 0;
+	}
+
+	.gallery-grid {
+		grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+	}
 }
 
 /* Navbar section */
@@ -814,6 +917,7 @@ button:focus {
 	font-weight: bold;
 	margin-bottom: 1rem;
 	line-height: 1.2;
+	color: white;
 }
 
 /* Section Description */
@@ -887,7 +991,6 @@ button:focus {
 	padding: 50px 20px;
 	text-align: center;
 	font-family: "Roboto", sans-serif;
-	margin-top: 300px;
 }
 
 .ask h2 {
@@ -1177,7 +1280,7 @@ button:focus {
 	padding: 15px;
 	border: none;
 	border-radius: 5px;
-	background-color: #50e3c2;
+	background-color: #26294d;
 	color: #fff;
 	font-size: 1rem;
 	cursor: pointer;
@@ -1251,11 +1354,23 @@ button:focus {
 		padding: 7px;
 		border: none;
 		border-radius: 5px;
-		background-color: #50e3c2;
+		background-color: #5095e3;
 		color: #fff;
 		font-size: 0.8rem;
 		cursor: pointer;
 		transition: background-color 0.3s ease;
+		width: 100%;
+	}
+
+	.contact-form form {
+		grid-template-columns: 1fr;
+	}
+
+	.contact-form input {
+		width: 90%;
+	}
+	.contact-form textarea {
+		width: 95%;
 	}
 }
 
@@ -1666,4 +1781,13 @@ p {
 
 .year_2024_pictures-carousel::-webkit-scrollbar {
 	display: none;
+}
+
+@media (max-width: 480px) {
+	.hero,
+	.service-cards,
+	.gallery {
+		margin: 0;
+		padding: 0;
+	}
 }
