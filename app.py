@@ -23,7 +23,8 @@ if not os.path.exists(DATABASE_FILE):
         cursor = conn.cursor()
 
         # Table for contact messages
-        cursor.execute('''
+        cursor.execute(
+            """
             CREATE TABLE IF NOT EXISTS messages (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT NOT NULL,
@@ -32,21 +33,26 @@ if not os.path.exists(DATABASE_FILE):
         subject TEXT NOT NULL,
         message TEXT NOT NULL
             )
-        ''')
+        """
+        )
 
         # Table for questions
-        cursor.execute('''
+        cursor.execute(
+            """
             CREATE TABLE IF NOT EXISTS questions (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 question TEXT NOT NULL
             )
-        ''')
+        """
+        )
         conn.commit()
 
 
 # Helper function to check allowed file types
 def allowed_file(filename):
-    return "." in filename and os.path.splitext(filename)[1].lower() in ALLOWED_EXTENSIONS
+    return (
+        "." in filename and os.path.splitext(filename)[1].lower() in ALLOWED_EXTENSIONS
+    )
 
 
 @app.route("/")
@@ -67,7 +73,9 @@ def ask_question():
             cursor = conn.cursor()
             cursor.execute("INSERT INTO questions (question) VALUES (?)", (question,))
             conn.commit()
-        return jsonify({"status": "success", "message": "Question submitted successfully!"})
+        return jsonify(
+            {"status": "success", "message": "Question submitted successfully!"}
+        )
     return jsonify({"status": "error", "message": "Question is required"}), 400
 
 
@@ -77,21 +85,32 @@ def about():
     return render_template("about.html")
 
 
-@app.route('/previous_year_images')
+@app.route("/previous_year_images")
 def previous_year_images():
-    image_folder = os.path.join(app.static_folder, 'conference2024')
-    images = [f for f in os.listdir(image_folder) if os.path.isfile(os.path.join(image_folder, f))]
-    return render_template('previous_year_images.html', images=images)
+    image_folder = os.path.join(app.static_folder, "conference2024")
+    images = [
+        f
+        for f in os.listdir(image_folder)
+        if os.path.isfile(os.path.join(image_folder, f))
+    ]
+    return render_template("previous_year_images.html", images=images)
+
 
 @app.route("/gallery", methods=["GET", "POST"])
 def gallery():
     """Gallery Page - Handles Image Upload and Display"""
     if request.method == "POST":
         uploaded_file = request.files.get("image")
-        if uploaded_file and uploaded_file.filename and allowed_file(uploaded_file.filename):
+        if (
+            uploaded_file
+            and uploaded_file.filename
+            and allowed_file(uploaded_file.filename)
+        ):
             # Generate a unique filename using a timestamp
             filename, extension = os.path.splitext(uploaded_file.filename)
-            unique_filename = f"{filename}_{datetime.now().strftime('%Y%m%d%H%M%S')}{extension}"
+            unique_filename = (
+                f"{filename}_{datetime.now().strftime('%Y%m%d%H%M%S')}{extension}"
+            )
             file_path = os.path.join(app.config["UPLOAD_FOLDER"], unique_filename)
             uploaded_file.save(file_path)
             flash("Image uploaded successfully!", "success")
@@ -120,17 +139,22 @@ def contact():
 
         # Validate inputs
         if not all([name, email, number, subject, message]):
-            flash("All fields are required. Please fill in the form completely.", "danger")
+            flash(
+                "All fields are required. Please fill in the form completely.", "danger"
+            )
             return redirect(url_for("contact"))
 
         try:
             # Insert the message into the database
             with sqlite3.connect(DATABASE_FILE) as conn:
                 cursor = conn.cursor()
-                cursor.execute("""
+                cursor.execute(
+                    """
                     INSERT INTO messages (name, email, number, subject, message) 
                     VALUES (?, ?, ?, ?, ?)
-                """, (name, email, number, subject, message))
+                """,
+                    (name, email, number, subject, message),
+                )
                 conn.commit()
             flash("Message sent successfully!", "success")
         except Exception as e:
@@ -155,7 +179,5 @@ def contact():
     return render_template("contact.html", messages=messages)
 
 
-
 if __name__ == "__main__":
     app.run()
-
