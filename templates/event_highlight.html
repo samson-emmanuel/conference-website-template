@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+
+{% block title %}Event Highlights - Evently{% endblock %}
+
+{% block content %}
+<section class="event-highlights">
+    <div class="container">
+        <h1 class="section-title">Event Highlights</h1>
+        <p class="section-description">
+            Enjoy the highlights from our recent events! Browse through the playlist below to catch up on inspiring talks and memorable moments.
+        </p>
+
+        <!-- Main Video Iframe -->
+        <div class="video-iframe-container">
+            <iframe
+                id="main-video"
+                src="https://www.youtube.com/embed/ZtWn0uyMfAc?autoplay=1"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+                class="iframe-style">
+            </iframe>
+        </div>
+
+        <!-- Thumbnails -->
+        <div class="video-thumbnails">
+            <img src="https://img.youtube.com/vi/ZtWn0uyMfAc/0.jpg" alt="Lafarge @60" onclick="updateMainVideo('ZtWn0uyMfAc')">
+            <img src="https://img.youtube.com/vi/VIDEO_ID1/0.jpg" alt="Video 1" onclick="updateMainVideo('VIDEO_ID1')">
+            <img src="https://img.youtube.com/vi/VIDEO_ID2/0.jpg" alt="Video 2" onclick="updateMainVideo('VIDEO_ID2')">
+            <img src="https://img.youtube.com/vi/VIDEO_ID3/0.jpg" alt="Video 3" onclick="updateMainVideo('VIDEO_ID3')">
+        </div>
+    </div>
+</section>
+
+<style>
+    .event-highlights {
+        padding: 40px 20px;
+        background-color: #26294d;
+    }
+
+    .event-highlights .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .event-highlights .section-title {
+        font-size: 2.5rem;
+        font-weight: bold;
+        margin-bottom: 20px;
+        color: #fff;
+    }
+
+    .event-highlights .section-description {
+        font-size: 1.1rem;
+        color: #bdbdbd;
+        margin-bottom: 30px;
+    }
+
+    .video-iframe-container {
+        position: relative;
+        padding-bottom: 56.25%;
+        height: 0;
+        overflow: hidden;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        margin-bottom: 20px;
+    }
+
+    .video-iframe-container iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: none;
+    }
+
+    .video-thumbnails {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .video-thumbnails img {
+        width: 150px;
+        height: auto;
+        cursor: pointer;
+        border-radius: 5px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .video-thumbnails img:hover {
+        transform: scale(1.05);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
+</style>
+
+<script>
+    function updateMainVideo(videoId) {
+        const iframe = document.getElementById('main-video');
+        iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+    }
+</script>
+{% endblock %}

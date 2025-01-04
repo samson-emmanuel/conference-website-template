@@ -1,0 +1,38 @@
+
+{% extends 'base.html' %}
+
+{% block title %}{{ speaker.name }} - Evently{% endblock %}
+
+{% block content %}
+<section class="speaker-details">
+    <div class="container">
+        <h2>Profile</h2>
+        <div class="grid-layout">
+            <!-- Speaker Image -->
+            <div class="image-container">
+                <img src="{{ speaker.image_url }}" alt="{{ speaker.name }}">
+            </div>
+             <br>
+
+            <!-- Speaker Information -->
+            <div class="details-container">
+                <h1>{{ speaker.name }}</h1>
+                <p><strong>Position:</strong> {{ speaker.position }}</p>
+                <p><strong>Bio:</strong></p>
+                <p>{{ speaker.bio }}</p>
+
+
+                <p><strong>Social Links:</strong></p>
+                <div class="social-icons">
+                    <a href="{{ speaker.facebook_url }}" target="_blank" rel="noopener noreferrer" style="background-color: grey"><i class="fab fa-facebook" style="color: black;"></i></a>
+
+                    <a href="{{ speaker.twitter_url }}" target="_blank" rel="noopener noreferrer"  style="background-color: grey"><i class="fab fa-twitter" style="color: black;"></i></a>
+                    <a href="{{ speaker.instagram_url }}" target="_blank" rel="noopener noreferrer"  style="background-color: grey"><i class="fab fa-instagram" style="color: black;"></i></a>
+
+                    <a href="{{ speaker.linkedin_url }}" target="_blank" rel="noopener noreferrer"  style="background-color: grey"><i class="fab fa-linkedin" style="color: black;"></i></a>
+                </div>                
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -106,19 +106,5 @@ const setupCountdown = (id, eventTime) => {
 
 // Day 1
 setupCountdown("afternoon-session-timer1", new Date("2025-01-29T14:00:00").getTime());
-setupCountdown("evening-session-timer1", new Date("2025-01-29T18:00:00").getTime());
-
-// Day 2
-setupCountdown("morning-session-timer2", new Date("2025-01-30T09:00:00").getTime());
-setupCountdown("afternoon-session-timer2", new Date("2025-01-30T14:00:00").getTime());
-setupCountdown("evening-session-timer2", new Date("2025-01-30T18:00:00").getTime());
-
-// Day 3 Sessions
-setupCountdown("morning-session-timer3", new Date("2025-01-31T09:00:00").getTime());
-setupCountdown("afternoon-session-timer3", new Date("2025-01-31T14:00:00").getTime());
-setupCountdown("evening-session-timer3", new Date("2025-01-31T18:00:00").getTime());
-setupCountdown("innovation-session-timer3", new Date("2025-01-31T20:00:00").getTime());
-setupCountdown("takeaway-session-timer3", new Date("2025-01-31T21:00:00").getTime());
-setupCountdown("dinner-session-timer3", new Date("2025-01-31T22:00:00").getTime());
 
 
