@@ -123,9 +123,13 @@ section {
 .navbar .logo {
 	font-size: 1.8rem;
 	font-weight: bold;
-	color: #fff;
+	color: #22a04e;
 	text-decoration: none;
 }
+.logo{
+	width: 20%;
+}
+
 
 /* Navigation Links */
 .navbar .nav-links {
@@ -212,9 +216,45 @@ section {
 		display: block;
 	}
 	.logo {
-		width: 1000px;
+		width: 150px;
+	}
+	.navbar .container {
+		/* flex-wrap: nowrap;
+		padding: 0 1rem; */
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		width: 100%;
+	}
+
+	.logo{
+		flex-shrink: 0;
+		width: auto;
+	}
+	.navbar .logo {
+		margin-right: auto;
+	}
+	.hamburger {
+		margin-left: auto; 
+		display: block;
 	}
 }
+
+@media (max-width: 768px) {
+	.navbar .dropdown .dropdown-menu {
+		display: none;
+	}
+
+	.navbar .dropdown.active .dropdown-menu {
+		display: block; /* Show dropdown on click */
+	}
+	.navbar .dropdown .dropdown-menu{
+		background-color: black;
+		z-index: 1;
+	}
+}
+
+
 
 .hero {
 	display: flex;
