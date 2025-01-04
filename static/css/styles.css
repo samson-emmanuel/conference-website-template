@@ -2124,6 +2124,28 @@ p {
         width: 100%;
         padding: 10px;
     }
+
+	.countdowns {
+		flex-direction: column; /* Stack content vertically */
+	}
+
+	.image-section img {
+		max-width: 100%; /* Ensure image scales to fit */
+	}
+
+	.arrangement2 h2 {
+		font-size: 1.5rem; /* Adjust heading size */
+	}
+
+	.arrangement2 p {
+		font-size: 0.9rem; /* Adjust paragraph font size */
+		text-align: center; /* Center-align text on smaller screens */
+	}
+
+	.event-container {
+		margin: auto;
+		align-items: center;
+	}
 }
 
 @media screen and (max-width: 768px) {
