@@ -6,17 +6,17 @@
 <section class="hero">
     <div class="hero-content">
         <div class="hero-text">
-            <h1>Lafarge Africa Leadership Conference 2025</h1>
-            <p>Driving Innovation and Excellence: Expanding <br> Growth Beyond Limit.</p>
-            <!-- <a href="#" class="btn">Buy Ticket</a> -->
+            <h1>Lafarge Africa Leadership <br> Conference 2025</h1>
+            <p><span style="font-weight: bolder; color: aqua; font-size: larger;">Theme: </span> <br>Driving Innovation and
+                Excellence: Expanding <br> Growth Beyond Limit.</p>
         </div>
-        <div class="hero-image">
-            <img src="static/images/DSC_4496.jpg" alt="Conference Image">
-        </div>
+        <!-- <div class="hero-image">
+            <img src="static/images/0.jpg" alt="Conference Image">
+        </div> -->
     </div>
 </section>
 
-<section class="about" id="about">
+<section class="about about-mainpagew" id="about">
     <div class="container">
         <h2>About</h2>
         <p>Expanding growth beyond limit is all about elevating the principles of innovation and excellence to
@@ -29,6 +29,44 @@
         </a>
     </div>
 </section>
+
+
+
+<section class="countdowns"
+    style="display: flex; justify-content: center; align-items: center; max-width: 1200px; margin: auto; flex-wrap: wrap;">
+    <!-- Left Image -->
+    <div class="image-section arrangement" style="flex: 1; text-align: center; margin: 20px;">
+        <img src="/static/images/conference-image2.png" alt="Conference Image"
+            style="width: 100%; max-width: 600px; border-radius: 12px;">
+    </div>
+
+    <!-- Right Countdown Section -->
+    <div class="arrangement2" style="flex: 1; text-align: center; padding: 20px;">
+        <h2 style="line-height: 1.5; font-size: 2rem;">WELCOME TO THE 2025 LAFARGE AFRICA LEADERSHIP CONFERENCE</h2>
+        <p style="color: white; margin-bottom: 2rem; font-size: 1rem; line-height: 1.6;">As leaders,
+            your insights and expertise are critical in steering the organization towards its
+            strategic goals. This conference presents an opportunity to inspire and motivate, foster collaboration,
+            and strengthen our culture of teamwork and shared responsibility. Together, we’ll explore new ideas,
+            tackle challenges, and chart a path toward even greater success. Thank you for being here and and co-
+            creating the future with us.</p>
+    </div>
+</section>
+
+<section class="countdowns">
+    <h2>Event Countdown</h2>
+
+    <!-- Day 1 -->
+    <!-- <h4>Day 1</h4> -->
+    <div class="event-container">
+        <div class="event-card">
+            <!-- <h3>Afternoon Session</h3>
+            <h3>Part 1</h3>
+            <p>Introduction and Setting the tone</p> -->
+            <div class="countdown-timer" id="afternoon-session-timer1"></div>
+        </div>
+    </div>
+</section>
+
 
 
 <!-- Speakers section -->
@@ -58,45 +96,6 @@
 </section>
 
 
-<section class="countdowns"
-    style="display: flex; justify-content: center; align-items: center; max-width: 1200px; margin: auto; flex-wrap: wrap;">
-    <!-- Left Image -->
-    <div class="image-section arrangement" style="flex: 1; text-align: center; margin: 20px;">
-        <img src="/static/images/conference-image2.png" alt="Conference Image"
-            style="width: 100%; max-width: 600px; border-radius: 12px;">
-    </div>
-
-    <!-- Right Countdown Section -->
-    <div class="arrangement2" style="flex: 1; text-align: center; padding: 20px;">
-        <h2 style="line-height: 1.5; font-size: 2rem;">WELCOME TO THE 2025 LAFARGE AFRICA LEADERSHIP CONFERENCE</h2>
-        <p style="color: white; margin-bottom: 2rem; font-size: 1rem; text-align: left; line-height: 1.6;">As leaders,
-            your insights and expertise are critical in steering the organization towards its
-            strategic goals. This conference presents an opportunity to inspire and motivate, foster collaboration,
-            and strengthen our culture of teamwork and shared responsibility. Together, we’ll explore new ideas,
-            tackle challenges, and chart a path toward even greater success. Thank you for being here and and co-
-            creating the future with us.</p>
-    </div>
-</section>
-
-<section class="countdowns">
-    <h2>Event Countdown</h2>
-
-    <!-- Day 1 -->
-    <!-- <h4>Day 1</h4> -->
-    <div class="event-container">
-        <div class="event-card">
-            <!-- <h3>Afternoon Session</h3>
-            <h3>Part 1</h3>
-            <p>Introduction and Setting the tone</p> -->
-            <div class="countdown-timer" id="afternoon-session-timer1"></div>
-        </div>
-    </div>
-</section>
-
-
-
-
-
 <!-- Section for the what the program is about -->
 <section>
     <h2>Upcoming Conference Schedule</h2>
@@ -104,28 +103,51 @@
 
     <!-- Tabs -->
     <div class="tabs">
-        <div class="tab active" data-day="day1">1st Day - 29 Januuay, 2025 <br> <br> Celebrating Excellence</div>
-        <div class="tab" data-day="day2">2nd Day - 30 Januuay, 2025 <br> <br> Pushing Boundaries with Innovation &
-            Excellence</div>
-        <div class="tab" data-day="day3">3rd Day - 31 January, 2025 <br> <br> New Era of Growth</div>
+        <div class="tab active" data-day="day1">1st Day - 29 Januuay, 2025 <br> <br> Celebrating Excellence <br>
+            <button id="toggleButton"
+                style="background-color: transparent; padding: 20px 5px 0 0; font-size: 14px; border: none; outline: none; text-transform: none">Click
+                to view dress code</button>
+            <div id="content" style="display: none; font-size: 14px;">
+                Colors here
+            </div>
+        </div>
+
+
+        <div class="tab" data-day="day2">2nd Day - 30 Januuay, 2025 <br> <br> Pushing Boundaries with Innovation &  Excellence <br>
+            <button id="toggleButton2"
+                style="background-color: transparent; padding: 20px 5px 0 0; font-size: 14px; border: none; outline: none; text-transform: none">Click
+                to view dress code</button>
+            <div id="content2" style="display: none; font-size: 14px;">
+                Colors here
+            </div>
+        </div>
+
+
+        <div class="tab" data-day="day3">3rd Day - 31 January, 2025 <br> <br> New Era of Growth  <br>
+            <button id="toggleButton3"
+                style="background-color: transparent; padding: 20px 5px 0 0; font-size: 14px; border: none; outline: none; text-transform: none">Click
+                to view dress code</button>
+            <div id="content3" style="display: none; font-size: 14px;">
+                Colors here
+            </div></div>
     </div>
 
     <!-- Speakers Containers -->
     <div id="day1" class="speakers-container active">
         <div class="speaker-card">
-            <img src="/static/images/b319724e-4c82-474a-8a5a-7070942fa201.jfif" alt="Speaker 1">
+            <img src="/static/images/others/DSC_4204 (2).jpg" alt="Speaker 1">
             <h3>All</h3>
             <p>02:20 PM - 04:00 PM</p>
             <p>Arrival-Cocktail and Networking</p>
         </div>
         <div class="speaker-card">
-            <img src="/static/images/b319724e-4c82-474a-8a5a-7070942fa201.jfif" alt="Speaker 2">
+            <img src="/static/images/others/DSC_4483.jpg" alt="Speaker 2">
             <h3>MC</h3>
             <p>04:00 PM - 05:00 PM</p>
             <p>Welcoming and Overview of the Conference</p>
         </div>
         <div class="speaker-card">
-            <img src="/static/images/b319724e-4c82-474a-8a5a-7070942fa201.jfif" alt="Speaker 3">
+            <img src="/static/images/others/Header Picture.jpg" alt="Speaker 3">
             <h3>Safety Team</h3>
             <p>05:00 PM - 05:10 PM</p>
             <p>Safety Moment</p>
@@ -144,7 +166,7 @@
             <p>Opening Remark - Driving Innovation & Excellence Expanding Growth Beyond Limit</p>
         </div>
         <div class="speaker-card">
-            <img src="/static/images/b319724e-4c82-474a-8a5a-7070942fa201.jfif" alt="Speaker 6">
+            <img src="/static/images/others/DSC_4204 (2).jpg" alt="Speaker 6">
             <h3>All</h3>
             <p>05:50 PM - 06:20 PM</p>
             <p>Highlights from 2024 Big success Stories (financial & Industrial Performance, New Product, Logistics,
@@ -154,13 +176,13 @@
 
     <div id="day2" class="speakers-container">
         <div class="speaker-card">
-            <img src="/static/images/b319724e-4c82-474a-8a5a-7070942fa201.jfif" alt="Speaker 7">
+            <img src="/static/images/others/Header Picture.jpg" alt="Speaker 7">
             <h3>All</h3>
             <p>06:30 AM - 07:45 AM</p>
             <p>Group Breakfast</p>
         </div>
         <div class="speaker-card">
-            <img src="/static/images/b319724e-4c82-474a-8a5a-7070942fa201.jfif" alt="Speaker 8">
+            <img src="/static/images/others/DSC_4204 (2).jpg" alt="Speaker 8">
             <h3>All</h3>
             <p>07:45 AM - 08:00 AM</p>
             <p>Convergence to the hall</p>
@@ -191,19 +213,19 @@
         </div>
         <div class="speaker-card">
             <img src="/static/images/b319724e-4c82-474a-8a5a-7070942fa201.jfif" alt="Speaker 9">
-            <h3>Chinedu</h3>
-            <h3>Daniel</h3>
+            <h3>Treasure Hunt</h3>
+            <!-- <h3>Daniel</h3>
             <h3>Emmanuel</h3>
             <h3>Saeed</h3>
-            <h3>Ghemiga</h3>
+            <h3>Ghemiga</h3> -->
             <br>
             <p>10:30 AM - 02:30 PM</p>
             <br>
-            <p>Growth</p>
+            <!-- <p>Growth</p>
             <p>Decarbonization</p>
             <p>Product & Solutions</p>
             <p>Operationsl Excellence</p>
-            <p>People</p>
+            <p>People</p> -->
         </div>
         <div class="speaker-card">
             <img src="/static/images/b319724e-4c82-474a-8a5a-7070942fa201.jfif" alt="Speaker 9">
@@ -212,7 +234,7 @@
             <p>Lunch at Continental</p>
         </div>
         <div class="speaker-card">
-            <img src="/static/images/b319724e-4c82-474a-8a5a-7070942fa201.jfif" alt="Speaker 9">
+            <img src="/static/images/others/LLC_24 (58).jpg" alt="Speaker 9">
             <h3></h3>
             <p>03:30 AM - 04:30 AM</p>
             <p>Delegates Movement</p>
@@ -313,35 +335,29 @@
     </div>
 </section>
 
-<section class="conference-section">
-    <h2 class="section-title">Know More Upcoming <br> Conference</h2>
-    <p class="section-description">
-        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-        invidunt ut labore et dolore magna,
-    </p>
-    <div class="conference-stats">
-        <div class="stat-box">
-            <div>
-                <i class="fas fa-user" style="color: white;"></i>
-            </div>
-            <h3>120</h3>
-            <p>Great Speakers</p>
-        </div>
-        <div class="stat-box">
-            <div><i class="fas fa-book" style="color: white;"></i></div>
-            <h3>320k</h3>
-            <p>Total Seats</p>
-        </div>
-        <div class="stat-box">
-            <div>
-                <i class="fas fa-microphone" style="color: white;"></i>
-            </div>
-            <h3>20+</h3>
-            <p>Total Topics</p>
-        </div>
+
+<section class="faq-section">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">What is the theme of the conference?</div>
+        <div class="faq-answer">The theme of the conference is "Driving Innovation and Excellence: Expanding Growth
+            Beyond Limit."</div>
+    </div>
+    <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">Where is the conference being held?</div>
+        <div class="faq-answer">The conference is being held at the Lafarge Africa headquarters.</div>
+    </div>
+    <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">Who are the keynote speakers?</div>
+        <div class="faq-answer">The keynote speakers include industry leaders and innovators. Check the speakers'
+            section for more details.</div>
+    </div>
+    <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">How can I register for the conference?</div>
+        <div class="faq-answer">You can register for the conference through our official website. Visit the registration
+            page for more details.</div>
     </div>
 </section>
-
 
 
 
@@ -422,5 +438,47 @@
             alert("An error occurred while submitting your question.");
         }
     }
+</script>
+
+<!-- faq scripts -->
+<script>
+    function toggleFaq(element) {
+        const answer = element.nextElementSibling;
+        answer.style.display = (answer.style.display === 'block') ? 'none' : 'block';
+    }
+</script>
+
+<script>
+    document.getElementById('toggleButton').addEventListener('click', function () {
+        var content = document.getElementById('content');
+        if (content.style.display === 'none') {
+            content.style.display = 'block'; // Show the content
+        } else {
+            content.style.display = 'none'; // Hide the content
+        }
+    });
+
+</script>
+<script>
+    document.getElementById('toggleButton2').addEventListener('click', function () {
+        var content = document.getElementById('content2');
+        if (content.style.display === 'none') {
+            content.style.display = 'block'; // Show the content
+        } else {
+            content.style.display = 'none'; // Hide the content
+        }
+    });
+
+</script>
+<script>
+    document.getElementById('toggleButton3').addEventListener('click', function () {
+        var content = document.getElementById('content3');
+        if (content.style.display === 'none') {
+            content.style.display = 'block'; // Show the content
+        } else {
+            content.style.display = 'none'; // Hide the content
+        }
+    });
+
 </script>
 {% endblock %}
