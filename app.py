@@ -334,6 +334,9 @@ def index():
         ]
     return render_template("index.html", speakers=speakers)
 
+@app.route('/ask')
+def ask():
+    return render_template('ask.html')
 
 @app.route("/ask-question", methods=["POST"])
 def ask_question():

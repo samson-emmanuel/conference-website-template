@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block title %}Ask a Question{% endblock %}
+
+{% block content %}
+<section class="ask" id="ask">
+    <div class="container">
+        <h2>Ask a Question</h2>
+        <form onsubmit="handleAsk(event)">
+            <textarea name="question" placeholder="Your Question" required></textarea>
+            <button type="submit">Ask</button>
+        </form>
+        <p id="success-message"></p>
+    </div>
+</section>
+
+<script>
+    async function handleAsk(event) {
+        event.preventDefault();
+
+        const textarea = document.querySelector('textarea[name="question"]');
+        const question = textarea.value.trim();
+
+        if (!question) {
+            alert("Please enter a question!");
+            return;
+        }
+
+        try {
+            const response = await fetch('/ask-question', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ question })
+            });
+
+            const data = await response.json();
+
+            if (data.status === "success") {
+                document.getElementById('success-message').textContent = "Question asked successfully!";
+                textarea.value = "";
+            } else {
+                alert(data.message || "An error occurred.");
+            }
+        } catch (error) {
+            console.error("Error submitting question:", error);
+            alert("An error occurred while submitting your question.");
+        }
+    }
+</script>
+{% endblock %}
