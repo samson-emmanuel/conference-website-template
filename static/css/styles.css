@@ -298,7 +298,7 @@ section {
 
 .hero-text {
 	margin: auto;
-	/* flex: 1; */
+	flex: 1;
 	padding: 100px;
 	color: white;
 	background-color: rgba(0, 0, 0, 0.6);
