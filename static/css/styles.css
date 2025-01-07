@@ -38,7 +38,7 @@ section {
 	margin: 0 auto;
 }
 
-#logo{
+#logo {
 	width: 8%;
 	/* background-color: green; */
 }
@@ -66,7 +66,6 @@ section {
 	h4 {
 		font-size: 1.2rem;
 	}
-
 }
 
 @media screen and (max-width: 480px) {
@@ -306,7 +305,7 @@ section {
 }
 
 .hero-text h1 {
-	font-size: 2.5rem;
+	font-size: 2rem;
 	margin-bottom: 15px;
 	text-align: center;
 }
@@ -834,42 +833,42 @@ button:focus {
 /* Responsive Adjustments */
 @media (max-width: 768px) {
 	.countdowns {
-		flex-direction: column; 
+		flex-direction: column;
 	}
 
 	.image-section img {
-		max-width: 100%; 
-		}
+		max-width: 100%;
+	}
 
 	.arrangement2 h2 {
-		font-size: 1.5rem; 
+		font-size: 1.5rem;
 
-	.arrangement2 p {
-		font-size: 0.9rem; 
-		text-align: center; 
-	}
+		.arrangement2 p {
+			font-size: 0.9rem;
+			text-align: center;
+		}
 
-	.event-container {
-		margin: auto;
-		align-items: center;
+		.event-container {
+			margin: auto;
+			align-items: center;
+		}
 	}
-}
 }
 @media (max-width: 360px) {
 	.countdowns {
-		flex-direction: column; 
+		flex-direction: column;
 	}
 
 	.image-section img {
-		max-width: 100%; 
+		max-width: 100%;
 	}
 
 	.arrangement2 h2 {
-		font-size: 1.5rem; 
+		font-size: 1.5rem;
 	}
 
 	.arrangement2 p {
-		font-size: 0.9rem; 
+		font-size: 0.9rem;
 		text-align: center;
 	}
 
@@ -880,19 +879,19 @@ button:focus {
 }
 @media (max-width: 412px) {
 	.countdowns {
-		flex-direction: column; 
+		flex-direction: column;
 	}
 
 	.image-section img {
-		max-width: 100%; 
+		max-width: 100%;
 	}
 
 	.arrangement2 h2 {
-		font-size: 1.5rem; 
+		font-size: 1.5rem;
 	}
 
 	.arrangement2 p {
-		font-size: 0.9rem; 
+		font-size: 0.9rem;
 		text-align: center;
 	}
 
@@ -926,10 +925,7 @@ button:focus {
 /* Responsive Grid Layout */
 .gallery-grid {
 	display: grid;
-	grid-template-columns: repeat(
-		auto-fill,
-		minmax(200px, 1fr)
-	); 
+	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
 	gap: 10px;
 	align-items: stretch;
 	justify-items: center;
@@ -940,8 +936,8 @@ button:focus {
 	position: relative;
 	overflow: hidden;
 	cursor: pointer;
-	background-color: #f0f0f0; 
-	aspect-ratio: 1 / 1; 
+	background-color: #f0f0f0;
+	aspect-ratio: 1 / 1;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -2123,10 +2119,10 @@ p {
 /* General Media Queries for Large Screens */
 @media screen and (max-width: 1440px) {
 	.hero {
-		padding: 2rem;
+		padding: 1.7rem;
 	}
 	.hero-text h1 {
-		font-size: 3rem;
+		font-size: 2rem;
 	}
 	.contact-form input,
 	.contact-form textarea {
