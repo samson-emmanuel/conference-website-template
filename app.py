@@ -423,11 +423,6 @@ def event_highlights():
     # Render the 'event_highlight.html' template
     return render_template('event_highlight.html')
 
-if __name__ == '__main__':
-    app.run(debug=True)
-
-
-
 
 @app.route("/contact", methods=["GET", "POST"])
 def contact():
@@ -483,4 +478,4 @@ def contact():
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
