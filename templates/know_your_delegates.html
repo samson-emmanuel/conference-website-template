@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div id="profiles">
+    {% for profile in profiles %}
+    <div class="card">
+        <img src="{{ profile['Kindly upload your preferred headshot to include in your profile.'] }}" alt="{{ profile['NAME'] }}">
+        <h2>{{ profile['NAME'] }}</h2>
+        <p>{{ profile['DESIGNATION'] }}</p>
+        <p>{{ profile['FUNCTION'] }}</p>
+        <p>{{ profile['LOCATION'] }}</p>
+        <!-- Add more fields as needed -->
+    </div>
+    {% endfor %}
+</div>
+<button id="loadMore" data-start="10">Load More</button>
+
+<script>
+    document.getElementById('loadMore').addEventListener('click', function() {
+        var start = this.getAttribute('data-start');
+        
+        fetch('/load_more', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: 'start=' + start
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);  // Debug: log the data to check the response
+            var profilesDiv = document.getElementById('profiles');
+            
+            if (data.length === 0) {
+                alert('No more profiles to load.');
+                return;
+            }
+            
+            data.forEach(profile => {
+                var card = document.createElement('div');
+                card.classList.add('card');
+                card.innerHTML = `
+                    <img src="${profile['Kindly upload your preferred headshot to include in your profile.']}" alt="${profile['NAME']}">
+                    <h2>${profile['NAME']}</h2>
+                    <p>${profile['DESIGNATION']}</p>
+                    <p>${profile['FUNCTION']}</p>
+                    <p>${profile['LOCATION']}</p>
+                `;
+                profilesDiv.appendChild(card);
+            });
+            
+            // Increment the data-start attribute
+            this.setAttribute('data-start', parseInt(start) + 10);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Failed to load more profiles.');
+        });
+    });
+</script>
+{% endblock %}

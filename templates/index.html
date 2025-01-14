@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 
-{% block title %}Home - Evently{% endblock %}
+{% block title %}Home{% endblock %}
+<div id="floating-text"></div>
+
 
 {% block content %}
 <section class="hero">
@@ -11,9 +13,6 @@
                 and
                 Excellence: Expanding <br> Growth Beyond Limit.</p>
         </div>
-        <!-- <div class="hero-image">
-            <img src="static/images/0.jpg" alt="Conference Image">
-        </div> -->
     </div>
 </section>
 
@@ -60,9 +59,6 @@
     <!-- <h4>Day 1</h4> -->
     <div class="event-container">
         <div class="event-card">
-            <!-- <h3>Afternoon Session</h3>
-            <h3>Part 1</h3>
-            <p>Introduction and Setting the tone</p> -->
             <div class="countdown-timer" id="afternoon-session-timer1"></div>
         </div>
     </div>
@@ -103,275 +99,275 @@
     <p style="color: white;">Click each day to see the speakers</p>
 
     <div class="all-tabs">
-<!-- Tabs -->
-<div class="tabs">
-    <div class="tab active" data-day="day1">1st Day - 29 Januuay, 2025 <br> <br> Celebrating Excellence <br>
-        <button id="toggleButton"
-            style="background-color: transparent; padding: 20px 5px 0 0; font-size: 14px; border: none; outline: none; text-transform: none; margin-bottom: 15px;">Click
-            to view dress code</button>
-        <div id="content" style="display: none; font-size: 14px;">
-            <span style="color: aqua;"> <strong>Corporate Causal</strong></span> <br>
-            <b>Men: </b><span style="font-size: 11.5px;">Any Coloured blazer of choice, paired with jeans or
-                chinos.</span>
-            <b>Women: </b><span style="font-size: 11.5px;">Cororate casual attire paired with any colour blazer of
-                choice.</span>
+        <!-- Tabs -->
+        <div class="tabs">
+            <div class="tab active" data-day="day1">1st Day - 29 Januuay, 2025 <br> <br> Celebrating Excellence <br>
+                <button id="toggleButton"
+                    style="background-color: transparent; padding: 20px 5px 0 0; font-size: 14px; border: none; outline: none; text-transform: none; margin-bottom: 15px;">Click
+                    to view dress code</button>
+                <div id="content" style="display: none; font-size: 14px;">
+                    <span style="color: aqua;"> <strong>Corporate Causal</strong></span> <br>
+                    <b>Men: </b><span style="font-size: 11.5px;">Any Coloured blazer of choice, paired with jeans or
+                        chinos.</span>
+                    <b>Women: </b><span style="font-size: 11.5px;">Cororate casual attire paired with any colour blazer
+                        of
+                        choice.</span>
+                </div>
+            </div>
+
+
+            <div class="tab" data-day="day2">2nd Day - 30 Januuay, 2025 <br> <br> Pushing Boundaries with Innovation &
+                Excellence <br>
+                <button id="toggleButton2"
+                    style="background-color: transparent; padding: 20px 5px 0 0; font-size: 14px; border: none; outline: none; text-transform: none; margin-bottom: 15px;">Click
+                    to view dress code</button>
+                <div id="content2" style="display: none; font-size: 14px;">
+                    Branded LAP Leadership Conference Denim, <br> paired with any trouser or skirt of choice
+                </div>
+            </div>
+
+            <div class="tab" data-day="day3">3rd Day - 31 January, 2025 <br> <br> New Era of Growth <br>
+                <button id="toggleButton3"
+                    style="background-color: transparent; padding: 20px 5px 0 0; font-size: 14px; border: none; outline: none; text-transform: none; margin-bottom: 15px;">Click
+                    to view dress code</button>
+                <div id="content3" style="display: none; font-size: 14px;">
+                    Branded LAP Leadership Conference T Shirt <br> <br>
+                    <span style="font-weight: bolder; color: aqua; font-size: larger;">Party Dress Code</span>
+                    <span style="color: aqua; font-size: 13;"> <strong>(GALA NIGHT)</strong></span> <br>
+                    <!-- <b>Men: </b> -->
+                    <span style="font-size: 11.5px;">Oscar themed, Las Begas style (Mask Optional).</span>
+                </div>
+            </div>
         </div>
-    </div>
 
+        <!-- Speakers Containers -->
+        <div id="day1" class="speakers-container active">
+            <div class="speaker-card">
+                <img src="/static/images/others/DSC_4204 (2).jpg" alt="Speaker 1">
+                <h3>All</h3>
+                <p>02:00 PM - 04:00 PM</p>
+                <p>Arrival-Cocktail and Networking</p>
+            </div>
+            <div class="speaker-card">
+                <img src="/static/images/others/DSC_4483.jpg" alt="Speaker 2">
+                <h3>MC</h3>
+                <p>04:00 PM - 05:00 PM</p>
+                <p>Welcoming and Overview of the Conference</p>
+            </div>
+            <div class="speaker-card">
+                <img src="/static/images/others/Header Picture.jpg" alt="Speaker 3">
+                <h3>Safety Team</h3>
+                <p>05:51 AM - 05:10 PM</p>
+                <p>Safety Moment</p>
+            </div>
+            <div class="speaker-card">
+                <img src="/static/images/gbemiga-owolabi.png" alt="Speaker 4">
+                <h3>Gbemiga</h3>
+                <p>05:10 PM - 05:20 PM</p>
+                <p>Welcome Address</p>
+            </div>
 
-    <div class="tab" data-day="day2">2nd Day - 30 Januuay, 2025 <br> <br> Pushing Boundaries with Innovation &
-        Excellence <br>
-        <button id="toggleButton2"
-            style="background-color: transparent; padding: 20px 5px 0 0; font-size: 14px; border: none; outline: none; text-transform: none; margin-bottom: 15px;">Click
-            to view dress code</button>
-        <div id="content2" style="display: none; font-size: 14px;">
-            Branded LAP Leadership Conference Denim, <br> paired with any trouser or skirt of choice
+            <div class="speaker-card">
+                <img src="/static/images/ceo.jpg" alt="Speaker 6">
+                <h3>Lolu</h3>
+                <p>05:30 PM - 05:50 PM</p>
+                <p>Opening Remark - Driving Innovation & Excellence Expanding Growth Beyond Limit</p>
+            </div>
+            <div class="speaker-card">
+                <img src="/static/images/others/DSC_4204 (2).jpg" alt="Speaker 6">
+                <h3>All</h3>
+                <p>05:50 PM - 06:20 PM</p>
+                <p>Highlights from 2024 Big success Stories (financial & Industrial Performance, New Product, Logistics,
+                    GPTW, Commercial, etc)</p>
+            </div>
+            <div class="speaker-card">
+                <img src="/static/images/folusoPhilip.png" alt="Folusho Philip">
+                <h3>Folusho Philips</h3>
+                <p>06:20 PM - 07:10 PM</p>
+                <p>Celebrating Excellence</p>
+            </div>
+            <div class="speaker-card">
+                <img src="/static/images/others/01-13.jpg" alt="Speaker 6">
+                <h3>All</h3>
+                <p>07:10 PM - 07:20 PM</p>
+                <p>Q & A Session</p>
+            </div>
+            <div class="speaker-card">
+                <img src="/static/images/others/01-2.jpg" alt="Speaker 6">
+                <h3>MC</h3>
+                <p>07:20 PM - 07:25 PM</p>
+                <p>Briefs/Reminders for Day 2</p>
+            </div>
+            <div class="speaker-card">
+                <img src="/static/images/others/DSC_4204 (2).jpg" alt="Speaker 6">
+                <h3>All</h3>
+                <p>07:25 PM - 08:30 PM</p>
+                <p>Dinner is Served (soft music)</p>
+            </div>
+            <div class="speaker-card">
+                <img src="/static/images/others/DSC_4204 (2).jpg" alt="Speaker 6">
+                <h3>All</h3>
+                <p>08:20 PM</p>
+                <p>Bond, Unwind & Close</p>
+            </div>
         </div>
-    </div>
 
-    <div class="tab" data-day="day3">3rd Day - 31 January, 2025 <br> <br> New Era of Growth <br>
-        <button id="toggleButton3"
-            style="background-color: transparent; padding: 20px 5px 0 0; font-size: 14px; border: none; outline: none; text-transform: none; margin-bottom: 15px;">Click
-            to view dress code</button>
-        <div id="content3" style="display: none; font-size: 14px;">
-            Branded LAP Leadership Conference T Shirt <br> <br>
-            <span style="font-weight: bolder; color: aqua; font-size: larger;">Party Dress Code</span>
-            <span style="color: aqua; font-size: 13;"> <strong>(GALA NIGHT)</strong></span> <br>
-            <!-- <b>Men: </b> -->
-            <span style="font-size: 11.5px;">Oscar themed, Las Begas style (Mask Optional).</span>
-            <!-- <b>Women: </b><span style="font-size: 11.5px;">Cororate casual attire paired with any colour blazer of choice.</span> -->
-        </div>
-    </div>
-</div>
-
-<!-- Speakers Containers -->
-<div id="day1" class="speakers-container active">
-    <div class="speaker-card">
-        <img src="/static/images/others/DSC_4204 (2).jpg" alt="Speaker 1">
-        <h3>All</h3>
-        <p>02:20 PM - 04:00 PM</p>
-        <p>Arrival-Cocktail and Networking</p>
-    </div>
-    <div class="speaker-card">
-        <img src="/static/images/others/DSC_4483.jpg" alt="Speaker 2">
-        <h3>MC</h3>
-        <p>04:00 PM - 05:00 PM</p>
-        <p>Welcoming and Overview of the Conference</p>
-    </div>
-    <div class="speaker-card">
-        <img src="/static/images/others/Header Picture.jpg" alt="Speaker 3">
-        <h3>Safety Team</h3>
-        <p>05:00 PM - 05:10 PM</p>
-        <p>Safety Moment</p>
-    </div>
-    <div class="speaker-card">
-        <img src="/static/images/gbemiga-owolabi.png" alt="Speaker 4">
-        <h3>Gbemiga</h3>
-        <p>05:10 PM - 05:20 PM</p>
-        <p>Welcome Address</p>
-    </div>
-
-    <div class="speaker-card">
-        <img src="/static/images/ceo.jpg" alt="Speaker 6">
-        <h3>Lolu</h3>
-        <p>05:30 PM - 05:50 PM</p>
-        <p>Opening Remark - Driving Innovation & Excellence Expanding Growth Beyond Limit</p>
-    </div>
-    <div class="speaker-card">
-        <img src="/static/images/others/DSC_4204 (2).jpg" alt="Speaker 6">
-        <h3>All</h3>
-        <p>05:50 PM - 06:20 PM</p>
-        <p>Highlights from 2024 Big success Stories (financial & Industrial Performance, New Product, Logistics,
-            GPTW, Commercial, etc)</p>
-    </div>
-    <div class="speaker-card">
-        <img src="/static/images/folusoPhilip.png" alt="Folusho Philip">
-        <h3>Folusho Philips</h3>
-        <p>06:20 PM - 07:10 PM</p>
-        <p>Celebrating Excellence</p>
-    </div>
-    <div class="speaker-card">
-        <img src="/static/images/others/01-13.jpg" alt="Speaker 6">
-        <h3>All</h3>
-        <p>07:10 PM - 07:20 PM</p>
-        <p>Q & A Session</p>
-    </div>
-    <div class="speaker-card">
-        <img src="/static/images/others/01-2.jpg" alt="Speaker 6">
-        <h3>MC</h3>
-        <p>07:20 PM - 07:25 PM</p>
-        <p>Briefs/Reminders for Day 2</p>
-    </div>
-    <div class="speaker-card">
-        <img src="/static/images/others/DSC_4204 (2).jpg" alt="Speaker 6">
-        <h3>All</h3>
-        <p>07:25 PM - 08:30 PM</p>
-        <p>Dinner is Served (soft music)</p>
-    </div>
-    <div class="speaker-card">
-        <img src="/static/images/others/DSC_4204 (2).jpg" alt="Speaker 6">
-        <h3>All</h3>
-        <p>08:20 PM</p>
-        <p>Bond, Unwind & Close</p>
-    </div>
-</div>
-
-<div id="day2" class="speakers-container">
-    <div class="speaker-card">
-        <img src="/static/images/others/Header Picture.jpg" alt="Speaker 7">
-        <h3>All</h3>
-        <p>06:30 AM - 07:45 AM</p>
-        <p>Group Breakfast</p>
-    </div>
-    <div class="speaker-card">
-        <img src="/static/images/others/DSC_4204 (2).jpg" alt="Speaker 8">
-        <h3>All</h3>
-        <p>07:45 AM - 08:00 AM</p>
-        <p>Convergence to the hall</p>
-    </div>
-    <div class="speaker-card">
-        <img src="/static/images/01.jpg
+        <div id="day2" class="speakers-container">
+            <div class="speaker-card">
+                <img src="/static/images/others/Header Picture.jpg" alt="Speaker 7">
+                <h3>All</h3>
+                <p>06:30 AM - 07:45 AM</p>
+                <p>Group Breakfast</p>
+            </div>
+            <div class="speaker-card">
+                <img src="/static/images/others/DSC_4204 (2).jpg" alt="Speaker 8">
+                <h3>All</h3>
+                <p>07:45 AM - 08:00 AM</p>
+                <p>Convergence to the hall</p>
+            </div>
+            <div class="speaker-card">
+                <img src="/static/images/01.jpg
         " alt="Speaker 9">
-        <h3>MC</h3>
-        <p>08:00 AM - 08:30 AM</p>
-        <p>Recap and Theme emphasis</p>
-    </div>
-    <div class="speaker-card">
-        <img src="/static/images/others/01.jpg" alt="Speaker 9">
-        <h3>MC</h3>
-        <p>08:30 AM - 09:00 AM</p>
-        <p>Q&A/Ice Breaker</p>
-    </div>
-    <div class="speaker-card">
-        <img src="/static/images/omobolaJohnson.png" alt="Speaker 9">
-        <h3>Omobola Olubusola Johnson</h3>
-        <p>09:00 AM - 10:15 AM</p>
-        <p>Pushing Boundaries with Innovation & Excellence</p>
-    </div>
-    <div class="speaker-card">
-        <img src="/static/images/others/01-3.jpg" alt="Speaker 9">
-        <h3></h3>
-        <p>10:15 AM - 10:30 AM</p>
-        <p>Morning Tea Break</p>
-    </div>
-    <div class="speaker-card">
-        <img src="/static/images/others/01-13.jpg" alt="Speaker 9">
-        <h3>Treasure Hunt</h3>
-        <h3>Ghemiga</h3>
-        <br>
-        <p>10:30 AM - 02:30 PM</p>
-        <br>
-    </div>
-    <div class="speaker-card">
-        <img src="/static/images/others/01-14.jpg" alt="Speaker 9">
-        <h3>All</h3>
-        <p>02:30 PM - 03:30 PM</p>
-        <p>Lunch at Continental</p>
-    </div>
-    <div class="speaker-card">
-        <img src="/static/images/others/LLC_24 (58).jpg" alt="Speaker 9">
-        <h3></h3>
-        <p>03:30 AM - 04:30 AM</p>
-        <p>Delegates Movement</p>
-    </div>
-    <div class="speaker-card">
-        <img src="/static/images/others/01-2.jpg" alt="Speaker 9">
-        <h3>All</h3>
-        <!-- <p>08:00 AM - 08:30 AM</p> -->
-        <p>Outdoor Team Building Activities and Bonding</p>
-    </div>
-    <div class="speaker-card">
-        <img src="/static/images/others/01-14.jpg" alt="Speaker 9">
-        <h3>All</h3>
-        <p>04:30 AM - 08:00 PM</p>
-        <p>Hang Out</p>
-    </div>
-</div>
+                <h3>MC</h3>
+                <p>08:00 AM - 08:30 AM</p>
+                <p>Recap and Theme emphasis</p>
+            </div>
+            <div class="speaker-card">
+                <img src="/static/images/others/01.jpg" alt="Speaker 9">
+                <h3>MC</h3>
+                <p>08:30 AM - 09:00 AM</p>
+                <p>Q&A/Ice Breaker</p>
+            </div>
+            <div class="speaker-card">
+                <img src="/static/images/omobolaJohnson.png" alt="Speaker 9">
+                <h3>Omobola Olubusola Johnson</h3>
+                <p>09:00 AM - 10:15 AM</p>
+                <p>Pushing Boundaries with Innovation & Excellence</p>
+            </div>
+            <div class="speaker-card">
+                <img src="/static/images/others/01-3.jpg" alt="Speaker 9">
+                <h3></h3>
+                <p>10:15 AM - 10:30 AM</p>
+                <p>Morning Tea Break</p>
+            </div>
+            <div class="speaker-card">
+                <img src="/static/images/others/01-13.jpg" alt="Speaker 9">
+                <h3>Treasure Hunt</h3>
+                <h3>Ghemiga</h3>
+                <br>
+                <p>10:30 AM - 02:30 PM</p>
+                <br>
+            </div>
+            <div class="speaker-card">
+                <img src="/static/images/others/01-14.jpg" alt="Speaker 9">
+                <h3>All</h3>
+                <p>02:30 PM - 03:30 PM</p>
+                <p>Lunch at Continental</p>
+            </div>
+            <div class="speaker-card">
+                <img src="/static/images/others/LLC_24 (58).jpg" alt="Speaker 9">
+                <h3></h3>
+                <p>03:30 AM - 04:30 AM</p>
+                <p>Delegates Movement</p>
+            </div>
+            <div class="speaker-card">
+                <img src="/static/images/others/01-2.jpg" alt="Speaker 9">
+                <h3>All</h3>
+                <!-- <p>08:00 AM - 08:30 AM</p> -->
+                <p>Outdoor Team Building Activities and Bonding</p>
+            </div>
+            <div class="speaker-card">
+                <img src="/static/images/others/01-14.jpg" alt="Speaker 9">
+                <h3>All</h3>
+                <p>04:30 AM - 08:00 PM</p>
+                <p>Hang Out</p>
+            </div>
+        </div>
 
-<div id="day3" class="speakers-container">
-    <div class="speaker-card">
-        <img src="/static/images/b319724e-4c82-474a-8a5a-7070942fa201.jfif" alt="Speaker 10">
-        <h3>All</h3>
-        <p>06:30 AM - 07:45 AM</p>
-        <p>Group Breakfast</p>
-    </div>
-    <div class="speaker-card">
-        <img src="/static/images/others/01-14.jpg" alt="Speaker 11">
-        <h3>MC</h3>
-        <p>08:00 AM - 08:30 AM</p>
-        <p>Recap and Theme Emphasis</p>
-    </div>
-    <div class="speaker-card">
-        <img src="/static/images/omobolaJohnson.png" alt="Speaker 11">
-        <h3>Speaker 3</h3>
-        <p>08:00 AM - 09:45 AM</p>
-        <p>Achieving a new era of growth through innovation and excellence</p>
-    </div>
-    <div class="speaker-card">
-        <img src="/static/images/others/01-13.jpg" alt="Speaker 11">
-        <h3>All</h3>
-        <p>09:45 AM - 10:00 AM</p>
-        <p>Morning Tea Break</p>
-    </div>
-    <div class="speaker-card">
-        <img src="/static/images/others/01-10.jpg" alt="Speaker 11">
-        <h3>Inernal Panelists</h3>
-        <p>10:00 AM - 12:00 PM</p>
-        <p>New era of Growht - What does it mean for Lafarge Africa</p>
-    </div>
-    <div class="speaker-card">
-        <img src="/static/images/ceo.jpg" alt="Speaker 11">
-        <h3>Lolu</h3>
-        <p>12:00 PM - 12:30 PM</p>
-        <p>2025 Key Objections & Next Steps</p>
-    </div>
-    <div class="speaker-card">
-        <img src="/static/images/others/01-8.jpg" alt="Speaker 11">
-        <h3>All</h3>
-        <p>12:30 PM - 01:00 PM</p>
-        <p>Group PPhotograph</p>
-    </div>
-    <div class="speaker-card">
-        <img src="/static/images/others/01-17.jpg" alt="Speaker 11">
-        <h3>All</h3>
-        <p>01:00 PM - 02:00 PM</p>
-        <p>Lunch</p>
-    </div>
-    <div class="speaker-card">
-        <img src="/static/images/b319724e-4c82-474a-8a5a-7070942fa201.jfif" alt="Speaker 11">
-        <h3></h3>
-        <p>02:00 PM - 03:00 PM</p>
-        <p>Demofrom Winner of UK Innovation challenge</p>
-    </div>
-    <div class="speaker-card">
-        <img src="/static/images/others/01-2.jpg" alt="Speaker 11">
-        <h3>Pre-selected delegates</h3>
-        <p>03:00 PM - 03:30 PM</p>
-        <p>Lesson Learned from the Conference & Treasure Hunt</p>
-    </div>
-    <div class="speaker-card">
-        <img src="/static/images/others/01-8.jpg" alt="Speaker 11">
-        <h3>All</h3>
-        <p>03:30 PM - 04:00 PM</p>
-        <p>Summarizing key takeaways from the conference</p>
-    </div>
-    <div class="speaker-card">
-        <img src="/static/images/ceo.jpg" alt="Speaker 11">
-        <h3>Lolu</h3>
-        <p>04:00 PM - 04:15 PM</p>
-        <p>Closing</p>
-    </div>
-    <div class="speaker-card">
-        <!-- <img src="/static/images/ceo.jpg" alt="Speaker 11"> -->
-        <h3>GALA</h3>
-        <p>07:30 PM - 11:00 PM</p>
-        <!-- <p>Closing</p> -->
-    </div>
-</div>
+        <div id="day3" class="speakers-container">
+            <div class="speaker-card">
+                <img src="/static/images/b319724e-4c82-474a-8a5a-7070942fa201.jfif" alt="Speaker 10">
+                <h3>All</h3>
+                <p>06:30 AM - 07:45 AM</p>
+                <p>Group Breakfast</p>
+            </div>
+            <div class="speaker-card">
+                <img src="/static/images/others/01-14.jpg" alt="Speaker 11">
+                <h3>MC</h3>
+                <p>08:00 AM - 08:30 AM</p>
+                <p>Recap and Theme Emphasis</p>
+            </div>
+            <div class="speaker-card">
+                <img src="/static/images/omobolaJohnson.png" alt="Speaker 11">
+                <h3>Speaker 3</h3>
+                <p>08:00 AM - 09:45 AM</p>
+                <p>Achieving a new era of growth through innovation and excellence</p>
+            </div>
+            <div class="speaker-card">
+                <img src="/static/images/others/01-13.jpg" alt="Speaker 11">
+                <h3>All</h3>
+                <p>09:45 AM - 10:00 AM</p>
+                <p>Morning Tea Break</p>
+            </div>
+            <div class="speaker-card">
+                <img src="/static/images/others/01-10.jpg" alt="Speaker 11">
+                <h3>Inernal Panelists</h3>
+                <p>10:00 AM - 12:00 PM</p>
+                <p>New era of Growht - What does it mean for Lafarge Africa</p>
+            </div>
+            <div class="speaker-card">
+                <img src="/static/images/ceo.jpg" alt="Speaker 11">
+                <h3>Lolu</h3>
+                <p>12:00 PM - 12:30 PM</p>
+                <p>2025 Key Objections & Next Steps</p>
+            </div>
+            <div class="speaker-card">
+                <img src="/static/images/others/01-8.jpg" alt="Speaker 11">
+                <h3>All</h3>
+                <p>12:30 PM - 01:00 PM</p>
+                <p>Group PPhotograph</p>
+            </div>
+            <div class="speaker-card">
+                <img src="/static/images/others/01-17.jpg" alt="Speaker 11">
+                <h3>All</h3>
+                <p>01:00 PM - 02:00 PM</p>
+                <p>Lunch</p>
+            </div>
+            <div class="speaker-card">
+                <img src="/static/images/b319724e-4c82-474a-8a5a-7070942fa201.jfif" alt="Speaker 11">
+                <h3></h3>
+                <p>02:00 PM - 03:00 PM</p>
+                <p>Demofrom Winner of UK Innovation challenge</p>
+            </div>
+            <div class="speaker-card">
+                <img src="/static/images/others/01-2.jpg" alt="Speaker 11">
+                <h3>Pre-selected delegates</h3>
+                <p>03:00 PM - 03:30 PM</p>
+                <p>Lesson Learned from the Conference & Treasure Hunt</p>
+            </div>
+            <div class="speaker-card">
+                <img src="/static/images/others/01-8.jpg" alt="Speaker 11">
+                <h3>All</h3>
+                <p>03:30 PM - 04:00 PM</p>
+                <p>Summarizing key takeaways from the conference</p>
+            </div>
+            <div class="speaker-card">
+                <img src="/static/images/ceo.jpg" alt="Speaker 11">
+                <h3>Lolu</h3>
+                <p>04:00 PM - 04:15 PM</p>
+                <p>Closing</p>
+            </div>
+            <div class="speaker-card">
+                <!-- <img src="/static/images/ceo.jpg" alt="Speaker 11"> -->
+                <h3>GALA</h3>
+                <p>07:30 PM - 11:00 PM</p>
+                <!-- <p>Closing</p> -->
+            </div>
+        </div>
 
     </div>
 
-    
+
 </section>
 
 
@@ -398,19 +394,6 @@
     </div>
 </section>
 
-<!-- Question asking section -->
-
-<!-- <section class="ask" id="ask">
-    <div class="container">
-        <h2>Ask a Question</h2>
-        <form onsubmit="handleAsk(event)">
-            <textarea name="question" placeholder="Your Question" required></textarea>
-            <button type="submit">Ask</button>
-        </form>
-        <p id="success-message"></p>
-    </div>
-</section> -->
-
 <script>
     // Tab Functionality
     const tabs = document.querySelectorAll(".tab");
@@ -436,45 +419,6 @@
     });
 </script>
 
-<!-- <script>
-    async function handleAsk(event) {
-        event.preventDefault(); // Prevent form submission
-
-        const textarea = document.querySelector('textarea[name="question"]');
-        const question = textarea.value.trim();
-
-        if (!question) {
-            alert("Please enter a question!");
-            return;
-        }
-
-        // Send question to the Flask backend
-        try {
-            const response = await fetch('/ask-question', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ question })
-            });
-
-            const data = await response.json();
-
-            if (data.status === "success") {
-                // Display success message and clear textarea
-                document.getElementById('success-message').textContent = "Question asked successfully!";
-                textarea.value = ""; // Clear the textarea
-            } else {
-                alert(data.message || "An error occurred.");
-            }
-        } catch (error) {
-            console.error("Error submitting question:", error);
-            alert("An error occurred while submitting your question.");
-        }
-    }
-</script> -->
-
-<!-- faq scripts -->
 <script>
     function toggleFaq(element) {
         const answer = element.nextElementSibling;
@@ -513,6 +457,119 @@
             content.style.display = 'none'; // Hide the content
         }
     });
+
+</script>
+
+ <!-- Scripts for happening now -->
+ <script>
+
+document.addEventListener("DOMContentLoaded", () => {
+    const days = [
+        { id: "day1", date: "2025-01-14" },
+        { id: "day2", date: "2025-01-30" },
+        { id: "day3", date: "2025-01-31" },
+    ];
+
+    // Function to parse time range and check if current time falls within it
+    function isHappeningNow(timeRange, date) {
+        const [startTime, endTime] = timeRange.split(" - ").map(time => {
+            const [hour, minute, period] = time.match(/(\d+):(\d+)\s?(AM|PM)/i).slice(1);
+            let hours24 = parseInt(hour, 10) + (period.toUpperCase() === "PM" && hour !== "12" ? 12 : 0);
+            hours24 = period.toUpperCase() === "AM" && hour === "12" ? 0 : hours24;
+            return new Date(`${date}T${hours24.toString().padStart(2, "0")}:${minute}:00`);
+        });
+
+        const now = new Date();
+        return now >= startTime && now <= endTime;
+    }
+
+    function updateHappeningNow() {
+        const floatingText = document.getElementById("floating-text");
+        const now = new Date();
+        let isEventHappening = false;
+
+        days.forEach(({ id, date }) => {
+            const container = document.getElementById(id);
+            if (!container) return;
+
+            const speakerCards = container.querySelectorAll(".speaker-card");
+
+            speakerCards.forEach(card => {
+                const timeRange = card.querySelector("p").textContent;
+                const eventDetails = card.querySelectorAll("p")[1]?.textContent || "";
+
+                if (/\d+:\d+\s?(AM|PM)\s-\s\d+:\d+\s?(AM|PM)/i.test(timeRange)) {
+                    if (isHappeningNow(timeRange, date)) {
+                        isEventHappening = true;
+                        floatingText.innerHTML = `<strong>Happening Now:</strong> ${eventDetails}`;
+                        floatingText.classList.add("visible");
+                    }
+                }
+            });
+        });
+
+        if (!isEventHappening) {
+            floatingText.classList.remove("visible");
+        }
+    }
+
+    // Add responsive floating text styles dynamically
+    const style = document.createElement("style");
+    style.textContent = `
+        #floating-text {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100%);
+            background: red;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            animation: fadeInOut 5s infinite ease-in-out;
+            z-index: 1000;
+            max-width: 90%;
+            text-align: center;
+        }
+
+        #floating-text.visible {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        @keyframes fadeInOut {
+            0%, 100% {
+                opacity: 0;
+                transform: translateX(-50%) translateY(100%);
+            }
+            50% {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            #floating-text {
+                font-size: 14px;
+                padding: 8px 16px;
+            }
+        }
+    `;
+    document.head.appendChild(style);
+
+    // Create the floating text element
+    const floatingText = document.createElement("div");
+    floatingText.id = "floating-text";
+    document.body.appendChild(floatingText);
+
+    // Update every minute
+    setInterval(updateHappeningNow, 60000);
+    updateHappeningNow();
+});
+
+
 
 </script>
 {% endblock %}

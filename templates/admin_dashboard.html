@@ -123,7 +123,8 @@
                         {% for message in messages %}
                         <li class="list-group-item">
                             <span>
-                                <strong>{{ message[1] }}</strong>: {{ message[4] }}
+                                <strong>{{ message[1] }}</strong>: {{ message[4] }} <br>
+                               <i>{{message[5]}}</i>
                             </span>
                             <form method="POST" action="{{ url_for('delete_message', message_id=message[0]) }}" class="d-inline">
                                 <button type="submit" class="btn btn-sm btn-danger">Delete</button>
