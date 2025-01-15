@@ -19,7 +19,7 @@ app.secret_key = secrets.token_hex(16)  # Required for flash messages
 # Ensure the uploads folder exists
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 # Load the data once at the start
-file_path = '/Users/samson/Desktop/lafarge web project/conference/static/2025_LC_DELEGATE_PROFILE.xlsx'
+file_path = 'static/2025_LC_DELEGATE_PROFILE.xlsx'
 df = pd.read_excel(file_path, sheet_name='Getting to Know the Delegates')
 
 
