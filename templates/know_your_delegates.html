@@ -4,7 +4,7 @@
 <div id="profiles">
     {% for profile in profiles %}
     <div class="card">
-        <img src="{{ profile['Kindly upload your preferred headshot to include in your profile.'] }}" alt="{{ profile['NAME'] }}">
+        <img src="{{ profile['image'] }}" alt="{{ profile['NAME'] }}">
         <h2>{{ profile['NAME'] }}</h2>
         <p>{{ profile['DESIGNATION'] }}</p>
         <p>{{ profile['FUNCTION'] }}</p>

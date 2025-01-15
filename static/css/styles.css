@@ -13,13 +13,14 @@ div {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
-	font-family: "Josefin Sans", sans-serif;
+	font-family: "montserrat", sans-serif;
 }
 
 /* Body Styling */
 body {
 	background: #26294d;
 	color: #fff;
+	font-size: ;
 }
 
 /* Typography */
