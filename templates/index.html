@@ -8,7 +8,7 @@
 <section class="hero">
     <div class="hero-content">
         <div class="hero-text">
-            <h1>Lafarge Africa Leadership <br> Conference 2025</h1>
+            <h1>Lafarge Africa <br> Leadership <br> Conference <br> 2025</h1>
             <p><span style="font-weight: bolder; color: aqua; font-size: larger;">Theme: </span> <br>Driving Innovation
                 and
                 Excellence: Expanding <br> Growth Beyond Limit.</p>
@@ -33,8 +33,7 @@
 
 
 
-<section class="countdowns"
-    style="display: flex; justify-content: center; align-items: center; max-width: 1200px; margin: auto; flex-wrap: wrap;">
+<section class="countdowns welcome">
     <!-- Left Image -->
     <div class="image-section arrangement" style="flex: 1; text-align: center;">
         <img src="/static/images/conference-image2.png" alt="Conference Image"
@@ -43,8 +42,8 @@
 
     <!-- Right Countdown Section -->
     <div class="arrangement2" style="flex: 1; text-align: center; padding: 20px;">
-        <h2 style="line-height: 1.5; font-size: 1.4rem;">WELCOME TO THE 2025 LAFARGE AFRICA LEADERSHIP CONFERENCE</h2>
-        <p style="color: white; margin-bottom: 2rem; font-size: 1rem; line-height: 1.6;">As leaders,
+        <h2>WELCOME TO THE 2025 <br> LAFARGE AFRICA <br> LEADERSHIP CONFERENCE</h2>
+        <p>As leaders,
             your insights and expertise are critical in steering the organization towards its
             strategic goals. This conference presents an opportunity to inspire and motivate, foster collaboration,
             and strengthen our culture of teamwork and shared responsibility. Together, we’ll explore new ideas,
@@ -95,8 +94,8 @@
 
 
 <!-- Section for the what the program is about -->
-<section>
-    <h2>Upcoming Conference Schedule</h2>
+<section class="schedule">
+    <h2>UPCOMING CONFERENCE SCHEDULE</h2>
     <p style="color: white;">Click each day to see the speakers</p>
 
     <div class="all-tabs">
@@ -374,25 +373,51 @@
 
 <section class="faq-section">
     <h2>Frequently Asked Questions</h2>
-    <div class="faq-item">
-        <div class="faq-question" onclick="toggleFaq(this)">What is the theme of the conference?</div>
-        <div class="faq-answer">The theme of the conference is "Driving Innovation and Excellence: Expanding Growth
-            Beyond Limit."</div>
+    <div class="faq-flex">
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">What is the theme of the conference?</div>
+            <div class="faq-answer">The theme of the conference is "Driving Innovation and Excellence: Expanding Growth
+                Beyond Limit."</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">Where is the conference being held?</div>
+            <div class="faq-answer">The conference is being held at the Lafarge Africa headquarters.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">Who are the keynote speakers?</div>
+            <div class="faq-answer">The keynote speakers include industry leaders and innovators. Check the speakers'
+                section for more details.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">How can I register for the conference?</div>
+            <div class="faq-answer">You can register for the conference through our official website. Visit the
+                registration
+                page for more details.</div>
+        </div>
     </div>
-    <div class="faq-item">
-        <div class="faq-question" onclick="toggleFaq(this)">Where is the conference being held?</div>
-        <div class="faq-answer">The conference is being held at the Lafarge Africa headquarters.</div>
+    <div class="faq-flex">
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">What is the theme of the conference?</div>
+            <div class="faq-answer">The theme of the conference is "Driving Innovation and Excellence: Expanding Growth
+                Beyond Limit."</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">Where is the conference being held?</div>
+            <div class="faq-answer">The conference is being held at the Lafarge Africa headquarters.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">Who are the keynote speakers?</div>
+            <div class="faq-answer">The keynote speakers include industry leaders and innovators. Check the speakers'
+                section for more details.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">How can I register for the conference?</div>
+            <div class="faq-answer">You can register for the conference through our official website. Visit the
+                registration
+                page for more details.</div>
+        </div>
     </div>
-    <div class="faq-item">
-        <div class="faq-question" onclick="toggleFaq(this)">Who are the keynote speakers?</div>
-        <div class="faq-answer">The keynote speakers include industry leaders and innovators. Check the speakers'
-            section for more details.</div>
-    </div>
-    <div class="faq-item">
-        <div class="faq-question" onclick="toggleFaq(this)">How can I register for the conference?</div>
-        <div class="faq-answer">You can register for the conference through our official website. Visit the registration
-            page for more details.</div>
-    </div>
+
 </section>
 
 <script>
@@ -461,62 +486,62 @@
 
 </script>
 
- <!-- Scripts for happening now -->
- <script>
+<!-- Scripts for happening now -->
+<script>
 
-document.addEventListener("DOMContentLoaded", () => {
-    const days = [
-        { id: "day1", date: "2025-01-14" },
-        { id: "day2", date: "2025-01-30" },
-        { id: "day3", date: "2025-01-31" },
-    ];
+    document.addEventListener("DOMContentLoaded", () => {
+        const days = [
+            { id: "day1", date: "2025-01-14" },
+            { id: "day2", date: "2025-01-30" },
+            { id: "day3", date: "2025-01-31" },
+        ];
 
-    // Function to parse time range and check if current time falls within it
-    function isHappeningNow(timeRange, date) {
-        const [startTime, endTime] = timeRange.split(" - ").map(time => {
-            const [hour, minute, period] = time.match(/(\d+):(\d+)\s?(AM|PM)/i).slice(1);
-            let hours24 = parseInt(hour, 10) + (period.toUpperCase() === "PM" && hour !== "12" ? 12 : 0);
-            hours24 = period.toUpperCase() === "AM" && hour === "12" ? 0 : hours24;
-            return new Date(`${date}T${hours24.toString().padStart(2, "0")}:${minute}:00`);
-        });
-
-        const now = new Date();
-        return now >= startTime && now <= endTime;
-    }
-
-    function updateHappeningNow() {
-        const floatingText = document.getElementById("floating-text");
-        const now = new Date();
-        let isEventHappening = false;
-
-        days.forEach(({ id, date }) => {
-            const container = document.getElementById(id);
-            if (!container) return;
-
-            const speakerCards = container.querySelectorAll(".speaker-card");
-
-            speakerCards.forEach(card => {
-                const timeRange = card.querySelector("p").textContent;
-                const eventDetails = card.querySelectorAll("p")[1]?.textContent || "";
-
-                if (/\d+:\d+\s?(AM|PM)\s-\s\d+:\d+\s?(AM|PM)/i.test(timeRange)) {
-                    if (isHappeningNow(timeRange, date)) {
-                        isEventHappening = true;
-                        floatingText.innerHTML = `<strong>Happening Now:</strong> ${eventDetails}`;
-                        floatingText.classList.add("visible");
-                    }
-                }
+        // Function to parse time range and check if current time falls within it
+        function isHappeningNow(timeRange, date) {
+            const [startTime, endTime] = timeRange.split(" - ").map(time => {
+                const [hour, minute, period] = time.match(/(\d+):(\d+)\s?(AM|PM)/i).slice(1);
+                let hours24 = parseInt(hour, 10) + (period.toUpperCase() === "PM" && hour !== "12" ? 12 : 0);
+                hours24 = period.toUpperCase() === "AM" && hour === "12" ? 0 : hours24;
+                return new Date(`${date}T${hours24.toString().padStart(2, "0")}:${minute}:00`);
             });
-        });
 
-        if (!isEventHappening) {
-            floatingText.classList.remove("visible");
+            const now = new Date();
+            return now >= startTime && now <= endTime;
         }
-    }
 
-    // Add responsive floating text styles dynamically
-    const style = document.createElement("style");
-    style.textContent = `
+        function updateHappeningNow() {
+            const floatingText = document.getElementById("floating-text");
+            const now = new Date();
+            let isEventHappening = false;
+
+            days.forEach(({ id, date }) => {
+                const container = document.getElementById(id);
+                if (!container) return;
+
+                const speakerCards = container.querySelectorAll(".speaker-card");
+
+                speakerCards.forEach(card => {
+                    const timeRange = card.querySelector("p").textContent;
+                    const eventDetails = card.querySelectorAll("p")[1]?.textContent || "";
+
+                    if (/\d+:\d+\s?(AM|PM)\s-\s\d+:\d+\s?(AM|PM)/i.test(timeRange)) {
+                        if (isHappeningNow(timeRange, date)) {
+                            isEventHappening = true;
+                            floatingText.innerHTML = `<strong>Happening Now:</strong> ${eventDetails}`;
+                            floatingText.classList.add("visible");
+                        }
+                    }
+                });
+            });
+
+            if (!isEventHappening) {
+                floatingText.classList.remove("visible");
+            }
+        }
+
+        // Add responsive floating text styles dynamically
+        const style = document.createElement("style");
+        style.textContent = `
         #floating-text {
             position: fixed;
             bottom: 20px;
@@ -558,17 +583,17 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
     `;
-    document.head.appendChild(style);
+        document.head.appendChild(style);
 
-    // Create the floating text element
-    const floatingText = document.createElement("div");
-    floatingText.id = "floating-text";
-    document.body.appendChild(floatingText);
+        // Create the floating text element
+        const floatingText = document.createElement("div");
+        floatingText.id = "floating-text";
+        document.body.appendChild(floatingText);
 
-    // Update every minute
-    setInterval(updateHappeningNow, 60000);
-    updateHappeningNow();
-});
+        // Update every minute
+        setInterval(updateHappeningNow, 60000);
+        updateHappeningNow();
+    });
 
 
 

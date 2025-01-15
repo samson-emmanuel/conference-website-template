@@ -20,7 +20,7 @@ div {
 body {
 	background: #26294d;
 	color: #fff;
-	font-size: ;
+	font-size: 20;
 }
 
 /* Typography */
@@ -116,7 +116,8 @@ section {
 	background-color: #26294d;
 	color: #fff;
 	padding: 1rem 2rem;
-	position: relative;
+	position: sticky;
+	top: 0;
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 	z-index: 100;
 }
@@ -382,10 +383,10 @@ section {
 }
 
 /* Section Styles */
-section {
+/* section {
 	padding: 50px 0;
-	/* max-width: 1500px; */
-}
+	max-width: 1500px;
+} */
 
 h2 {
 	text-align: center;
@@ -640,15 +641,15 @@ button:focus {
 
 /* about us section styling */
 .about {
-	padding: 1.5rem 0;
+	/* padding: 1.5rem 0; */
 	/* background: linear-gradient( to bottom, #26294D,  #10122a ); */
 	background: transparent;
 	text-align: center;
 	/* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); */
-	border-radius: 10px;
-	margin: 2rem auto;
-	max-width: 1000px;
-	/* background-color: #1e1e4a; */
+	/* border-radius: 10px; */
+	/* margin: 1rem auto; */
+	max-width: 1500px;
+	/* background-color: #1414f6; */
 }
 
 .about h2 {
@@ -673,10 +674,10 @@ button:focus {
 }
 
 .about p {
-	font-size: 1.1rem;
+	font-size: 1.7rem;
 	color: #cacaca;
-	margin: 1.5rem auto;
-	max-width: 1000px;
+	margin: 1.5rem 0;
+	max-width: 1500px;
 	line-height: 1.8;
 }
 
@@ -700,11 +701,12 @@ button:focus {
 	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
+
 /* Responsive Design */
 @media (max-width: 768px) {
-	.about {
+	/* .about {
 		padding: 3rem 1.5rem;
-	}
+	} */
 
 	.about h2 {
 		font-size: 2rem;
@@ -720,10 +722,21 @@ button:focus {
 }
 
 /* Countdown section */
+.welcome{
+	display: flex; 
+	justify-content: center; 
+	align-items: center; 
+	max-width: 1200px; 
+	margin: auto; 
+	flex-wrap: wrap;
+}
+
+
+
 .countdowns {
 	text-align: center;
 	margin: 2rem auto;
-	padding: 2rem 0;
+	/* padding: 2rem 0; */
 	background: transparent;
 	max-width: 100%;
 }
@@ -735,6 +748,19 @@ button:focus {
 .arrangement2 {
 	padding: 20px auto;
 	margin-right: -10px;
+}
+
+.arrangement2 h2{
+	line-height: 1.5;
+    font-size: 2rem;
+}
+
+.arrangement2 p {
+	color: white;
+    margin-bottom: 2rem;
+    font-size: 1.5rem;
+    line-height: 1.6;
+    text-align: center;
 }
 
 .countdowns h2 {
@@ -890,6 +916,18 @@ button:focus {
 		align-items: center;
 	}
 }
+
+/* schedule styling responsive */
+.schedule h2{
+	font-size: 1.4rem;
+	}
+/* @media (max-width: 415){
+	.schedule h2{
+	font-size: 1.8rem;
+	background-color: red;
+	}
+
+} */
 
 /* Gallery Section Styles */
 /* General Styles */
@@ -1323,7 +1361,7 @@ button:focus {
 }
 
 .contact-container {
-	display: flex;
+	display: block;
 	justify-content: space-between;
 	align-items: flex-start;
 	gap: 200px;
@@ -1356,6 +1394,9 @@ button:focus {
 	font-size: 1rem;
 	cursor: pointer;
 	transition: background-color 0.3s ease;
+	width: 91%;
+	align-items: center;
+	margin: -10px 20px 20px 20px;
 }
 
 .contact-form button:hover {
@@ -1381,7 +1422,8 @@ button:focus {
 }
 
 .contact-info {
-	flex: 1;
+	display: inline-block;
+	/* flex: 1; */
 	text-align: left;
 }
 
@@ -1397,7 +1439,7 @@ button:focus {
 	background-color: #1e215e;
 	padding: 10px;
 	border-radius: 50%;
-	display: flex;
+	display: inline;
 	justify-content: center;
 	align-items: center;
 	width: 40px;
@@ -1455,7 +1497,7 @@ h2 {
 p {
 	text-align: center;
 	margin: 10px auto;
-	max-width: 600px;
+	/* max-width: 600px; */
 	color: #ccc; /* Light grey color for readability */
 }
 
@@ -1490,8 +1532,6 @@ p {
 	width: 80%;
 	height: 80%;
 	object-fit: cover;
-	display: block;
-	padding-left: 20px;
 }
 
 .card-details {
@@ -1529,7 +1569,7 @@ p {
 /* Social media icons */
 .icon-links {
 	position: absolute;
-	top: 50%;
+	top: 70%;
 	left: 50%;
 	transform: translate(-50%, -50%) scale(0);
 	display: flex;
@@ -2236,10 +2276,10 @@ p {
 @media screen and (max-width: 480px) {
 	.hero {
 		background: url("/static/images/Header\ Picture.jpg") no-repeat center top;
-		background-size: contain;
+		background-size: cover;
 		background-attachment: scroll;
 		height: auto;
-		padding: 20px;
+		/* padding: 20px; */
 	}
 }
 
@@ -2299,6 +2339,15 @@ p {
 
 /* FAQ SECTION */
 
+.faq-flex {
+    display: flex; 
+    flex-direction: row; 
+    justify-content: space-between; 
+    gap: 20px; 
+    flex-wrap: wrap; 
+	margin-bottom: 20px;
+}
+
 .faq-section {
 	margin: 20px auto;
 	max-width: 100%;
@@ -2312,12 +2361,15 @@ p {
 	margin-bottom: 20px;
 	color: white;
 }
+
 .faq-item {
 	margin-bottom: 15px;
-	/* border: 1px solid #ddd; */
 	border-radius: 5px;
 	overflow: hidden;
+    flex: 1 1 calc(50% - 20px); 
+    box-sizing: border-box;
 }
+
 .faq-question {
 	padding: 15px;
 	background-color: #282e63;
@@ -2325,6 +2377,7 @@ p {
 	font-weight: bold;
 	color: rgb(194, 194, 194);
 	transition: background-color 0.3s;
+	text-align: center;
 }
 .faq-question:hover {
 	background-color: #0e1131;
@@ -2334,6 +2387,19 @@ p {
 	display: none;
 	background-color: #282e63;
 	border-top: 1px solid #282e63;
-	font-size: 0.8rem;
+	font-size: 1.0rem;
 	line-height: 1.5;
+	text-align: center;
+}
+
+/* Media Query for Mobile */
+@media (max-width: 768px) {
+    .faq-flex {
+        flex-direction: column;
+    }
+
+    .faq-item {
+        flex: 1 1 100%; 
+		margin-bottom: 2px;
+    }
 }
