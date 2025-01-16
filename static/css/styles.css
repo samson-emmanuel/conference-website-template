@@ -913,6 +913,20 @@ button:focus {
 		margin: auto;
 		align-items: center;
 	}
+
+	.contact-form button {
+		grid-column: span 2;
+		padding: 7px;
+		border: none;
+		border-radius: 5px;
+		background-color: #5095e3;
+		color: #fff;
+		font-size: 0.8rem;
+		cursor: pointer;
+		transition: background-color 0.3s ease;
+		width: 100% !important;
+		margin: auto;
+	}
 }
 
 /* schedule styling responsive */
@@ -2104,11 +2118,20 @@ p {
 		flex-direction: column;
 	}
 	.contact-info {
+		display: inline-block;
 		margin-bottom: 1rem;
 	}
 	.logo img {
 		width: 60%;
 	}
+
+	.contact-info div span {
+		font-size: 0.7rem;
+		color: white;
+		line-height: 1.1;
+	}
+
+	
 }
 
 /* Samsung Galaxy S10/S20/Note (360px width) */
@@ -2124,7 +2147,8 @@ p {
 		grid-template-columns: repeat(2, 1fr);
 	}
 	.contact-form button {
-		width: 100%;
+		width: 30%;
+	margin: auto;
 	}
 	.logo img {
 		width: 60%;

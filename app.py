@@ -27,7 +27,7 @@ df = pd.read_excel(file_path, sheet_name='Getting to Know the Delegates')
 @app.route('/know_your_delegates')
 def know_your_delegates():
     profiles = df.head(30).to_dict(orient='records')
-    print(f'{profiles}')
+    # print(f'{profiles}')
     return render_template('know_your_delegates.html', profiles=profiles)
 
 

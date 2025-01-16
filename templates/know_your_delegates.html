@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div id="profiles">
+<div id="profiles" style="display: flex; flex-wrap: wrap; gap: 20px;">
     {% for profile in profiles %}
-    <div class="card">
-        <img src="{{ profile['image'] }}" alt="{{ profile['NAME'] }}">
+    <div class="card" style="flex: 0 0 calc(50% - 20px); box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); padding: 15px; margin-bottom: 20px; border-radius: 8px;">
+        <img src="data:image/jpeg;base64,{{ profile['image'] }}" alt="{{ profile['NAME'] }}" style="width: 100%; height: auto; border-radius: 8px;">
         <h2>{{ profile['NAME'] }}</h2>
         <p>{{ profile['DESIGNATION'] }}</p>
         <p>{{ profile['FUNCTION'] }}</p>
@@ -13,7 +13,7 @@
     </div>
     {% endfor %}
 </div>
-<button id="loadMore" data-start="10">Load More</button>
+<button id="loadMore" data-start="10" style="margin: 20px 0; padding: 10px 20px; border: none; background-color: #007BFF; color: white; border-radius: 4px; cursor: pointer;">Load More</button>
 
 <script>
     document.getElementById('loadMore').addEventListener('click', function() {
@@ -28,7 +28,6 @@
         })
         .then(response => response.json())
         .then(data => {
-            console.log(data);  // Debug: log the data to check the response
             var profilesDiv = document.getElementById('profiles');
             
             if (data.length === 0) {
@@ -39,8 +38,9 @@
             data.forEach(profile => {
                 var card = document.createElement('div');
                 card.classList.add('card');
+                card.style.cssText = "flex: 0 0 calc(50% - 20px); box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); padding: 15px; margin-bottom: 20px; border-radius: 8px;";
                 card.innerHTML = `
-                    <img src="${profile['Kindly upload your preferred headshot to include in your profile.']}" alt="${profile['NAME']}">
+                    <img src="data:image/jpeg;base64,${profile['image']}" alt="${profile['NAME']}" style="width: 100%; height: auto; border-radius: 8px;">
                     <h2>${profile['NAME']}</h2>
                     <p>${profile['DESIGNATION']}</p>
                     <p>${profile['FUNCTION']}</p>
