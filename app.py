@@ -108,7 +108,7 @@ with sqlite3.connect(DATABASE_FILE) as conn:
         """
     )
 
-        cursor.execute("SELECT COUNT(*) FROM speakers")
+    cursor.execute("SELECT COUNT(*) FROM speakers")
     if cursor.fetchone()[0] == 0:  # If no data exists
         cursor.executemany(
             """
