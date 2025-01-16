@@ -1125,6 +1125,7 @@ button:focus {
 	/* border-radius: 8px; */
 	font-size: 1rem;
 	font-family: inherit;
+	color: #fff;
 }
 
 .ask form textarea:focus {
