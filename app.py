@@ -2,7 +2,14 @@ from flask import Flask, render_template, request, redirect, url_for, flash, jso
 from datetime import datetime
 import sqlite3
 import os
-from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
+from flask_login import (
+    LoginManager,
+    UserMixin,
+    login_user,
+    login_required,
+    logout_user,
+    current_user,
+)
 import secrets
 import pandas as pd
 
@@ -19,23 +26,22 @@ app.secret_key = secrets.token_hex(16)  # Required for flash messages
 # Ensure the uploads folder exists
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 # Load the data once at the start
-file_path = 'static/2025_LC_DELEGATE_PROFILE.xlsx'
-df = pd.read_excel(file_path, sheet_name='Getting to Know the Delegates')
+file_path = "static/2025_LC_DELEGATE_PROFILE.xlsx"
+df = pd.read_excel(file_path, sheet_name="Getting to Know the Delegates")
 
 
-
-@app.route('/know_your_delegates')
+@app.route("/know_your_delegates")
 def know_your_delegates():
-    profiles = df.head(30).to_dict(orient='records')
+    profiles = df.head(30).to_dict(orient="records")
     # print(f'{profiles}')
-    return render_template('know_your_delegates.html', profiles=profiles)
+    return render_template("know_your_delegates.html", profiles=profiles)
 
 
-@app.route('/load_more', methods=['POST'])
+@app.route("/load_more", methods=["POST"])
 def load_more():
-    start = int(request.form.get('start', 0))
+    start = int(request.form.get("start", 0))
     end = start + 10
-    profiles = df.iloc[start:end].to_dict(orient='records')
+    profiles = df.iloc[start:end].to_dict(orient="records")
     print(profiles)  # Debugging output
     return jsonify(profiles)
 
@@ -91,7 +97,7 @@ with sqlite3.connect(DATABASE_FILE) as conn:
         )
         """
     )
-
+    cursor.execute("DROP TABLE IF EXISTS speakers")
     # Speakers table
     cursor.execute(
         """
@@ -110,28 +116,67 @@ with sqlite3.connect(DATABASE_FILE) as conn:
 
     cursor.execute("SELECT COUNT(*) FROM speakers")
     if cursor.fetchone()[0] == 0:  # If no data exists
+        # cursor.executemany(
+        #     """
+        #     INSERT INTO speakers (name, position, bio, image_url, facebook_url, twitter_url, linkedin_url)
+        #     VALUES (?, ?, ?, ?, ?, ?, ?)
+        #     """,
+        #     [
+        #         ("Segun Ogunsansaya", "Segun is the inaugural Chairman of the Airtel Africa Foundation, a position he took up in July 2024, after serving as Group CEO of Airtel Africa Plc which is a FTSE 100 company. Segun is also the Chairman of the Board of Nigeria Sovereign Investment Authority.He joined Airtel in 2012, ran the Nigeria Operations of the Telecommunications and mobile money company for nine years before his appointment as Chief Executive Officer of the Group in 2021. With local knowledge of the African landscape and deep distribution experience he led the company in maintaining double-digit revenue growth over many quarters and to deliver new, innovative products to its customers across the continent. Segun has over 35 years of business management experience garnered across multiple  geographies, organizations, and diverse sectors, including consultancy, banking, fast moving consumer goods and telecommunications. He was Managing Director at various times of Coca-Cola Bottling operations in some countries in Africa. After winning many business awards in previous years, Segun was conferred in 2024 with the Lifetime Achievement Award for his leadership, resilience, and significant contributions that have left an indelible mark on the business community in Africa. Segun serves as a director on the board of Nigeria Economic Summit Group, the foremost private sector advocacy group in Nigeria. He is a Fellow in several professional organizations.  ", "/static/images/segunOgunsanya.png", "https://facebook.com/lolu", "https://twitter.com/lolu", "https://linkedin.com/in/lolu"),
+
+        #         ("Folusho Phillips", "Growth", "Folusho Philips is a distinguished Nigerian professional and entrepreneur known for his significant contributions to management consulting and economic development in Africa. He is the founder and chairman of Phillips Consulting Limited, a management consulting firm with offices in Nigeria, South Africa, and the UK. The firm specializes in organizational development and corporate transformation. A Chartered Management Accountant (UK) and Chartered Accountant (Nigeria), Phillips earned a degree in Industrial Economics from the University of Wales' Institute of Science & Technology. His professional career includes roles in financial management and consulting with Coopers & Lybrand International (now PwC), and as the Group General Manager of Finance at the SCOA Group. He has held influential positions, such as the Chairman of the Nigeria Economic Summit Group and the Nigeria-South Africa Chamber of Commerce. Additionally, he serves as a director of several companies and non-profit organizations, including Special Olympics Nigeria and the African Business Roundtable. Phillips is recognized for his commitment to fostering economic growth and business leadership across Africa", "/static/images/folusoPhilip.png", "https://facebook.com/osazemen", "https://twitter.com/osazemen", "https://linkedin.com/in/osazemen"),
+
+        #         ("Omobola Johnson", "Pushing Boundaries", "Omobola Olubusola Johnson (born 28 June 1963) is a Nigerian technocrat and the Honorary Chairperson of the global Alliance for Affordable Internet (A4AI). She is also a former and first Minister of Communication Technology in the cabinet of President Goodluck Jonathan. She was educated at the International School Ibadan and the University of Manchester (BEng, Electrical and Electronic Engineering) and King's College London (MSc, Digital Electronics). She has a Doctor of Business Administration (DBA) from Cranfield University. Prior to her Ministerial appointment she was country managing director for Accenture, Nigeria. She had worked with Accenture since 1985 when it was Andersen Consulting. Johnson is the pioneer head of the country's communication technology ministry, which was created as part of the transformation agenda of the Nigerian government. Johnson co-founded a women's organization, WIMBIZ in 2001. She has earned several public commendations since taking up her first government assignment as minister in 2011. This is following the numerous achievements of her ministry notably among which is the launch of the NigComSat-IR Satellite. This has helped to complement the country's efforts at fibre connectivity and the provision of greater bandwidth. The ministry under her watch has also deployed more than 700 personal computers to secondary schools in the first phase of School Access Programme (SAP) while about 193 tertiary institutions in the country now have internet access in the Tertiary Institution Access Programme (TIAP) and 146 communities have access to Community Communication Centers deployed around the country. Omobola is currently a non-executive director of Guinness Nigeria PLC, MTN and Chairperson of Custodian and Allied Insurance Limited. She is also a senior partner with the Venture Capital Firm TLCOM.", "/static/images/omobolaJohnson.png", "https://facebook.com/saeed", "https://twitter.com/saeed", "https://linkedin.com/in/saeed"),
+        #     ]
+        # )
+
         cursor.executemany(
             """
-            INSERT INTO speakers (name, position, bio, image_url, facebook_url, twitter_url, linkedin_url)
-            VALUES (?, ?, ?, ?, ?, ?, ?)
-            """,
+    INSERT INTO speakers (name, position, bio, image_url, facebook_url, twitter_url, linkedin_url)
+    VALUES (?, ?, ?, ?, ?, ?, ?)
+    """,
             [
-                ("Segun Ogunsansaya", "Segun is the inaugural Chairman of the Airtel Africa Foundation, a position he took up in July 2024, after serving as Group CEO of Airtel Africa Plc which is a FTSE 100 company. Segun is also the Chairman of the Board of Nigeria Sovereign Investment Authority.He joined Airtel in 2012, ran the Nigeria Operations of the Telecommunications and mobile money company for nine years before his appointment as Chief Executive Officer of the Group in 2021. With local knowledge of the African landscape and deep distribution experience he led the company in maintaining double-digit revenue growth over many quarters and to deliver new, innovative products to its customers across the continent. Segun has over 35 years of business management experience garnered across multiple  geographies, organizations, and diverse sectors, including consultancy, banking, fast moving consumer goods and telecommunications. He was Managing Director at various times of Coca-Cola Bottling operations in some countries in Africa. After winning many business awards in previous years, Segun was conferred in 2024 with the Lifetime Achievement Award for his leadership, resilience, and significant contributions that have left an indelible mark on the business community in Africa. Segun serves as a director on the board of Nigeria Economic Summit Group, the foremost private sector advocacy group in Nigeria. He is a Fellow in several professional organizations.  ", "/static/images/segunOgunsanya.png", "https://facebook.com/lolu", "https://twitter.com/lolu", "https://linkedin.com/in/lolu"),
-
-                ("Folusho Phillips", "Growth", "Folusho Philips is a distinguished Nigerian professional and entrepreneur known for his significant contributions to management consulting and economic development in Africa. He is the founder and chairman of Phillips Consulting Limited, a management consulting firm with offices in Nigeria, South Africa, and the UK. The firm specializes in organizational development and corporate transformation. A Chartered Management Accountant (UK) and Chartered Accountant (Nigeria), Phillips earned a degree in Industrial Economics from the University of Wales' Institute of Science & Technology. His professional career includes roles in financial management and consulting with Coopers & Lybrand International (now PwC), and as the Group General Manager of Finance at the SCOA Group. He has held influential positions, such as the Chairman of the Nigeria Economic Summit Group and the Nigeria-South Africa Chamber of Commerce. Additionally, he serves as a director of several companies and non-profit organizations, including Special Olympics Nigeria and the African Business Roundtable. Phillips is recognized for his commitment to fostering economic growth and business leadership across Africa", "/static/images/folusoPhilip.png", "https://facebook.com/osazemen", "https://twitter.com/osazemen", "https://linkedin.com/in/osazemen"),
-
-                ("Omobola Johnson", "Pushing Boundaries", "Omobola Olubusola Johnson (born 28 June 1963) is a Nigerian technocrat and the Honorary Chairperson of the global Alliance for Affordable Internet (A4AI). She is also a former and first Minister of Communication Technology in the cabinet of President Goodluck Jonathan. She was educated at the International School Ibadan and the University of Manchester (BEng, Electrical and Electronic Engineering) and King's College London (MSc, Digital Electronics). She has a Doctor of Business Administration (DBA) from Cranfield University. Prior to her Ministerial appointment she was country managing director for Accenture, Nigeria. She had worked with Accenture since 1985 when it was Andersen Consulting. Johnson is the pioneer head of the country's communication technology ministry, which was created as part of the transformation agenda of the Nigerian government. Johnson co-founded a women's organization, WIMBIZ in 2001. She has earned several public commendations since taking up her first government assignment as minister in 2011. This is following the numerous achievements of her ministry notably among which is the launch of the NigComSat-IR Satellite. This has helped to complement the country's efforts at fibre connectivity and the provision of greater bandwidth. The ministry under her watch has also deployed more than 700 personal computers to secondary schools in the first phase of School Access Programme (SAP) while about 193 tertiary institutions in the country now have internet access in the Tertiary Institution Access Programme (TIAP) and 146 communities have access to Community Communication Centers deployed around the country. Omobola is currently a non-executive director of Guinness Nigeria PLC, MTN and Chairperson of Custodian and Allied Insurance Limited. She is also a senior partner with the Venture Capital Firm TLCOM.", "/static/images/omobolaJohnson.png", "https://facebook.com/saeed", "https://twitter.com/saeed", "https://linkedin.com/in/saeed"),
-            ]
+                (
+                    "Segun Ogunsansaya",
+                    "Pushing Boundaries",
+                   "Segun is the inaugural Chairman of the Airtel Africa Foundation, a position he took up in July 2024, after serving as Group CEO of Airtel Africa Plc which is a FTSE 100 company. Segun is also the Chairman of the Board of Nigeria Sovereign Investment Authority.He joined Airtel in 2012, ran the Nigeria Operations of the Telecommunications and mobile money company for nine years before his appointment as Chief Executive Officer of the Group in 2021. With local knowledge of the African landscape and deep distribution experience he led the company in maintaining double-digit revenue growth over many quarters and to deliver new, innovative products to its customers across the continent. Segun has over 35 years of business management experience garnered across multiple  geographies, organizations, and diverse sectors, including consultancy, banking, fast moving consumer goods and telecommunications. He was Managing Director at various times of Coca-Cola Bottling operations in some countries in Africa. After winning many business awards in previous years, Segun was conferred in 2024 with the Lifetime Achievement Award for his leadership, resilience, and significant contributions that have left an indelible mark on the business community in Africa. Segun serves as a director on the board of Nigeria Economic Summit Group, the foremost private sector advocacy group in Nigeria. He is a Fellow in several professional organizations.",
+                    "/static/images/segunOgunsanya.png",
+                    "https://facebook.com/",
+                    "https://twitter.com/",
+                    "https://linkedin.com/in/",
+                ),
+                (
+                    "Folusho Phillips",
+                    "Growth",
+                    "Folusho Phillips is a distinguished Nigerian professional and entrepreneur known for his significant contributions to management consulting and economic development in Africa. He is the founder and chairman of Phillips Consulting Limited, a management consulting firm with offices in Nigeria, South Africa, and the UK. The firm specializes in organizational development and corporate transformation. A Chartered Management Accountant (UK) and Chartered Accountant (Nigeria), Phillips earned a degree in Industrial Economics from the University of Wales' Institute of Science & Technology. His professional career includes roles in financial management and consulting with Coopers & Lybrand International (now PwC), and as the Group General Manager of Finance at the SCOA Group. He has held influential positions, such as the Chairman of the Nigeria Economic Summit Group and the Nigeria-South Africa Chamber of Commerce. Additionally, he serves as a director of several companies and non-profit organizations, including Special Olympics Nigeria and the African Business Roundtable. Phillips is recognized for his commitment to fostering economic growth and business leadership across Africa",
+                    "/static/images/folusoPhilip.png",
+                    "https://facebook.com/",
+                    "https://twitter.com/",
+                    "https://linkedin.com/in",
+                ),
+                (
+                    "Omobola Johnson",
+                    "Pushing Boundaries",
+                     "Omobola Olubusola Johnson (born 28 June 1963) is a Nigerian technocrat and the Honorary Chairperson of the global Alliance for Affordable Internet (A4AI). She is also a former and first Minister of Communication Technology in the cabinet of President Goodluck Jonathan. She was educated at the International School Ibadan and the University of Manchester (BEng, Electrical and Electronic Engineering) and King's College London (MSc, Digital Electronics). She has a Doctor of Business Administration (DBA) from Cranfield University. Prior to her Ministerial appointment she was country managing director for Accenture, Nigeria. She had worked with Accenture since 1985 when it was Andersen Consulting. Johnson is the pioneer head of the country's communication technology ministry, which was created as part of the transformation agenda of the Nigerian government. Johnson co-founded a women's organization, WIMBIZ in 2001. She has earned several public commendations since taking up her first government assignment as minister in 2011. This is following the numerous achievements of her ministry notably among which is the launch of the NigComSat-IR Satellite. This has helped to complement the country's efforts at fibre connectivity and the provision of greater bandwidth. The ministry under her watch has also deployed more than 700 personal computers to secondary schools in the first phase of School Access Programme (SAP) while about 193 tertiary institutions in the country now have internet access in the Tertiary Institution Access Programme (TIAP) and 146 communities have access to Community Communication Centers deployed around the country. Omobola is currently a non-executive director of Guinness Nigeria PLC, MTN and Chairperson of Custodian and Allied Insurance Limited. She is also a senior partner with the Venture Capital Firm TLCOM.",
+                    "/static/images/omobolaJohnson.png",
+                    "https://facebook.com/saeed",
+                    "https://twitter.com/saeed",
+                    "https://linkedin.com/in/saeed",
+                ),
+            ],
         )
+
         conn.commit()
 
 
 # Admin User Model
 class Admin(UserMixin):
     """Model for admin users"""
+
     def __init__(self, id, email):
         self.id = id
         self.email = email
+
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -144,10 +189,14 @@ def load_user(user_id):
             return Admin(user[0], user[1])
     return None
 
+
 # Helper function to check allowed file types
 def allowed_file(filename):
     """Check if a file has an allowed extension"""
-    return "." in filename and os.path.splitext(filename)[1].lower() in ALLOWED_EXTENSIONS
+    return (
+        "." in filename and os.path.splitext(filename)[1].lower() in ALLOWED_EXTENSIONS
+    )
+
 
 # Helper function to fetch speaker details by ID
 def get_speaker_by_id(speaker_id):
@@ -169,12 +218,15 @@ def get_speaker_by_id(speaker_id):
             }
     return None
 
+
 @app.route("/")
 def index():
     """Home Page - Display list of speakers"""
     with sqlite3.connect(DATABASE_FILE) as conn:
         cursor = conn.cursor()
-        cursor.execute("SELECT id, name, position, image_url, facebook_url, twitter_url, linkedin_url FROM speakers")
+        cursor.execute(
+            "SELECT id, name, position, image_url, facebook_url, twitter_url, linkedin_url FROM speakers"
+        )
         speakers = [
             {
                 "id": row[0],
@@ -188,6 +240,7 @@ def index():
             for row in cursor.fetchall()
         ]
     return render_template("index.html", speakers=speakers)
+
 
 @app.route("/gallery", methods=["GET", "POST"])
 def gallery():
@@ -218,6 +271,7 @@ def gallery():
     ]
     return render_template("gallery.html", images=gallery_images)
 
+
 @app.route("/previous_year_images")
 def previous_year_images():
     """Page to display previous year images"""
@@ -229,10 +283,12 @@ def previous_year_images():
     ]
     return render_template("previous_year_images.html", images=images)
 
+
 @app.route("/ask")
 def ask():
     """Ask Questions Page"""
     return render_template("ask.html")
+
 
 @app.route("/ask-question", methods=["POST"])
 def ask_question():
@@ -251,10 +307,12 @@ def ask_question():
         )
     return jsonify({"status": "error", "message": "Question is required"}), 400
 
+
 @app.route("/about")
 def about():
     """About Page"""
     return render_template("about.html")
+
 
 @app.route("/speaker/<int:speaker_id>")
 def speaker_page(speaker_id):
@@ -263,6 +321,7 @@ def speaker_page(speaker_id):
     if not speaker:
         return "Speaker not found", 404
     return render_template("speaker.html", speaker=speaker)
+
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -284,6 +343,7 @@ def login():
             return redirect(url_for("login"))
 
     return render_template("login.html")
+
 
 @app.route("/logout")
 @login_required
@@ -346,7 +406,6 @@ def delete_question(question_id):
     return redirect(url_for("admin_dashboard"))
 
 
-
 @app.route("/delete-image/<filename>", methods=["POST"])
 @login_required
 def delete_image(filename):
@@ -363,6 +422,7 @@ def delete_image(filename):
 
     return redirect(url_for("admin_dashboard"))
 
+
 @app.route("/add-admin", methods=["GET", "POST"])
 @login_required
 def add_admin():
@@ -373,7 +433,9 @@ def add_admin():
 
         with sqlite3.connect(DATABASE_FILE) as conn:
             cursor = conn.cursor()
-            cursor.execute("INSERT INTO admins (email, password) VALUES (?, ?)", (email, password))
+            cursor.execute(
+                "INSERT INTO admins (email, password) VALUES (?, ?)", (email, password)
+            )
             conn.commit()
 
         flash("New admin added successfully!", "success")
@@ -393,7 +455,6 @@ def manage_admins():
         admins = cursor.fetchall()
 
     return render_template("manage_admins.html", admins=admins)
-
 
 
 @app.route("/delete-admin/<int:admin_id>", methods=["POST"])
@@ -419,7 +480,9 @@ def contact():
         message = request.form.get("message")
 
         if not all([name, email, number, subject, message]):
-            flash("All fields are required. Please fill in the form completely.", "danger")
+            flash(
+                "All fields are required. Please fill in the form completely.", "danger"
+            )
             return redirect(url_for("contact"))
 
         with sqlite3.connect(DATABASE_FILE) as conn:
@@ -441,6 +504,7 @@ def contact():
         messages = cursor.fetchall()
 
     return render_template("contact.html", messages=messages)
+
 
 if __name__ == "__main__":
     app.run(debug=True)
@@ -481,7 +545,6 @@ if __name__ == "__main__":
 # df = pd.read_excel(file_path, sheet_name='Getting to Know the Delegates')
 
 
-
 # @app.route('/know_your_delegates')
 # def know_your_delegates():
 #     profiles = df.head(30).to_dict(orient='records')
@@ -496,7 +559,6 @@ if __name__ == "__main__":
 #     profiles = df.iloc[start:end].to_dict(orient='records')
 #     print(profiles)  # Debugging output
 #     return jsonify(profiles)
-
 
 
 # # Initialize the database and create tables if they don't exist
@@ -602,7 +664,6 @@ if __name__ == "__main__":
 #             demo_speakers
 #         )
 
-    
 
 #     connection.commit()
 #     cursor.close()
