@@ -603,7 +603,7 @@ p {
 }
 
 /* Reset default button styling */
-button {
+/* button {
 	font-family: "Arial", sans-serif;
 	font-size: 1rem;
 	padding: 15px 30px;
@@ -618,7 +618,7 @@ button {
 	display: inline-block;
 	text-align: center;
 	outline: none;
-}
+} */
 
 /* Hover and active states */
 button:hover {
@@ -701,7 +701,6 @@ button:focus {
 	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-
 /* Responsive Design */
 @media (max-width: 768px) {
 	/* .about {
@@ -722,20 +721,18 @@ button:focus {
 }
 
 /* Countdown section */
-.welcome{
-	display: flex; 
-	justify-content: center; 
-	align-items: center; 
-	max-width: 1200px; 
-	margin: auto; 
+.welcome {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	max-width: 1200px;
+	margin: auto;
 	flex-wrap: wrap;
 }
 
-
-
 .countdowns {
 	text-align: center;
-	margin: 2rem auto;
+	margin: 4rem auto 2rem;
 	/* padding: 2rem 0; */
 	background: transparent;
 	max-width: 100%;
@@ -750,17 +747,18 @@ button:focus {
 	margin-right: -10px;
 }
 
-.arrangement2 h2{
+.arrangement2 h2 {
 	line-height: 1.5;
-    font-size: 2rem;
+	font-size: 2rem;
 }
 
 .arrangement2 p {
 	color: white;
-    margin-bottom: 2rem;
-    font-size: 1.5rem;
-    line-height: 1.6;
-    text-align: center;
+	margin-bottom: 2rem;
+	font-size: 1.5rem;
+	line-height: 1.6;
+	text-align: center;
+	padding: 10px 70px;
 }
 
 .countdowns h2 {
@@ -918,9 +916,9 @@ button:focus {
 }
 
 /* schedule styling responsive */
-.schedule h2{
+.schedule h2 {
 	font-size: 1.4rem;
-	}
+}
 /* @media (max-width: 415){
 	.schedule h2{
 	font-size: 1.8rem;
@@ -1377,6 +1375,7 @@ button:focus {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	gap: 15px;
+	margin: 0 1px 0 80px;
 }
 
 .contact-form textarea {
@@ -1384,7 +1383,7 @@ button:focus {
 	font-family: inherit;
 }
 
-.contact-form button {
+/* .contact-form button {
 	grid-column: span 2;
 	padding: 15px;
 	border: none;
@@ -1394,10 +1393,10 @@ button:focus {
 	font-size: 1rem;
 	cursor: pointer;
 	transition: background-color 0.3s ease;
-	width: 91%;
+	width:91%;
 	align-items: center;
 	margin: -10px 20px 20px 20px;
-}
+} */
 
 .contact-form button:hover {
 	background-color: #3d55d6;
@@ -1418,7 +1417,7 @@ button:focus {
 .contact-form textarea {
 	width: 93%;
 	height: 90%;
-	margin-bottom: 20%;
+	margin-bottom: 5%;
 }
 
 .contact-info {
@@ -1452,38 +1451,81 @@ button:focus {
 	line-height: 1.5;
 }
 
+
+
+
+
+
+
+.contact-container {
+	align-items: center;
+}
+
+.contact-info {
+	display: flex; 
+	justify-content: space-between;
+	align-items: center; 
+	gap: 20px; 
+	width: 85%;
+	margin: 40px auto;
+}
+
+
+.contact-info div {
+	display: flex; 
+	align-items: center; 
+}
+
+.contact-info i {
+	margin-right: 10px; 
+	font-size: 1.5rem; 
+}
+
+
+.contact-info span {
+	color: white; 
+}
+
+.contact-info span {
+	font-size: 0.5rem; /* Adjust the size as needed */
+	color: white; /* Ensure text is visible on dark background */
+}
+
+
+.contact-form button {
+	grid-column: span 2;
+	padding: 7px;
+	border: none;
+	border-radius: 5px;
+	background-color: #5095e3;
+	color: #fff;
+	font-size: 0.8rem;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+	width: 30%;
+	margin: auto;
+}
+
+
+
+
+
+
+
+
+
 @media screen and (max-width: 768px) {
-	.contact-container {
-		flex-direction: column;
-		align-items: center;
-	}
-
-	.contact-info {
-		width: 100%;
-		margin-top: 20px;
-	}
-	.contact-form button {
-		grid-column: span 2;
-		padding: 7px;
-		border: none;
-		border-radius: 5px;
-		background-color: #5095e3;
-		color: #fff;
-		font-size: 0.8rem;
-		cursor: pointer;
-		transition: background-color 0.3s ease;
-		width: 100%;
-	}
-
 	.contact-form form {
-		grid-template-columns: 1fr;
+		display: block;
+		margin: 10px 1px 10px 0;
 	}
 
 	.contact-form input {
 		width: 90%;
+		margin: 10px 0;
 	}
 	.contact-form textarea {
-		width: 95%;
+		min-height: 200px;
 	}
 }
 
@@ -2340,11 +2382,11 @@ p {
 /* FAQ SECTION */
 
 .faq-flex {
-    display: flex; 
-    flex-direction: row; 
-    justify-content: space-between; 
-    gap: 20px; 
-    flex-wrap: wrap; 
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	gap: 20px;
+	flex-wrap: wrap;
 	margin-bottom: 20px;
 }
 
@@ -2366,8 +2408,8 @@ p {
 	margin-bottom: 15px;
 	border-radius: 5px;
 	overflow: hidden;
-    flex: 1 1 calc(50% - 20px); 
-    box-sizing: border-box;
+	flex: 1 1 calc(50% - 20px);
+	box-sizing: border-box;
 }
 
 .faq-question {
@@ -2387,19 +2429,19 @@ p {
 	display: none;
 	background-color: #282e63;
 	border-top: 1px solid #282e63;
-	font-size: 1.0rem;
+	font-size: 1rem;
 	line-height: 1.5;
 	text-align: center;
 }
 
 /* Media Query for Mobile */
 @media (max-width: 768px) {
-    .faq-flex {
-        flex-direction: column;
-    }
+	.faq-flex {
+		flex-direction: column;
+	}
 
-    .faq-item {
-        flex: 1 1 100%; 
+	.faq-item {
+		flex: 1 1 100%;
 		margin-bottom: 2px;
-    }
+	}
 }
