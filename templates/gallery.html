@@ -2,21 +2,27 @@
 {% block content %}
 <section class="gallery">
     <h2>Explore Gallery</h2>
-    <p>Discover our amazing collection of moments!</p>
-        <!-- Upload Form -->
-        <form action="{{ url_for('gallery') }}" method="POST" enctype="multipart/form-data" class="upload-form" id="upload-form">
-            <input type="file" name="image" id="file-input" accept="image/*" style="display: none;" onchange="document.getElementById('upload-form').submit();">
-            <button type="button" class="custom-button" onclick="document.getElementById('file-input').click();">Upload Photo</button>
-        </form>  <br>
+    <p>Discover our amazing collection of approved moments!</p>
+    
+    <!-- Upload Form -->
+    <form action="{{ url_for('gallery') }}" method="POST" enctype="multipart/form-data" class="upload-form" id="upload-form">
+        <input type="file" name="image" id="file-input" accept="image/*" style="display: none;" onchange="document.getElementById('upload-form').submit();">
+        <button type="button" class="custom-button" onclick="document.getElementById('file-input').click();">Upload Photo</button>
+    </form>  
+    <br>
+
+    <!-- Gallery Grid -->
     <div class="gallery-grid">
-        {% for image in images %}
-        <div class="gallery-item" onclick="openModal('{{ url_for('static', filename='uploads/' + image) }}')">
-            <img src="{{ url_for('static', filename='uploads/' + image) }}" alt="Event Image" class="gallery-image">
-        </div>
-        {% endfor %}
+        {% if images %}
+            {% for image in images %}
+            <div class="gallery-item" onclick="openModal('{{ url_for('static', filename='uploads/' + image) }}')">
+                <img src="{{ url_for('static', filename='uploads/' + image) }}" alt="Event Image" class="gallery-image">
+            </div>
+            {% endfor %}
+        {% else %}
+            <p class="no-images">No approved images available at the moment. Check back later!</p>
+        {% endif %}
     </div>
-
-
 </section>
 
 <!-- Image Modal -->

@@ -75,7 +75,7 @@
     <div class="showcase-grid">
         {% for speaker in speakers %}
         <div class="profile-card">
-            <a href="{{ url_for('speaker_page', speaker_id=speaker['id']) }}">
+            <a href="{{ url_for('speaker_page', speaker_id=speaker['id']) }}" style="text-decoration: none;" >
                 <img src="{{ speaker['image_url'] }}" alt="{{ speaker['name'] }}">
                 <div class="card-details">
                     <h3>{{ speaker['name'] }}</h3>

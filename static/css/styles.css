@@ -2122,7 +2122,7 @@ p {
 		margin-bottom: 1rem;
 	}
 	.logo img {
-		width: 60%;
+		width: 120% !important;
 	}
 
 	.contact-info div span {
@@ -2151,7 +2151,7 @@ p {
 	margin: auto;
 	}
 	.logo img {
-		width: 60%;
+		width: 120% !important;
 	}
 }
 
@@ -2193,7 +2193,7 @@ p {
 	}
 
 	.logo img {
-		width: 60%;
+		width: 120% !important;
 	}
 }
 
@@ -2469,4 +2469,23 @@ p {
 		flex: 1 1 100%;
 		margin-bottom: 2px;
 	}
+}
+
+/* Styles for smaller devices */
+@media (max-width: 768px) {
+    .contact-info {
+        flex-direction: column;
+        align-items: flex-start; 
+    }
+
+    .contact-info div {
+        flex-direction: column;
+        align-items: center; 
+        text-align: center;  
+    }
+
+    .contact-info i {
+        margin-right: 0; 
+        margin-bottom: 5px; 
+    }
 }
