@@ -603,7 +603,7 @@ p {
 }
 
 /* Reset default button styling */
-/* button {
+.custom-button {
 	font-family: "Arial", sans-serif;
 	font-size: 1rem;
 	padding: 15px 30px;
@@ -618,7 +618,7 @@ p {
 	display: inline-block;
 	text-align: center;
 	outline: none;
-} */
+}
 
 /* Hover and active states */
 button:hover {
