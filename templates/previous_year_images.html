@@ -1,52 +1,29 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="carousel-container">
-    <button class="arrow left" onclick="moveLeft()">&#10094;</button>
-    <div class="year_2024_pictures-carousel" id="carousel">
-        {% for image in images %}
-        <div class="slide">
-            <img src="{{ url_for('static', filename='conference2024/' + image) }}" alt="{{ image }}">
-
-            <!-- <div class="caption">Caption for {{ image }}</div> -->
-        </div>
-        {% endfor %}
+<div class="gallery-container">
+    {% for image in images %}
+    <div class="image-wrapper" onclick="openImage('{{ url_for('static', filename='conference2024/' + image) }}')">
+        <img src="{{ url_for('static', filename='conference2024/' + image) }}" alt="{{ image }}">
     </div>
-    <button class="arrow right" onclick="moveRight()">&#10095;</button>
+    {% endfor %}
+</div>
+
+<div id="image-modal" class="modal">
+    <span class="close" onclick="closeImage()">&times;</span>
+    <img id="modal-content" class="modal-content">
 </div>
 
 <script>
-const carousel = document.getElementById('carousel');
-const slides = document.querySelectorAll('.slide');
-let currentIndex = 0;
-
-function updateSlides() {
-    slides.forEach((slide, index) => {
-        slide.classList.remove('active');
-        if (index === currentIndex) {
-            slide.classList.add('active');
-        }
-    });
-
-    // Scroll to the current slide smoothly
-    const slideWidth = slides[currentIndex].offsetWidth;
-    const scrollPosition = slideWidth * currentIndex - (carousel.clientWidth / 2) + (slideWidth / 2);
-    carousel.scrollTo({ left: scrollPosition, behavior: 'smooth' });
+function openImage(src) {
+    const modal = document.getElementById('image-modal');
+    const modalImg = document.getElementById('modal-content');
+    modal.style.display = 'block';
+    modalImg.src = src;
 }
 
-function moveRight() {
-    currentIndex = (currentIndex + 1) % slides.length;
-    updateSlides();
+function closeImage() {
+    const modal = document.getElementById('image-modal');
+    modal.style.display = 'none';
 }
-
-function moveLeft() {
-    currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-    updateSlides();
-}
-
-// Initialize the first slide as active
-updateSlides();
-
-
 </script>
-
 {% endblock %}

@@ -60,4 +60,4 @@ const setupCountdown = (id, eventTime) => {
 };
 
 // Example usage
-setupCountdown("afternoon-session-timer1", new Date("2025-01-16T14:00:00").getTime());
+setupCountdown("afternoon-session-timer1", new Date("2025-01-29T14:00:00").getTime());

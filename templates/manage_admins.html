@@ -1,6 +1,3 @@
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,16 +42,20 @@
 <body>
     <div class="container mt-5">
         <h2>Manage Admins</h2>
+        {% if admins %}
         <ul class="list-group mt-4 shadow-sm rounded">
             {% for admin in admins %}
             <li class="list-group-item d-flex justify-content-between align-items-center">
-                <span class="fw-bold text-primary">{{ admin[1] }}</span>
-                <form method="POST" action="{{ url_for('delete_admin', admin_id=admin[0]) }}">
+                <span class="fw-bold text-primary">{{ admin.email }}</span>
+                <form method="POST" action="{{ url_for('delete_admin', admin_id=admin.id) }}">
                     <button type="submit" class="btn btn-sm btn-danger">Delete</button>
                 </form>
             </li>
             {% endfor %}
         </ul>
+        {% else %}
+        <p class="text-center mt-4">No admins found.</p>
+        {% endif %}
         <a href="{{ url_for('admin_dashboard') }}" class="btn btn-secondary mt-4 w-100">Back to Dashboard</a>
     </div>
 </body>

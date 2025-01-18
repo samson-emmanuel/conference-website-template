@@ -411,7 +411,6 @@ h2 {
 /* General Styling */
 .speakers {
 	text-align: center;
-	font-family: Arial, sans-serif;
 	padding: 2rem;
 	background-color: #f9f9f9;
 }
@@ -513,7 +512,6 @@ p {
 .all-tabs {
 	margin: 20px auto;
 	max-width: 100%;
-	font-family: Arial, sans-serif;
 	font-size: larger;
 	background-color: #1e1e4a;
 	padding: 5%;
@@ -604,7 +602,6 @@ p {
 
 /* Reset default button styling */
 .custom-button {
-	font-family: "Arial", sans-serif;
 	font-size: 1rem;
 	padding: 15px 30px;
 	border: none;
@@ -635,21 +632,15 @@ button:active {
 
 /* Focus state for accessibility */
 button:focus {
-	outline: 2px solid #ffbf47;
+	/* outline: 2px solid #ffbf47; */
 	outline-offset: 4px;
 }
 
 /* about us section styling */
 .about {
-	/* padding: 1.5rem 0; */
-	/* background: linear-gradient( to bottom, #26294D,  #10122a ); */
 	background: transparent;
 	text-align: center;
-	/* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); */
-	/* border-radius: 10px; */
-	/* margin: 1rem auto; */
 	max-width: 1500px;
-	/* background-color: #1414f6; */
 }
 
 .about h2 {
@@ -679,6 +670,7 @@ button:focus {
 	margin: 1.5rem 0;
 	max-width: 1500px;
 	line-height: 1.8;
+	padding: 0 2%;
 }
 
 .about a button {
@@ -914,6 +906,12 @@ button:focus {
 		align-items: center;
 	}
 
+	.arrangement2 p {
+        font-size: 0.9rem;
+        text-align: center;
+        padding: 0 5px;
+    }
+
 	.contact-form button {
 		grid-column: span 2;
 		padding: 7px;
@@ -926,6 +924,12 @@ button:focus {
 		transition: background-color 0.3s ease;
 		width: 100% !important;
 		margin: auto;
+	}
+
+	.faq-toggle-btn {
+		margin: 0 35% 20px;
+		font-size: 0.7rem;
+		padding: 15px 20px;
 	}
 }
 
@@ -976,7 +980,6 @@ button:focus {
 	position: relative;
 	overflow: hidden;
 	cursor: pointer;
-	background-color: #f0f0f0;
 	aspect-ratio: 1 / 1;
 	display: flex;
 	justify-content: center;
@@ -988,6 +991,7 @@ button:focus {
 	height: 100%;
 	object-fit: cover;
 	transition: transform 0.3s ease;
+	border-radius: 15px;
 }
 
 /* Hover Effect */
@@ -1085,7 +1089,6 @@ button:focus {
 	color: #ffffff;
 	text-align: center;
 	padding: 3rem 1rem;
-	font-family: Arial, sans-serif;
 }
 
 /* Section Title */
@@ -1168,13 +1171,13 @@ button:focus {
 }
 
 .ask form button:hover {
-	background-color: #0056b3; /* Darker blue */
-	transform: translateY(-3px); /* Lift effect */
+	background-color: #0056b3; 
+	transform: translateY(-3px); 
 }
 
 .ask form button:active {
 	transform: translateY(0);
-	background-color: #004099; /* Slightly darker on click */
+	background-color: #004099; 
 }
 
 /* Responsive Design */
@@ -1200,7 +1203,6 @@ button:focus {
 	color: #fff;
 	padding: 20px 0;
 	text-align: center;
-	font-family: Arial, sans-serif;
 }
 
 .footer-container {
@@ -1272,12 +1274,12 @@ button:focus {
 
 .gallery-item {
 	position: relative;
-	width: 250px;
+	width: 150px;
 	overflow: hidden;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background-color: #f0f0f0;
+	/* background-color: #f0f0f0; */
 }
 
 .gallery-item img {
@@ -1548,7 +1550,7 @@ button:focus {
 h2 {
 	text-align: center;
 	margin-top: 30px;
-	font-size: 2rem;
+	font-size: 1.7rem !important;
 }
 
 p {
@@ -1776,7 +1778,7 @@ p {
 	}
 
 	.gallery-item {
-		width: 100%;
+		width: 80%;
 	}
 
 	.ask form button {
@@ -1816,73 +1818,8 @@ p {
 	text-align: left;
 }
 
-/* .expectations-section {
-	padding: 40px 30px;
-	background: #20233f;
-	border-top: 3px solid #007bff;
-	border-bottom: 3px solid #007bff;
-}
-.section-title {
-	font-size: 2.5rem;
-	margin-bottom: 25px;
-	color: #50e3c2;
-	text-align: center;
-	text-transform: capitalize;
-}
-.section-intro {
-	font-size: 1.3rem;
-	margin-bottom: 25px;
-	color: #b0b0b0;
-	text-align: center;
-}
-.expectations-list {
-	list-style: none;
-	padding: 0;
-	display: flex;
-	flex-direction: column;
-	gap: 20px;
-}
-.expectation-item {
-	margin: 0;
-	padding: 20px;
-	background: #333759;
-	border-left: 8px solid #4a90e2;
-	color: #e8e8e8;
-	border-radius: 8px;
-	transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.expectation-item:hover {
-	transform: translateY(-5px);
-	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-}
-
-.reasons-section {
-	padding: 40px 30px;
-	background: #1e1f36;
-}
-.reasons-list {
-	list-style: none;
-	padding: 0;
-	display: flex;
-	flex-wrap: wrap;
-	gap: 20px;
-}
-.reason-item {
-	flex: 1 1 calc(45% - 20px);
-	margin: 0;
-	background: #2c2f48;
-	padding: 20px;
-	color: #d4d4d4;
-	border-radius: 10px;
-	box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-	transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.reason-item:hover {
-	transform: scale(1.05);
-	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-} */
 /* Previous year gallery styling */
-.year_2024_pictures-carousel {
+/* .year_2024_pictures-carousel {
 	display: flex;
 	overflow: scroll;
 	scroll-behavior: smooth;
@@ -1949,7 +1886,7 @@ p {
 
 .year_2024_pictures-carousel::-webkit-scrollbar {
 	display: none;
-}
+} */
 
 @media (max-width: 480px) {
 	.hero,
@@ -2099,7 +2036,7 @@ p {
 		flex-direction: column;
 	}
 	.gallery-item {
-		width: 100%;
+		width: 80%;
 	}
 	.logo img {
 		width: 60%;
@@ -2291,20 +2228,24 @@ p {
 	}
 
 	.countdowns {
-		flex-direction: column; /* Stack content vertically */
+		flex-direction: column; 
+		margin: 1rem auto 2rem
 	}
 
 	.image-section img {
-		max-width: 100%; /* Ensure image scales to fit */
+		max-width: 100%; 
 	}
 
 	.arrangement2 h2 {
-		font-size: 1.5rem; /* Adjust heading size */
+		font-size: 1.5rem; 
 	}
 
 	.arrangement2 p {
-		font-size: 0.9rem; /* Adjust paragraph font size */
-		text-align: center; /* Center-align text on smaller screens */
+		font-size: 1rem; 
+		text-align: center; 
+		padding: 0 5px;
+		line-height: 1.8;
+		color: #cacaca;
 	}
 
 	.event-container {
@@ -2416,12 +2357,12 @@ p {
 }
 
 .faq-section {
+	display: none;
 	margin: 20px auto;
 	max-width: 100%;
-	font-family: Arial, sans-serif;
 	font-size: larger;
 	background-color: #1e1e4a;
-	padding: 5%;
+	padding: 2%;
 }
 .faq-section h2 {
 	text-align: center;
@@ -2459,6 +2400,23 @@ p {
 	text-align: center;
 }
 
+.faq-toggle-btn{
+	margin: 0 45% 20px;
+	font-size: 1rem;
+	padding: 15px 30px;
+	border: none;
+	border-radius: 50px;
+	background-color: #007bff;
+	color: white;
+	text-transform: uppercase;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	display: inline-block;
+	text-align: center;
+	outline: none;
+}
+
 /* Media Query for Mobile */
 @media (max-width: 768px) {
 	.faq-flex {
@@ -2468,6 +2426,23 @@ p {
 	.faq-item {
 		flex: 1 1 100%;
 		margin-bottom: 2px;
+	}
+
+	.faq-toggle-btn{
+		margin: 0 35% 20px;
+		font-size: 0.7rem;
+		padding: 15px 20px;
+		border: none;
+		border-radius: 50px;
+		background-color: #007bff;
+		color: white;
+		text-transform: uppercase;
+		cursor: pointer;
+		transition: all 0.3s ease;
+		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+		display: inline-block;
+		text-align: center;
+		outline: none;
 	}
 }
 
@@ -2487,5 +2462,79 @@ p {
     .contact-info i {
         margin-right: 0; 
         margin-bottom: 5px; 
+    }
+}
+
+
+/* Gallery container styles */
+.gallery-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 10px;
+    padding: 20px;
+    margin: 0 auto;
+}
+
+/* Individual image styles */
+.image-wrapper img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.image-wrapper img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    overflow: auto;
+}
+
+.modal-content {
+    display: block;
+    margin: 50px auto;
+    max-width: 80%;
+    max-height: 80%;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.3);
+}
+
+.close {
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: #ccc;
+}
+
+/* Responsive behavior */
+@media (max-width: 768px) {
+    .modal-content {
+        max-width: 90%;
+        max-height: 90%;
+    }
+
+    .close {
+        top: 10px;
+        right: 20px;
+        font-size: 30px;
     }
 }

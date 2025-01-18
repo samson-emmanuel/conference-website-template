@@ -1,87 +1,208 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         body {
-            background-color: #f8f9fa;
-            font-family: Arial, sans-serif;
+            background-color: #f3f4f6;
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            color: #343a40;
         }
+
         .dashboard-header {
             text-align: center;
             margin-bottom: 30px;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #212529;
         }
-        nav a {
-            margin-right: 10px;
-        }
+
         .card {
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 15px;
+            border-radius: 10px;
+            background-color: #ffffff;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
-        .list-group-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
         }
+
+        .card-header {
+            font-size: 1.25rem;
+            font-weight: 600;
+            border-bottom: 1px solid #e9ecef;
+        }
+
         .img-thumbnail {
-            max-height: 80px;
-            width: auto;
-            margin-right: 15px;
+            padding: .25rem;
+            background-color: var(--bs-body-bg);
+            border: var(--bs-border-width) solid var(--bs-border-color);
+            border-radius: var(--bs-border-radius);
+            max-width: 10%;
+            height: auto;
         }
-        .btn-actions {
-            display: flex;
-            gap: 10px;
+
+        @media (max-width: 768px) {
+            .dashboard-header {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .dashboard-header {
+                font-size: 1.25rem;
+            }
         }
     </style>
 </head>
+
 <body>
     <div class="container mt-5">
         <h2 class="dashboard-header">Admin Dashboard</h2>
-        
-        <!-- Navigation Section -->
-        <nav class="d-flex justify-content-center mb-4">
-            <a href="{{ url_for('logout') }}" class="btn btn-danger">Logout</a>
-            <a href="{{ url_for('add_admin') }}" class="btn btn-primary">Add Admin</a>
-            <a href="{{ url_for('manage_admins') }}" class="btn btn-secondary">Manage Admins</a>
-        </nav>
 
-        <!-- Dashboard Content -->
-        <div class="row">
-            <!-- Messages Section -->
-            <div class="col-md-6 mb-4">
-                <div class="card">
-                    <div class="card-header bg-primary text-white">
-                        <h5 class="mb-0">Messages</h5>
-                    </div>
-                    <ul class="list-group list-group-flush">
-                        {% for message in messages %}
-                        <li class="list-group-item">
-                            <span>
-                                <strong>{{ message[1] }}</strong>: {{ message[4] }} <br>
-                                <i>{{ message[5] }}</i>
-                            </span>
-                            <form method="POST" action="{{ url_for('delete_message', message_id=message[0]) }}" class="d-inline">
-                                <button type="submit" class="btn btn-sm btn-danger">Delete</button>
-                            </form>
-                        </li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            </div>
+        <ul class="nav nav-tabs mb-4" id="dashboardTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="questions-tab" data-bs-toggle="tab" data-bs-target="#questions" type="button" role="tab" aria-controls="questions" aria-selected="true">Questions</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="messages-tab" data-bs-toggle="tab" data-bs-target="#messages" type="button" role="tab" aria-controls="messages" aria-selected="false">Messages</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="images-tab" data-bs-toggle="tab" data-bs-target="#images" type="button" role="tab" aria-controls="images" aria-selected="false">Images</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="add-admin-tab" href="{{ url_for('add_admin') }}" role="tab" aria-controls="add-admin" aria-selected="false">Add Admin</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="manage-admin-tab" href="{{ url_for('manage_admins') }}" role="tab" aria-controls="manage-admin" aria-selected="false">Manage Admins</a>
+            </li>
+        </ul>
 
-            <!-- Questions Section -->
-            <div class="col-md-6 mb-4">
+        <div class="tab-content" id="dashboardTabContent">
+            <div class="tab-pane fade show active" id="questions" role="tabpanel" aria-labelledby="questions-tab">
                 <div class="card">
-                    <div class="card-header bg-success text-white">
-                        <h5 class="mb-0">Questions</h5>
-                    </div>
+                    <div class="card-header bg-success text-white">Questions</div>
                     <ul class="list-group list-group-flush">
                         {% for question in questions %}
                         <li class="list-group-item">
-                            <span>{{ question[1] }}</span>
-                            <form method="POST" action="{{ url_for('delete_question', question_id=question[0]) }}" class="d-inline">
+                            <strong>{{ question['id'] }}.</strong> {{ question['question'] }}
+                            <form method="POST" action="{{ url_for('delete_question', question_id=question['id']) }}">
+                                <button type="submit" class="btn btn-sm btn-danger mt-2">Delete</button>
+                            </form>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="messages" role="tabpanel" aria-labelledby="messages-tab">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">Messages</div>
+                    <ul class="list-group list-group-flush">
+                        {% for message in messages %}
+                        <li class="list-group-item">
+                            <strong>{{ message['name'] }}</strong><br>
+                            <span><strong>Phone:</strong> {{ message['number'] }}</span><br>
+                            <span><strong>Email:</strong> {{ message['email'] }}</span><br>
+                            <span><strong>Subject:</strong> {{ message['subject'] }}</span><br>
+                            <i>{{ message['message'] }}</i>
+                            <form method="POST" action="{{ url_for('delete_message', message_id=message['id']) }}">
+                                <button type="submit" class="btn btn-sm btn-danger mt-2">Delete</button>
+                            </form>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="images" role="tabpanel" aria-labelledby="images-tab">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header bg-warning text-dark">Pending Images</div>
+                            <ul class="list-group list-group-flush">
+                                {% for image in unapproved_images %}
+                                <li class="list-group-item">
+                                    <div class="d-flex align-items-center">
+                                        <img src="{{ url_for('static', filename='uploads/' + image['filename']) }}" alt="{{ image['filename'] }}" class="img-thumbnail me-2">
+                                        <span>{{ image['filename'] }}</span>
+                                    </div>
+                                    <div class="btn-actions">
+                                        <form method="POST" action="{{ url_for('approve_image', image_id=image['id']) }}" class="d-inline">
+                                            <button type="submit" class="btn btn-sm btn-success">Approve</button>
+                                        </form>
+                                        <form method="POST" action="{{ url_for('delete_image', image_id=image['id']) }}" class="d-inline">
+                                            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                        </form>
+                                        <button class="btn btn-sm btn-primary view-image-btn" data-image-url="{{ url_for('static', filename='uploads/' + image['filename']) }}">View</button>
+                                    </div>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header bg-info text-white">Approved Images</div>
+                            <ul class="list-group list-group-flush">
+                                {% for image in approved_images %}
+                                <li class="list-group-item">
+                                    <div class="d-flex align-items-center">
+                                        <img src="{{ url_for('static', filename='uploads/' + image['filename']) }}" alt="{{ image['filename'] }}" class="img-thumbnail me-2">
+                                        <span>{{ image['filename'] }}</span>
+                                    </div>
+                                    <div class="btn-actions">
+                                        <form method="POST" action="{{ url_for('delete_image', image_id=image['id']) }}" class="d-inline">
+                                            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                        </form>
+                                        <button class="btn btn-sm btn-primary view-image-btn" data-image-url="{{ url_for('static', filename='uploads/' + image['filename']) }}">View</button>
+                                    </div>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="add-admin" role="tabpanel" aria-labelledby="add-admin-tab">
+                <div class="card">
+                    <div class="card-header bg-secondary text-white">Add Admin</div>
+                    <form method="POST" action="{{ url_for('add_admin') }}">
+                        <div class="mb-3">
+                            <label for="adminName" class="form-label">Admin Name</label>
+                            <input type="text" class="form-control" id="adminName" name="adminName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="adminEmail" class="form-label">Admin Email</label>
+                            <input type="email" class="form-control" id="adminEmail" name="adminEmail" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Add Admin</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="manage-admin" role="tabpanel" aria-labelledby="manage-admin-tab">
+                <div class="card">
+                    <div class="card-header bg-dark text-white">Manage Admins</div>
+                    <ul class="list-group list-group-flush">
+                        {% for admin in admins %}
+                        <li class="list-group-item">
+                            <strong>{{ admin['name'] }}</strong> - {{ admin['email'] }}
+                            <form method="POST" action="{{ url_for('delete_admin', admin_id=admin['id']) }}" class="d-inline">
                                 <button type="submit" class="btn btn-sm btn-danger">Delete</button>
                             </form>
                         </li>
@@ -90,56 +211,36 @@
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- Pending Images Section -->
-        <div class="mt-5">
-            <div class="card">
-                <div class="card-header bg-warning text-dark">
-                    <h5 class="mb-0">Pending Images</h5>
+    <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="imageModalLabel">Image Viewer</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <ul class="list-group list-group-flush">
-                    {% for image in unapproved_images %}
-                    <li class="list-group-item">
-                        <div class="d-flex align-items-center">
-                            <img src="{{ url_for('static', filename='uploads/' + image[1]) }}" alt="{{ image[1] }}" class="img-thumbnail">
-                            <span>{{ image[1] }}</span>
-                        </div>
-                        <div class="btn-actions">
-                            <form method="POST" action="{{ url_for('approve_image', image_id=image[0]) }}" class="d-inline">
-                                <button type="submit" class="btn btn-sm btn-success">Approve</button>
-                            </form>
-                            <form method="POST" action="{{ url_for('delete_image', image_id=image[0]) }}" class="d-inline">
-                                <button type="submit" class="btn btn-sm btn-danger">Delete</button>
-                            </form>
-                        </div>
-                    </li>
-                    {% endfor %}
-                </ul>
+                <div class="modal-body text-center">
+                    <img id="modalImage" src="" alt="Image Preview" class="img-fluid">
+                </div>
             </div>
         </div>
-
-        <!-- Approved Images Section -->
-<div class="mt-5">
-    <div class="card">
-        <div class="card-header bg-info text-white">
-            <h5 class="mb-0">Approved Images</h5>
-        </div>
-        <ul class="list-group list-group-flush">
-            {% for image in approved_images %}
-            <li class="list-group-item">
-                <div class="d-flex align-items-center">
-                    <img src="{{ url_for('static', filename='uploads/' + image[1]) }}" alt="{{ image[1] }}" class="img-thumbnail">
-                    <span>{{ image[1] }}</span>
-                </div>
-                <form method="POST" action="{{ url_for('delete_image', image_id=image[0]) }}" class="d-inline">
-                    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
-                </form>
-            </li>
-            {% endfor %}
-        </ul>
     </div>
-</div>
 
-    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const viewImageButtons = document.querySelectorAll('.view-image-btn');
+            viewImageButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const imageUrl = button.getAttribute('data-image-url');
+                    const modal = new bootstrap.Modal(document.getElementById('imageModal'));
+                    document.getElementById('modalImage').src = imageUrl;
+                    modal.show();
+                });
+            });
+        });
+    </script>
 </body>
+
 </html>
