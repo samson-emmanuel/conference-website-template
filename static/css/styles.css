@@ -2466,7 +2466,7 @@ p {
 }
 
 
-/* Gallery container styles */
+Gallery container styles
 .gallery-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
