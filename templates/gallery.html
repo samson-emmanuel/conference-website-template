@@ -12,17 +12,12 @@
     <br>
 
     <!-- Gallery Grid -->
-    <div class="gallery-grid">
-        {% if images %}
-            {% for image in images %}
-            <div class="gallery-item" onclick="openModal('{{ url_for('static', filename='uploads/' + image) }}')">
-                <img src="{{ url_for('static', filename='uploads/' + image) }}" alt="Event Image" class="gallery-image">
-            </div>
-            {% endfor %}
-        {% else %}
-            <p class="no-images">No available images at the moment. Check back later!</p>
-        {% endif %}
+    <div class="gallery-grid" id="gallery-container">
+        <!-- Images will be dynamically loaded here -->
     </div>
+
+    <!-- Load More Button -->
+    <button id="load-more" onclick="loadMoreImages()" class="custom-button">Load More</button>
 </section>
 
 <!-- Image Modal -->
@@ -32,15 +27,58 @@
 </div>
 
 <script>
-function openModal(imageSrc) {
-    const modal = document.getElementById('imageModal');
-    const modalImg = document.getElementById('modalImage');
-    modal.style.display = "block";
-    modalImg.src = imageSrc;
-}
+    // Array of images passed from the server
+    const allImages = {{ images|tojson }};
+    const imagesPerPage = 12;
+    let currentPage = 0;
 
-function closeModal() {
-    document.getElementById('imageModal').style.display = "none";
-}
+    // Function to load a set of images
+    function loadMoreImages() {
+        const galleryContainer = document.getElementById('gallery-container');
+        const start = currentPage * imagesPerPage;
+        const end = start + imagesPerPage;
+
+        // Check if there are more images to load
+        if (start >= allImages.length) {
+            document.getElementById('load-more').style.display = 'none';
+            return;
+        }
+
+        const imagesToLoad = allImages.slice(start, end);
+
+        imagesToLoad.forEach(image => {
+            const galleryItem = document.createElement('div');
+            galleryItem.className = 'gallery-item';
+            galleryItem.setAttribute('onclick', `openModal('{{ url_for('static', filename='uploads/') }}${image}')`);
+            
+            const img = document.createElement('img');
+            img.src = '{{ url_for("static", filename="uploads/") }}' + image;
+            img.alt = "Event Image";
+            img.className = 'gallery-image';
+
+            galleryItem.appendChild(img);
+            galleryContainer.appendChild(galleryItem);
+        });
+
+        currentPage++;
+    }
+
+    // Function to open the image modal
+    function openModal(imageSrc) {
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImage');
+        modal.style.display = "block";
+        modalImg.src = imageSrc;
+    }
+
+    // Function to close the image modal
+    function closeModal() {
+        document.getElementById('imageModal').style.display = "none";
+    }
+
+    // Load the first set of images on page load
+    document.addEventListener('DOMContentLoaded', () => {
+        loadMoreImages();
+    });
 </script>
 {% endblock %}

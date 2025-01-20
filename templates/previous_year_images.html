@@ -1,12 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="gallery-container">
-    {% for image in images %}
-    <div class="image-wrapper" onclick="openImage('{{ url_for('static', filename='conference2024/' + image) }}')">
-        <img src="{{ url_for('static', filename='conference2024/' + image) }}" alt="{{ image }}">
-    </div>
-    {% endfor %}
+<div class="gallery-container" id="gallery-container">
+    <!-- Initially loaded images will be rendered here -->
 </div>
+
+<button id="load-more" onclick="loadMoreImages()" class="load-more">Load More</button>
 
 <div id="image-modal" class="modal">
     <span class="close" onclick="closeImage()">&times;</span>
@@ -14,16 +12,58 @@
 </div>
 
 <script>
-function openImage(src) {
-    const modal = document.getElementById('image-modal');
-    const modalImg = document.getElementById('modal-content');
-    modal.style.display = 'block';
-    modalImg.src = src;
-}
+    // Array of images passed from the server
+    const allImages = {{ images|tojson }};
+    const imagesPerPage = 12;
+    let currentPage = 0;
 
-function closeImage() {
-    const modal = document.getElementById('image-modal');
-    modal.style.display = 'none';
-}
+    // Function to load a set of images
+    function loadMoreImages() {
+        const galleryContainer = document.getElementById('gallery-container');
+        const start = currentPage * imagesPerPage;
+        const end = start + imagesPerPage;
+
+        // Check if there are more images to load
+        if (start >= allImages.length) {
+            document.getElementById('load-more').style.display = 'none';
+            return;
+        }
+
+        const imagesToLoad = allImages.slice(start, end);
+
+        imagesToLoad.forEach(image => {
+            const imageWrapper = document.createElement('div');
+            imageWrapper.className = 'image-wrapper';
+            imageWrapper.setAttribute('onclick', `openImage('${image}')`);
+            
+            const img = document.createElement('img');
+            img.src = '{{ url_for("static", filename="conference2024/") }}' + image;
+            img.alt = image;
+
+            imageWrapper.appendChild(img);
+            galleryContainer.appendChild(imageWrapper);
+        });
+
+        currentPage++;
+    }
+
+    // Function to open the image modal
+    function openImage(src) {
+        const modal = document.getElementById('image-modal');
+        const modalImg = document.getElementById('modal-content');
+        modal.style.display = 'block';
+        modalImg.src = '{{ url_for("static", filename="conference2024/") }}' + src;
+    }
+
+    // Function to close the image modal
+    function closeImage() {
+        const modal = document.getElementById('image-modal');
+        modal.style.display = 'none';
+    }
+
+    // Load the first set of images on page load
+    document.addEventListener('DOMContentLoaded', () => {
+        loadMoreImages();
+    });
 </script>
 {% endblock %}
