@@ -17,7 +17,6 @@
             <p> <span>CURRENTLY WATCHING: </span> {{ profile['CW'] }}</p>
             <p> <span>CURRENTLY READING:</span> {{ profile['CR'] }}</p>
             <p> <span>CAN'T LIVE WITH: </span> {{ profile['CLWI'] }}</p>
-            <p> <span>DESIGNATION:</span> {{ profile['CLWI'] }}</p>
         </div>
     </div>
     {% endfor %}
@@ -32,12 +31,12 @@
         padding: 20px; 
     }
 
-    .profile-card {
+    /* .profile-card {
         display: flex;
         flex-direction: row;
         align-items: center;
         width: calc(50% - 20px); 
-        max-width: 500px;
+        max-width: 620px;
         padding: 20px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         border-radius: 8px;
@@ -45,7 +44,35 @@
         border: 1px solid #ddd; 
         color: #fff;
         height: 70%;
-    }
+    } */
+
+
+    .profile-card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: calc(50% - 20px); 
+    max-width: 620px;
+    min-height: 200px; /* Ensure a fixed minimum height */
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background-color: transparent;
+    border: 1px solid #ddd; 
+    color: #fff;
+    /* overflow: hidden;  */
+    text-overflow: ellipsis; /* Add ellipsis for overflowing text */
+    white-space: normal; 
+}
+.profile-text p {
+    margin: 5px 0;
+    font-size: 0.6rem;
+    text-align: left;
+    line-height: 1.2;
+    /* overflow: hidden; */
+    text-overflow: ellipsis;
+    white-space: normal;
+}
 
     .profile-image img {
         width: 200px;
@@ -68,12 +95,12 @@
         font-size: 1rem;
     }
 
-    .profile-text p {
+    /* .profile-text p {
         margin: 5px 0;
         font-size: 0.6rem;
         text-align: left;
         line-height: 1.2;
-    }
+    } */
 
     /* Media Query for Tablets */
     @media (max-width: 768px) {
@@ -139,52 +166,106 @@
 
 
 <script>
+    // document.getElementById('loadMore').addEventListener('click', function () {
+    //     const start = parseInt(this.getAttribute('data-start'), 10);
+
+    //     fetch('/load_more', {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/x-www-form-urlencoded',
+    //         },
+    //         body: `start=${start}`
+    //     })
+    //     .then(response => {
+    //         if (!response.ok) {
+    //             throw new Error('Failed to fetch profiles');
+    //         }
+    //         return response.json();
+    //     })
+    //     .then(data => {
+    //         if (!Array.isArray(data) || data.length === 0) {
+    //             alert('No more profiles to load.');
+    //             return;
+    //         }
+
+    //         const profilesDiv = document.getElementById('profileContainer');
+    //         data.forEach(profile => {
+    //             const card = document.createElement('div');
+    //             card.classList.add('profile-card');
+    //             card.innerHTML = `
+    //                 <div class="profile-image">
+    //                     <img src="data:image/jpeg;base64,${profile['image']}" alt="${profile['NAME']}">
+    //                 </div>
+    //                 <div class="profile-text">
+    //                     <h2>${profile['NAME']}</h2>
+    //                     <p>${profile['DESIGNATION']}</p>
+    //                     <p>${profile['FUNCTION']}</p>
+    //                     <p>${profile['LOCATION']}</p>
+    //                 </div>
+    //             `;
+    //             profilesDiv.appendChild(card);
+    //         });
+
+    //         this.setAttribute('data-start', start + 10);
+    //     })
+    //     .catch(error => {
+    //         console.error('Error:', error.message);
+    //         alert('Failed to load more profiles. Please try again.');
+    //     });
+    // });
+
     document.getElementById('loadMore').addEventListener('click', function () {
-        const start = parseInt(this.getAttribute('data-start'), 10);
+    const start = parseInt(this.getAttribute('data-start'), 10);
 
-        fetch('/load_more', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: `start=${start}`
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Failed to fetch profiles');
-            }
-            return response.json();
-        })
-        .then(data => {
-            if (!Array.isArray(data) || data.length === 0) {
-                alert('No more profiles to load.');
-                return;
-            }
+    fetch('/load_more', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: `start=${start}`
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Failed to fetch profiles');
+        }
+        return response.json();
+    })
+    .then(data => {
+        if (!Array.isArray(data) || data.length === 0) {
+            alert('No more profiles to load.');
+            return;
+        }
 
-            const profilesDiv = document.getElementById('profileContainer');
-            data.forEach(profile => {
-                const card = document.createElement('div');
-                card.classList.add('profile-card');
-                card.innerHTML = `
-                    <div class="profile-image">
-                        <img src="data:image/jpeg;base64,${profile['image']}" alt="${profile['NAME']}">
-                    </div>
-                    <div class="profile-text">
-                        <h2>${profile['NAME']}</h2>
-                        <p>${profile['DESIGNATION']}</p>
-                        <p>${profile['FUNCTION']}</p>
-                        <p>${profile['LOCATION']}</p>
-                    </div>
-                `;
-                profilesDiv.appendChild(card);
-            });
-
-            this.setAttribute('data-start', start + 10);
-        })
-        .catch(error => {
-            console.error('Error:', error.message);
-            alert('Failed to load more profiles. Please try again.');
+        const profilesDiv = document.getElementById('profileContainer');
+        data.forEach(profile => {
+            const card = document.createElement('div');
+            card.classList.add('profile-card');
+            card.innerHTML = `
+                <div class="profile-image">
+                    <img src="data:image/jpeg;base64,${profile['image']}" alt="${profile['NAME']}">
+                </div>
+                <div class="profile-text">
+                    <h2>${profile['NAME']}</h2>
+                    <p><span>DESIGNATION: </span>${profile['DESIGNATION']}</p>
+                    <p><span>FUNCTION: </span>${profile['FUNCTION']}</p>
+                    <p><span>LOCATION: </span>${profile['LOCATION']}</p>
+                    <p><span>CAN'T LIVE WITHOUT: </span>${profile['SYCLW']}</p>
+                    <p><span>CAN'T WAIT FOR: </span>${profile['SYCWF']}</p>
+                    <p><span>CURRENTLY WATCHING: </span>${profile['CW']}</p>
+                    <p><span>CURRENTLY READING: </span>${profile['CR']}</p>
+                    <p><span>CAN'T LIVE WITH: </span>${profile['CLWI']}</p>
+                </div>
+            `;
+            profilesDiv.appendChild(card);
         });
+
+        this.setAttribute('data-start', start + 10);
+    })
+    .catch(error => {
+        console.error('Error:', error.message);
+        alert('Failed to load more profiles. Please try again.');
     });
+});
+
 </script>
 {% endblock %}

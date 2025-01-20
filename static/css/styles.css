@@ -2538,3 +2538,177 @@ p {
         font-size: 30px;
     }
 }
+
+
+
+/* Section for the timer  */
+    .countdown-overlay {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        font-size: 2rem;
+        z-index: 10;
+		width: 50%;
+    }
+
+    .count-up {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 1.5rem;
+    }
+
+    .time-box {
+        display: inline-block;
+        margin: 0 10px;
+        text-align: center;
+    }
+
+    .time-box span {
+        font-size: 2rem;
+        font-weight: bold;
+    }
+
+    .time-box small {
+        display: block;
+        font-size: 0.75rem;
+    }
+
+	/*  */
+
+	/* Countdown Timer Styles */
+.countdown-overlay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.countdown-timer {
+    font-size: 2rem;
+    color: #fff;
+    background: #007bff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+    .hero-text h1 {
+        font-size: 2rem;
+    }
+
+    .hero-text p {
+        font-size: 0.9rem;
+    }
+
+    .countdown-timer {
+        font-size: 1.5rem;
+        padding: 8px 15px;
+    }
+}
+
+
+/* Styling for the timer */
+/* Base styles */
+.countdown-overlay {
+    margin-top: 200px; /* Adds spacing between the text and timer */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.countdown-timer {
+    display: flex;
+    gap: 15px; /* Space between time boxes */
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+    color: #ffffff; /* White text color for better contrast */
+    text-transform: uppercase;
+    background: rgba(0, 0, 0, 0.8); /* Slightly transparent background for timer */
+    padding: 10px 20px;
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.countdown-timer .time-box {
+    text-align: center;
+    background-color: rgb(83, 83, 83) !important;
+}
+
+.countdown-timer .time-box span {
+    display: block;
+    font-size: 2rem; /* Larger numbers */
+    color: #00aaff; /* Aqua-like color for numbers */
+}
+
+.countdown-timer .time-box small {
+    font-size: 0.9rem;
+    color: #dddddd; /* Lighter text for labels */
+}
+
+/* Responsive styles */
+
+/* Medium screens (landscape tablets and small desktops) */
+@media (max-width: 1024px) {
+    .countdown-overlay {
+        margin-top: 150px; /* Reduce margin for smaller screens */
+    }
+
+    .countdown-timer {
+        gap: 10px;
+        padding: 8px 16px; /* Reduce padding */
+    }
+
+    .countdown-timer .time-box span {
+        font-size: 1.8rem; /* Slightly smaller numbers */
+    }
+
+    .countdown-timer .time-box small {
+        font-size: 0.8rem; /* Smaller labels */
+    }
+}
+
+/* Small screens (landscape phones) */
+@media (max-width: 768px) {
+    .countdown-overlay {
+        margin-top: 50%;
+    }
+
+    .countdown-timer {
+        gap: 8px;
+        padding: 6px 12px; /* Compact padding */
+    }
+
+    .countdown-timer .time-box span {
+        font-size: 1rem; /* Smaller numbers */
+    }
+
+    .countdown-timer .time-box small {
+        font-size: 0.7rem; /* Smaller labels */
+    }
+}
+
+/* Extra small screens (portrait phones) */
+@media (max-width: 480px) and (orientation: landscape) {
+    .countdown-overlay {
+        margin-top: 80px;
+    }
+
+    .countdown-timer {
+        flex-direction: column; /* Stack time boxes vertically */
+        gap: 5px;
+        padding: 4px 8px;
+    }
+
+    .countdown-timer .time-box span {
+        font-size: 1.2rem; /* Smallest numbers */
+    }
+
+    .countdown-timer .time-box small {
+        font-size: 0.6rem; /* Smallest labels */
+    }
+}

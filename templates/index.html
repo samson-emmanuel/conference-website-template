@@ -7,7 +7,19 @@
 {% block content %}
 <section class="hero">
     <div class="hero-content">
+        
         <div class="hero-text">
+            
+            <!-- <section class="countdown-overlay">
+                <div id="countdown-timer" class="countdown-timer"></div>
+            </section> -->
+
+            <section class="countdown-overlay">
+                <div id="countdown-timer" class="countdown-timer"></div>
+            </section>
+            
+
+
             <h1>Lafarge Africa <br> Leadership <br> Conference <br> 2025</h1>
             <p><span style="font-weight: bolder; color: aqua; font-size: larger;">Theme: </span> <br>Driving Innovation
                 and
@@ -53,16 +65,15 @@
 </section>
 
 <section class="countdowns">
-    <h2>Event Countdown</h2>
-
-    <!-- Day 1 -->
-    <!-- <h4>Day 1</h4> -->
-    <div class="event-container">
-        <div class="event-card">
-            <div class="countdown-timer" id="afternoon-session-timer1"></div>
-        </div>
-    </div>
+    <h2 id="event-header" style="display: none;">Event Timer</h2>    
 </section>
+
+<section class="count-up">
+    <div id="count-up-timer" class="count-up-timer"></div>
+</section>
+
+
+
 
 
 
@@ -75,7 +86,7 @@
     <div class="showcase-grid">
         {% for speaker in speakers %}
         <div class="profile-card">
-            <a href="{{ url_for('speaker_page', speaker_id=speaker['id']) }}" style="text-decoration: none;" >
+            <a href="{{ url_for('speaker_page', speaker_id=speaker['id']) }}" style="text-decoration: none;">
                 <img src="{{ speaker['image_url'] }}" alt="{{ speaker['name'] }}">
                 <div class="card-details">
                     <h3>{{ speaker['name'] }}</h3>
@@ -144,33 +155,46 @@
         <div id="day1" class="speakers-container active">
             <div class="speaker-card">
                 <img src="/static/images/others/DSC_4204 (2).jpg" alt="Speaker 1">
-                <h3>All</h3>
+                <h3></h3>
                 <p>02:00 PM - 04:00 PM</p>
-                <p>Arrival-Cocktail and Networking</p>
+                <p>Delegates Arrivals</p>
             </div>
+
             <div class="speaker-card">
                 <img src="/static/images/others/DSC_4483.jpg" alt="Speaker 2">
-                <h3>MC</h3>
+                <h3>All</h3>
                 <p>04:00 PM - 05:00 PM</p>
-                <p>Welcoming and Overview of the Conference</p>
+                <p>Arrival - Cocktail and Networking</p>
             </div>
             <div class="speaker-card">
                 <img src="/static/images/others/Header Picture.jpg" alt="Speaker 3">
+                <h3>MC</h3>
+                <p>05:00 PM - 05:10 PM</p>
+                <p>Welcoming and Overview of the Conference</p>
+            </div>
+            <div class="speaker-card">
+                <img src="/static/images/others/unnamed (22).png" alt="Speaker 4">
                 <h3>Safety Team</h3>
-                <p>05:10 PM - 05:10 PM</p>
+                <p>05:10 PM - 05:20 PM</p>
                 <p>Safety Moment</p>
             </div>
             <div class="speaker-card">
                 <img src="/static/images/gbemiga-owolabi.png" alt="Speaker 4">
-                <h3>Gbemiga</h3>
-                <p>05:10 PM - 05:20 PM</p>
+                <h3>Gemiga</h3>
+                <p>05:20 PM - 05:30 PM</p>
                 <p>Welcome Address</p>
+            </div>
+            <div class="speaker-card">
+                <img src="/static/images/others/DSC_4517.jpg" alt="Speaker 4">
+                <h3>Gbenga Oyebode</h3>
+                <p>05:30 PM - 05:35 PM</p>
+                <p>Charge from LAP Board Chairman</p>
             </div>
 
             <div class="speaker-card">
                 <img src="/static/images/ceo.jpg" alt="Speaker 6">
                 <h3>Lolu</h3>
-                <p>05:30 PM - 05:50 PM</p>
+                <p>05:35 PM - 05:50 PM</p>
                 <p>Opening Remark - Driving Innovation & Excellence Expanding Growth Beyond Limit</p>
             </div>
             <div class="speaker-card">
@@ -208,7 +232,7 @@
                 <img src="/static/images/others/DSC_4204 (2).jpg" alt="Speaker 6">
                 <h3>All</h3>
                 <p>08:20 PM</p>
-                <p>Bond, Unwind & Close</p>
+                <p></p>
             </div>
         </div>
 
@@ -241,21 +265,21 @@
                 <p>Q&A/Ice Breaker</p>
             </div>
             <div class="speaker-card">
-                <img src="/static/images/WaleOyedeji.jpg" alt="Speaker 9">
-                <h3>Wale Oyedeji</h3>
-                <p>09:00 AM - 10:15 AM</p>
-                <p>Pushing Boundaries with Innovation & Excellence</p>
+                <img src="/static/images/f6-1.jpg" alt="Speaker 9">
+                <h3>Jumoke Adenowo</h3>
+                <p>09:00 AM - 10:10 AM</p>
+                <p>Driving Excellence in Execusion: Turning Vision into Reality</p>
             </div>
             <div class="speaker-card">
                 <img src="/static/images/others/01-3.jpg" alt="Speaker 9">
                 <h3></h3>
-                <p>10:15 AM - 10:30 AM</p>
+                <p>10:10 AM - 10:30 AM</p>
                 <p>Morning Tea Break</p>
             </div>
             <div class="speaker-card">
                 <img src="/static/images/others/01-13.jpg" alt="Speaker 9">
                 <h3>Treasure Hunt</h3>
-                <h3>Ghemiga</h3>
+                <h3></h3>
                 <br>
                 <p>10:30 AM - 02:30 PM</p>
                 <br>
@@ -268,21 +292,21 @@
             </div>
             <div class="speaker-card">
                 <img src="/static/images/others/LLC_24 (58).jpg" alt="Speaker 9">
-                <h3></h3>
-                <p>03:30 PM - 04:30 AM</p>
-                <p>Delegates Movement</p>
-            </div>
-            <!-- <div class="speaker-card">
-                <img src="/static/images/others/01-2.jpg" alt="Speaker 9">
                 <h3>All</h3>
-                <p>08:00 AM - 08:30 AM</p>
-                <p>Outdoor Team Building Activities and Bonding</p>
-            </div> -->
+                <p>03:30 PM - 04:30 PM</p>
+                <p>Demo from Winner of UK Innovation Challenge</p>
+            </div>
+            <div class="speaker-card">
+                <img src="/static/images/gbemiga-owolabi.png" alt="Speaker 9">
+                <h3>Gbemiga</h3>
+                <p>04:30 PM - 05:00 PM</p>
+                <p>Closing</p>
+            </div>
             <div class="speaker-card">
                 <img src="/static/images/others/01-14.jpg" alt="Speaker 9">
                 <h3>All</h3>
-                <p>04:30 AM - 08:00 PM</p>
-                <p>Outdoor Team Building Activities and Bonding <br> Hang Out</p>
+                <p>07:30 PM - 10:00 PM</p>
+                <p>Dinner at the Continental</p>
             </div>
         </div>
 
@@ -303,36 +327,36 @@
                 <img src="/static/images/others/01-14.jpg" alt="Speaker 11">
                 <h3>MC</h3>
                 <p>08:00 AM - 08:30 AM</p>
-                <p>Recap and Theme Emphasis</p>
+                <p>Recap and Theme Emphasis: <br>A brief recap of the previous day and day 3 agenda/Doc on Growth</p>
             </div>
             <div class="speaker-card">
-                <img src="/static/images/WaleOyedeji.jpg" alt="Speaker 11">
-                <h3>Speaker 3</h3>
-                <p>08:30 AM - 09:45 AM</p>
-                <p>Achieving a new era of growth through innovation and excellence</p>
+                <img src="/static/images/segunOgunsanya.png" alt="Speaker 11">
+                <h3>Dr Segun Ogunsaya</h3>
+                <p>08:30 AM - 09:50 AM</p>
+                <p>Keynote Address: <br>Achieving a new era of growth through innovation and excellence</p>
             </div>
             <div class="speaker-card">
                 <img src="/static/images/others/01-13.jpg" alt="Speaker 11">
                 <h3>All</h3>
-                <p>09:45 AM - 10:00 AM</p>
+                <p>09:50 AM - 10:15 AM</p>
                 <p>Morning Tea Break</p>
             </div>
             <div class="speaker-card">
-                <img src="/static/images/others/01-10.jpg" alt="Speaker 11">
-                <h3>Internal Panelists</h3>
-                <p>10:00 AM - 12:00 PM</p>
-                <p>New era of Growht - What does it mean for Lafarge Africa</p>
+                <img src="/static/images/WaleOyedeji.jpg" alt="Speaker 11">
+                <h3>Wale Oyedeji</h3>
+                <p>10:15 AM - 11:30 AM</p>
+                <p>Keynote Address: <br>Pushing Boundaries with Innovation & Excellence</p>
             </div>
             <div class="speaker-card">
                 <img src="/static/images/ceo.jpg" alt="Speaker 11">
                 <h3>Lolu</h3>
-                <p>12:00 PM - 12:30 PM</p>
+                <p>11:30 AM - 12:00 PM</p>
                 <p>2025 Key Objections & Next Steps</p>
             </div>
             <div class="speaker-card">
                 <img src="/static/images/others/01-8.jpg" alt="Speaker 11">
                 <h3>All</h3>
-                <p>12:30 PM - 01:00 PM</p>
+                <p>12:00 PM - 01:00 PM</p>
                 <p>Group PPhotograph</p>
             </div>
             <div class="speaker-card">
@@ -343,33 +367,35 @@
             </div>
             <div class="speaker-card">
                 <img src="/static/images/b319724e-4c82-474a-8a5a-7070942fa201.jfif" alt="Speaker 11">
-                <h3></h3>
+                <h3>Internal Panelist</h3>
                 <p>02:00 PM - 03:00 PM</p>
-                <p>Demofrom Winner of UK Innovation challenge</p>
+                <p>Panel Discussion: Pushing Boundaries with Innovation & Excellence</p>
             </div>
             <div class="speaker-card">
                 <img src="/static/images/others/01-2.jpg" alt="Speaker 11">
-                <h3>Pre-selected delegates</h3>
-                <p>03:00 PM - 03:30 PM</p>
-                <p>Lesson Learned from the Conference & Treasure Hunt</p>
-            </div>
-            <div class="speaker-card">
-                <img src="/static/images/others/01-8.jpg" alt="Speaker 11">
                 <h3>All</h3>
-                <p>03:30 PM - 04:00 PM</p>
-                <p>Summarizing key takeaways from the conference</p>
+                <p>03:00 PM - 03:45 PM</p>
+                <p>Summarizing key takeaways from the conference <br> (Lesson Learned from the Conference & Treasure
+                    Hunt
+                    )</p>
             </div>
             <div class="speaker-card">
                 <img src="/static/images/ceo.jpg" alt="Speaker 11">
                 <h3>Lolu</h3>
-                <p>04:00 PM - 04:15 PM</p>
+                <p>03:45 PM - 04:15 PM</p>
                 <p>Closing</p>
+            </div>
+            <div class="speaker-card">
+                <img src="/static/images/01.jpg" alt="Speaker 11">
+                <h3></h3>
+                <p>04:30 PM - 05:15 PM</p>
+                <p>Delegates Movement</p>
             </div>
             <div class="speaker-card">
                 <!-- <img src="/static/images/ceo.jpg" alt="Speaker 11"> -->
                 <h3>GALA</h3>
-                <p>07:30 PM - 11:00 PM</p>
-                <p>GALA NIGHT</p>
+                <p>05:15 PM - 11:00 PM</p>
+                <p>Outdoor Team Building Activities and Bonding <br> Hang-out</p>
             </div>
         </div>
 
@@ -382,7 +408,8 @@
     <div class="faq-flex">
         <div class="faq-item">
             <div class="faq-question" onclick="toggleFaq(this)">What is the theme of the conference?</div>
-            <div class="faq-answer">The theme of the conference is "Driving Innovation and Excellence: Expanding Growth Beyond Limit."</div>
+            <div class="faq-answer">The theme of the conference is "Driving Innovation and Excellence: Expanding Growth
+                Beyond Limit."</div>
         </div>
         <div class="faq-item">
             <div class="faq-question" onclick="toggleFaq(this)">Where is the conference being held?</div>
@@ -390,12 +417,15 @@
         </div>
         <div class="faq-item">
             <div class="faq-question" onclick="toggleFaq(this)">Who are the keynote speakers?</div>
-            <div class="faq-answer">The keynote speakers include industry leaders and innovators. Check the speakers' section for more details.</div>
+            <div class="faq-answer">The keynote speakers include industry leaders and innovators. Check the speakers'
+                section for more details.</div>
         </div>
         <div class="faq-item">
             <div class="faq-question" onclick="toggleFaq(this)">What is the hotel check-in time?</div>
-            <div class="faq-answer">Delegates are expected to arrive at the Lagos Continental Hotel on Wednesday, 29 January 2025, between 14:00
-                and 15:30 for registration and check-in. It is recommended to arrive on time to complete check-in/registration.</div>
+            <div class="faq-answer">Delegates are expected to arrive at the Lagos Continental Hotel on Wednesday, 29
+                January 2025, between 14:00
+                and 15:30 for registration and check-in. It is recommended to arrive on time to complete
+                check-in/registration.</div>
         </div>
 
         <div class="faq-item">
@@ -405,22 +435,28 @@
         </div>
 
         <div class="faq-item">
-            <div class="faq-question" onclick="toggleFaq(this)">When I arrive at the hotel location, where do I check in?</div>
-            <div class="faq-answer">Upon your arrival at The Lagos Continental Hotel, please proceed to the Soul Lounge on the ground floor for
+            <div class="faq-question" onclick="toggleFaq(this)">When I arrive at the hotel location, where do I check
+                in?</div>
+            <div class="faq-answer">Upon your arrival at The Lagos Continental Hotel, please proceed to the Soul Lounge
+                on the ground floor for
                 check-in.</div>
         </div>
         <div class="faq-item">
             <div class="faq-question" onclick="toggleFaq(this)">How do I get my conference shirts?</div>
-            <div class="faq-answer">For Lagos-based delegates, conference shirts will be distributed at the Ikoyi head office, with further details to
-                follow shortly. Delegates traveling from outside Lagos will receive their shirts upon arrival at the conference venue.</div>
+            <div class="faq-answer">For Lagos-based delegates, conference shirts will be distributed at the Ikoyi head
+                office, with further details to
+                follow shortly. Delegates traveling from outside Lagos will receive their shirts upon arrival at the
+                conference venue.</div>
         </div>
         <div class="faq-item">
             <div class="faq-question" onclick="toggleFaq(this)">Where will Delegate Registration be done?</div>
-            <div class="faq-answer">Upon arrival at the hotel, please proceed to the registration desk on the third floor. You will see the appropriate
+            <div class="faq-answer">Upon arrival at the hotel, please proceed to the registration desk on the third
+                floor. You will see the appropriate
                 signage.</div>
         </div>
         <div class="faq-item">
-            <div class="faq-question" onclick="toggleFaq(this)">Will transport arrangement be made for delegates outside Lagos?</div>
+            <div class="faq-question" onclick="toggleFaq(this)">Will transport arrangement be made for delegates outside
+                Lagos?</div>
             <div class="faq-answer">Yes. Transport arrangement will be made for outside-Lagos delegates.</div>
         </div>
     </div>
@@ -429,22 +465,22 @@
 
 <script>
     // Toggle the FAQ section visibility
-document.getElementById("faq-toggle-btn").addEventListener("click", function () {
-    const faqSection = document.getElementById("faq-section");
-    if (faqSection.style.display === "none" || !faqSection.style.display) {
-        faqSection.style.display = "block";
-        this.textContent = "Hide FAQs";
-    } else {
-        faqSection.style.display = "none";
-        this.textContent = "Show FAQs";
-    }
-});
+    document.getElementById("faq-toggle-btn").addEventListener("click", function () {
+        const faqSection = document.getElementById("faq-section");
+        if (faqSection.style.display === "none" || !faqSection.style.display) {
+            faqSection.style.display = "block";
+            this.textContent = "Hide FAQs";
+        } else {
+            faqSection.style.display = "none";
+            this.textContent = "Show FAQs";
+        }
+    });
 
-// Toggle individual FAQ answers
-function toggleFaq(element) {
-    const faqItem = element.parentElement;
-    faqItem.classList.toggle("active");
-}
+    // Toggle individual FAQ answers
+    function toggleFaq(element) {
+        const faqItem = element.parentElement;
+        faqItem.classList.toggle("active");
+    }
 </script>
 
 
@@ -522,7 +558,7 @@ function toggleFaq(element) {
         const days = [
             { id: "day1", date: "2025-01-29" },
             { id: "day2", date: "2025-01-30" },
-            { id: "day3", date: "2025-01-3" },
+            { id: "day3", date: "2025-01-31" },
         ];
 
         // Function to parse time range and check if current time falls within it
@@ -568,18 +604,18 @@ function toggleFaq(element) {
             }
         }
 
-    function adjustFloatingTextPosition() {
-        const floatingText = document.getElementById("floating-text");
-        const viewportHeight = window.innerHeight;
-        const threshold = 150; // Minimum distance from bottom in portrait mode
-        if (viewportHeight < 500) {
-            // Portrait mode: Adjust to ensure visibility
-            floatingText.style.bottom = `${Math.min(20, viewportHeight - threshold)}px`;
-        } else {
-            // Default for larger viewports
-            floatingText.style.bottom = "20px";
+        function adjustFloatingTextPosition() {
+            const floatingText = document.getElementById("floating-text");
+            const viewportHeight = window.innerHeight;
+            const threshold = 150; // Minimum distance from bottom in portrait mode
+            if (viewportHeight < 500) {
+                // Portrait mode: Adjust to ensure visibility
+                floatingText.style.bottom = `${Math.min(20, viewportHeight - threshold)}px`;
+            } else {
+                // Default for larger viewports
+                floatingText.style.bottom = "20px";
+            }
         }
-    }
 
         // Add responsive floating text styles dynamically
         const style = document.createElement("style");
@@ -639,4 +675,6 @@ function toggleFaq(element) {
     });
 
 </script>
+
+
 {% endblock %}

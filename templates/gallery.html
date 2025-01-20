@@ -2,7 +2,7 @@
 {% block content %}
 <section class="gallery">
     <h2>Explore Gallery</h2>
-    <p>Discover our amazing collection of approved moments!</p>
+    <!-- <p>Discover our amazing collection of approved moments!</p> -->
     
     <!-- Upload Form -->
     <form action="{{ url_for('gallery') }}" method="POST" enctype="multipart/form-data" class="upload-form" id="upload-form">
@@ -20,7 +20,7 @@
             </div>
             {% endfor %}
         {% else %}
-            <p class="no-images">No approved images available at the moment. Check back later!</p>
+            <p class="no-images">No available images at the moment. Check back later!</p>
         {% endif %}
     </div>
 </section>
