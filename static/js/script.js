@@ -260,6 +260,6 @@ const setupCountUp = (timerId, startTime, endTime) => {
 // Initialize the count-up timer
 setupCountUp(
     "count-up-timer",
-    new Date("2025-01-20T14:00:00").getTime(), // Start at 2 PM
-    new Date("2025-01-23T23:00:00").getTime() // End at 11 PM on the 3rd day
+    new Date("2025-01-29T14:00:00").getTime(), // Start at 2 PM
+    new Date("2025-01-31T23:00:00").getTime() // End at 11 PM on the 3rd day
 );    
