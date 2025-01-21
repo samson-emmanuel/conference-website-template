@@ -55,17 +55,34 @@ df = pd.read_excel(file_path, sheet_name="Getting to Know the Delegates")
 
 
 def connect_to_database():
-    """Establish a MySQL database connection."""
     try:
-        conn = mysql.connector.connect(**DATABASE_CONFIG)
-        return conn
-    except mysql.connector.Error as err:
-        if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
-            print("Invalid credentials.")
-        elif err.errno == errorcode.ER_BAD_DB_ERROR:
-            print("Database does not exist.")
+        # Get environment variables
+        db_user = os.getenv('DATABASE_USER')
+        db_pass = os.getenv('DATABASE_PASSWORD')
+        db_name = os.getenv('DATABASE_NAME')
+        instance_connection_name = os.getenv('INSTANCE_CONNECTION_NAME')
+
+        if os.getenv('GAE_ENV', '').startswith('standard'):
+            # Running on Cloud Run/App Engine
+            unix_socket = f'/cloudsql/{instance_connection_name}'
+            conn = mysql.connector.connect(
+                user=db_user,
+                password=db_pass,
+                database=db_name,
+                unix_socket=unix_socket
+            )
         else:
-            print(err)
+            # Running locally
+            host = os.getenv('DATABASE_HOST', 'localhost')
+            conn = mysql.connector.connect(
+                user=db_user,
+                password=db_pass,
+                host=host,
+                database=db_name
+            )
+        return conn
+    except Exception as e:
+        print(f"Database connection failed: {e}")
         return None
 
 
@@ -182,19 +199,34 @@ def login():
     if request.method == "POST":
         email = request.form.get("email")
         password = request.form.get("password")
+
         conn = connect_to_database()
-        if conn:
+        if not conn:
+            app.logger.error("Failed to connect to database")
+            flash("System error. Please try again later.", "danger")
+            return redirect(url_for("login"))
+
+        try:
             cursor = conn.cursor(dictionary=True)
             cursor.execute("SELECT * FROM admins WHERE email = %s", (email,))
             admin = cursor.fetchone()
-            cursor.close()
-            conn.close()
+            app.logger.info(f"Query result for {email}: {admin is not None}")
+
             if admin and admin["password"] == password:
                 user = Admin(admin["id"], admin["email"])
                 login_user(user)
                 return redirect(url_for("admin_dashboard"))
 
-        flash("Invalid credentials. Please try again.", "danger")
+            app.logger.warning(f"Failed login attempt for email: {email}")
+            flash("Invalid credentials. Please try again.", "danger")
+
+        except Exception as e:
+            app.logger.error(f"Login error: {str(e)}")
+            flash("System error. Please try again later.", "danger")
+        finally:
+            cursor.close()
+            conn.close()
+
         return redirect(url_for("login"))
 
     return render_template("login.html")
