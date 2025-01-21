@@ -5,39 +5,159 @@
 {% block content %}
 <section class="speaker-details">
     <div class="container">
-        <h2>Profile</h2>
-        <div class="grid-layout">
-            <!-- Speaker Image -->
-            <div class="image-container">
-                <img src="{{ speaker['image_url'] }}" alt="{{ speaker.name }}">
+        <h2 class="section-title">Profile</h2>
+        <div class="profile-layout">
+            <!-- Speaker Image and Name -->
+            <div class="left-section">
+                <div class="image-wrapper">
+                    <img src="{{ speaker['image_url'] }}" alt="{{ speaker.name }}">
+                </div>
+                <h1 class="speaker-name">{{ speaker.name }}</h1>
             </div>
-            <br>
 
-            <!-- Speaker Information -->
-            <div class="details-container">
-                <h1>{{ speaker.name }}</h1>
-                <p><strong>Bio:</strong></p>
-                <p>{{ speaker.bio }}</p>
+            <!-- Speaker Bio and Social Links -->
+            <div class="right-section">
+                <p class="bio-title"><strong>Bio:</strong></p>
+                <p class="bio-text">{{ speaker.bio }}</p>
 
-                <p><strong>Social Links:</strong></p>
+                <!-- <p class="social-title"><strong>Social Links:</strong></p>
                 <div class="social-icons">
-                    <a href="{{ speaker.facebook_url }}" target="_blank" rel="noopener noreferrer" style="background-color: grey">
-                        <i class="fab fa-facebook" style="color: black;"></i>
+                    <a href="{{ speaker.facebook_url }}" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-facebook"></i>
                     </a>
-
-                    <a href="{{ speaker.twitter_url }}" target="_blank" rel="noopener noreferrer" style="background-color: grey">
-                        <i class="fab fa-twitter" style="color: black;"></i>
+                    <a href="{{ speaker.twitter_url }}" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-twitter"></i>
                     </a>
-                    <a href="{{ speaker.instagram_url }}" target="_blank" rel="noopener noreferrer" style="background-color: grey">
-                        <i class="fab fa-instagram" style="color: black;"></i>
+                    <a href="{{ speaker.instagram_url }}" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-instagram"></i>
                     </a>
-
-                    <a href="{{ speaker.linkedin_url }}" target="_blank" rel="noopener noreferrer" style="background-color: grey">
-                        <i class="fab fa-linkedin" style="color: black;"></i>
+                    <a href="{{ speaker.linkedin_url }}" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-linkedin"></i>
                     </a>
-                </div>                
+                </div> -->
             </div>
         </div>
     </div>
 </section>
+
+<style>
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+    
+    .profile-layout {
+        overflow: hidden; /* To ensure content wraps properly around floated elements */
+    }
+    
+    .left-section {
+        float: left;
+        width: 30%; /* Adjust the percentage as needed */
+        text-align: center;
+    }
+    
+    .image-wrapper img {
+        margin-top: 50px;
+        width: 100%;
+        max-width: 250px;
+        border-radius: 50%;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    
+    .speaker-name {
+        margin-top: 10px;
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+    
+    .right-section {
+        float: left;
+        width: 70%; /* Adjust the percentage as needed */
+        line-height: 1.6;
+        color: #333;
+    }
+    
+    .bio-title {
+        font-size: 1.25rem;
+        margin-bottom: 10px;
+    }
+    
+    .bio-text {
+        margin-bottom: 10px;
+    }
+    
+    .social-title {
+        margin-top: 20px;
+        margin-bottom: 10px;
+        font-size: 1.25rem;
+    }
+    
+    .social-icons {
+        display: flex;
+        gap: 10px;
+    }
+    
+    .social-icons a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: #f0f0f0;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.3s, transform 0.2s;
+    }
+    
+    .social-icons a:hover {
+        background-color: #007bff;
+        transform: translateY(-3px);
+    }
+    
+    .social-icons i {
+        color: #333;
+        font-size: 1.2rem;
+    }
+    
+    .social-icons a:hover i {
+        color: #fff;
+    }
+    
+    /* Responsive styling for smaller screens */
+    @media (max-width: 768px) {
+        .profile-layout {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    
+        .left-section, 
+        .right-section {
+            float: none;
+            width: 100%;
+            text-align: center;
+        }
+    
+        .image-wrapper img {
+            margin-top: 20px;
+            max-width: 150px;
+        }
+    
+        .speaker-name {
+            font-size: 1.25rem;
+        }
+    
+        .right-section {
+            text-align: left;
+        }
+    }
+    </style>
+    
+</style>
 {% endblock %}
