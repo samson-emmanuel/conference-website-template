@@ -6,6 +6,7 @@ class Settings(BaseSettings):
     DATABASE_USER: str
     DATABASE_PASSWORD: str
     DATABASE_NAME: str
+    INSTANCE_CONNECTION_NAME: str
 
     model_config = SettingsConfigDict(
         env_file=".env",
