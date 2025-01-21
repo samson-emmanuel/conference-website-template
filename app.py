@@ -14,22 +14,22 @@ from flask_login import (
     current_user,
 )
 from flask_mail import Mail, Message
-import psycopg2 
+import psycopg2
+from config import Config
 
 app = Flask(__name__)
 
 # Configuration
 DATABASE_CONFIG = {
-    'host': 'localhost',
-    'user': 'root',
-    'password': 'Oungbogbololese100%',
-    'database': 'lafargeConferenceSite'
+    'host': Config.DATABASE_HOST,
+    'user': Config.DATABASE_USER,
+    'password': Config.DATABASE_PASSWORD,
+    'database': Config.DATABASE_NAME
 }
 UPLOAD_FOLDER = "static/uploads"
 ALLOWED_EXTENSIONS = {".jpg", ".jpeg", ".png", ".gif"}
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 app.secret_key = secrets.token_hex(16)
-
 
 
 app.config.update(
