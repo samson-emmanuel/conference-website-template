@@ -62,9 +62,9 @@ def connect_to_database():
         db_name = os.getenv('DATABASE_NAME')
         instance_connection_name = os.getenv('INSTANCE_CONNECTION_NAME')
 
-        if os.getenv('GAE_ENV', '').startswith('standard'):
-            # Running on Cloud Run/App Engine
+        if os.getenv('K_SERVICE'):
             unix_socket = f'/cloudsql/{instance_connection_name}'
+            print('conn string', unix_socket)
             conn = mysql.connector.connect(
                 user=db_user,
                 password=db_pass,
@@ -73,7 +73,7 @@ def connect_to_database():
             )
         else:
             # Running locally
-            host = os.getenv('DATABASE_HOST', 'localhost')
+            host = os.getenv('DATABASE_HOST')
             conn = mysql.connector.connect(
                 user=db_user,
                 password=db_pass,
