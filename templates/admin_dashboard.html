@@ -32,6 +32,10 @@
             border-radius: 10px;
             background-color: #ffffff;
             transition: transform 0.2s ease, box-shadow 0.2s ease;
+            width: 600px;
+            height: 700px;
+            overflow: auto;
+
         }
 
         .card:hover {
@@ -136,8 +140,9 @@
                                 {% for image in unapproved_images %}
                                 <li class="list-group-item">
                                     <div class="d-flex align-items-center">
-                                        <img src="{{ url_for('static', filename='uploads/' + image['filename']) }}" alt="{{ image['filename'] }}" class="img-thumbnail me-2">
-                                        <span>{{ image['filename'] }}</span>
+                                        <!-- Display Cloudinary URL -->
+                                        <img src="{{ image['filename'] }}" alt="{{ image['filename'] }}" class="img-thumbnail me-2">
+                                        <!-- <span>{{ image['filename'] }}</span> -->
                                     </div>
                                     <div class="btn-actions">
                                         <form method="POST" action="{{ url_for('approve_image', image_id=image['id']) }}" class="d-inline">
@@ -146,14 +151,14 @@
                                         <form method="POST" action="{{ url_for('delete_image', image_id=image['id']) }}" class="d-inline">
                                             <button type="submit" class="btn btn-sm btn-danger">Delete</button>
                                         </form>
-                                        <button class="btn btn-sm btn-primary view-image-btn" data-image-url="{{ url_for('static', filename='uploads/' + image['filename']) }}">View</button>
+                                        <button class="btn btn-sm btn-primary view-image-btn" data-image-url="{{ image['filename'] }}">View</button>
                                     </div>
                                 </li>
                                 {% endfor %}
                             </ul>
                         </div>
                     </div>
-
+            
                     <div class="col-md-6">
                         <div class="card">
                             <div class="card-header bg-info text-white">Approved Images</div>
@@ -161,14 +166,15 @@
                                 {% for image in approved_images %}
                                 <li class="list-group-item">
                                     <div class="d-flex align-items-center">
-                                        <img src="{{ url_for('static', filename='uploads/' + image['filename']) }}" alt="{{ image['filename'] }}" class="img-thumbnail me-2">
-                                        <span>{{ image['filename'] }}</span>
+                                        <!-- Display Cloudinary URL -->
+                                        <img src="{{ image['filename'] }}" alt="{{ image['filename'] }}" class="img-thumbnail me-2">
+                                        <!-- <span>{{ image['filename'] }}</span> -->
                                     </div>
                                     <div class="btn-actions">
                                         <form method="POST" action="{{ url_for('delete_image', image_id=image['id']) }}" class="d-inline">
                                             <button type="submit" class="btn btn-sm btn-danger">Delete</button>
                                         </form>
-                                        <button class="btn btn-sm btn-primary view-image-btn" data-image-url="{{ url_for('static', filename='uploads/' + image['filename']) }}">View</button>
+                                        <button class="btn btn-sm btn-primary view-image-btn" data-image-url="{{ image['filename'] }}">View</button>
                                     </div>
                                 </li>
                                 {% endfor %}
@@ -177,6 +183,7 @@
                     </div>
                 </div>
             </div>
+            
 
             <div class="tab-pane fade" id="add-admin" role="tabpanel" aria-labelledby="add-admin-tab">
                 <div class="card">

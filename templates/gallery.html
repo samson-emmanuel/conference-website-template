@@ -2,7 +2,6 @@
 {% block content %}
 <section class="gallery">
     <h2>Explore Gallery</h2>
-    <!-- <p>Discover our amazing collection of approved moments!</p> -->
     
     <!-- Upload Form -->
     <form action="{{ url_for('gallery') }}" method="POST" enctype="multipart/form-data" class="upload-form" id="upload-form">
@@ -13,7 +12,11 @@
 
     <!-- Gallery Grid -->
     <div class="gallery-grid" id="gallery-container">
-        <!-- Images will be dynamically loaded here -->
+        {% for image in images %}
+        <div class="gallery-item" onclick="openModal('{{ image }}')">
+            <img src="{{ image }}" alt="Event Image" class="gallery-image">
+        </div>
+        {% endfor %}
     </div>
 
     <!-- Load More Button -->
@@ -27,58 +30,59 @@
 </div>
 
 <script>
-    // Array of images passed from the server
-    const allImages = {{ images|tojson }};
-    const imagesPerPage = 12;
-    let currentPage = 0;
+    let currentStart = 12; // Starting point for loading more images
+    const limit = 12; // Number of images to load per request
 
-    // Function to load a set of images
-    function loadMoreImages() {
-        const galleryContainer = document.getElementById('gallery-container');
-        const start = currentPage * imagesPerPage;
-        const end = start + imagesPerPage;
+    async function loadMoreImages() {
+        try {
+            const response = await fetch(`/load-more-images?start=${currentStart}&limit=${limit}`);
+            const newImages = await response.json();
 
-        // Check if there are more images to load
-        if (start >= allImages.length) {
-            document.getElementById('load-more').style.display = 'none';
-            return;
+            if (newImages.length === 0) {
+                document.getElementById("load-more").style.display = "none"; // Hide button if no more images
+                return;
+            }
+
+            const galleryContainer = document.getElementById("gallery-container");
+            newImages.forEach(filename => {
+                const galleryItem = document.createElement("div");
+                galleryItem.className = "gallery-item";
+                galleryItem.setAttribute("onclick", `openModal('${filename}')`);
+
+                const img = document.createElement("img");
+                img.src = filename;
+                img.alt = "Event Image";
+                img.className = "gallery-image";
+
+                galleryItem.appendChild(img);
+                galleryContainer.appendChild(galleryItem);
+            });
+
+            currentStart += limit; // Update the starting point for the next load
+        } catch (error) {
+            console.error("Error loading more images:", error);
         }
-
-        const imagesToLoad = allImages.slice(start, end);
-
-        imagesToLoad.forEach(image => {
-            const galleryItem = document.createElement('div');
-            galleryItem.className = 'gallery-item';
-            galleryItem.setAttribute('onclick', `openModal('{{ url_for('static', filename='uploads/') }}${image}')`);
-            
-            const img = document.createElement('img');
-            img.src = '{{ url_for("static", filename="uploads/") }}' + image;
-            img.alt = "Event Image";
-            img.className = 'gallery-image';
-
-            galleryItem.appendChild(img);
-            galleryContainer.appendChild(galleryItem);
-        });
-
-        currentPage++;
     }
 
-    // Function to open the image modal
     function openModal(imageSrc) {
-        const modal = document.getElementById('imageModal');
-        const modalImg = document.getElementById('modalImage');
-        modal.style.display = "block";
-        modalImg.src = imageSrc;
+        const modal = document.getElementById("imageModal");
+        const modalImg = document.getElementById("modalImage");
+        
+        modal.style.display = "block"; // Show the modal
+        modalImg.src = imageSrc; // Set the source of the modal image
     }
 
-    // Function to close the image modal
     function closeModal() {
-        document.getElementById('imageModal').style.display = "none";
+        const modal = document.getElementById("imageModal");
+        modal.style.display = "none"; // Hide the modal
     }
 
-    // Load the first set of images on page load
-    document.addEventListener('DOMContentLoaded', () => {
-        loadMoreImages();
+    document.addEventListener("DOMContentLoaded", () => {
+        if ({{ images|length }} < 12) {
+            document.getElementById("load-more").style.display = "none";
+        }
     });
 </script>
+
+
 {% endblock %}

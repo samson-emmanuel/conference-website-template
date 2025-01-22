@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, jsonify
 from datetime import datetime
 import os
+import cloudinary
+import cloudinary.uploader
 import secrets
 import pandas as pd
 import mysql.connector
@@ -18,6 +20,14 @@ import psycopg2
 from config import Config
 
 app = Flask(__name__)
+
+# Configure Cloudinary
+cloudinary.config(
+    cloud_name="dacopk5b3",
+    api_key="966134237713365",
+    api_secret="B40Jh6p02w0cKiiW-jMomI5M0Ys"
+)
+
 
 # Configuration
 DATABASE_CONFIG = {
@@ -137,6 +147,16 @@ def initialize_database():
                 "INSERT INTO admins (email, password) VALUES (%s, %s)",
                 ("demo@example.com", "demo_password"),
             )
+
+                # Alter the table to add the public_id column if it doesn't exist
+        try:
+            cursor.execute("ALTER TABLE images ADD COLUMN public_id VARCHAR(255);")
+        except mysql.connector.Error as err:
+            if err.errno == errorcode.ER_DUP_FIELDNAME:
+                print("Column 'public_id' already exists.")
+            else:
+                print(f"Error: {err}")
+
         conn.commit()
         cursor.close()
         conn.close()
@@ -243,71 +263,71 @@ def logout():
 def gallery():
     if request.method == "POST":
         uploaded_file = request.files.get("image")
-        if (
-            uploaded_file
-            and uploaded_file.filename
-            and allowed_file(uploaded_file.filename)
-        ):
-            filename, extension = os.path.splitext(uploaded_file.filename)
-            unique_filename = (
-                f"{filename}_{datetime.now().strftime('%Y%m%d%H%M%S')}{extension}"
-            )
-            file_path = os.path.join(app.config["UPLOAD_FOLDER"], unique_filename)
-            uploaded_file.save(file_path)
+        if uploaded_file and uploaded_file.filename:
+            try:
+                # Upload to Cloudinary
+                result = cloudinary.uploader.upload(
+                    uploaded_file,
+                    folder="flask_project_gallery"
+                )
+                public_id = result.get("public_id")
+                file_url = result.get("url")
 
-            conn = connect_to_database()
-            if conn:
-                try:
+                # Save to database
+                conn = connect_to_database()
+                if conn:
                     cursor = conn.cursor()
                     cursor.execute(
                         """
-                        INSERT INTO images (filename, upload_time, approved)
-                        VALUES (%s, %s, %s)
+                        INSERT INTO images (public_id, filename, upload_time, approved)
+                        VALUES (%s, %s, %s, %s)
                         """,
-                        (unique_filename, datetime.now(), 0),
+                        (public_id, file_url, datetime.now(), 0),
                     )
                     conn.commit()
                     cursor.close()
-                    
-                    # Send email notification
-                    try:
-                        msg = Message(
-                            "New Image Uploaded",
-                            recipients=["samaiyex@gmail.com.com"]
-                        )
-                        msg.body = (
-                            f"A new image has been uploaded and is awaiting approval.\n"
-                            f"Filename: {unique_filename}\n"
-                            f"Uploaded at: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"
-                        )
-                        mail.send(msg)
-                        flash("Image uploaded successfully and pending approval! Email notification sent.", "success")
-                    except Exception as email_error:
-                        flash(f"Image uploaded successfully, but email failed to send: {email_error}", "warning")
-
-                except Exception as db_error:
-                    flash(f"Failed to upload image: {db_error}", "danger")
-                finally:
                     conn.close()
-            else:
-                flash("Database connection failed!", "danger")
+
+                    flash("Image uploaded successfully and pending approval!", "success")
+            except Exception as e:
+                flash(f"Failed to upload image: {e}", "danger")
 
             return redirect(url_for("gallery"))
+
+    # Fetch only the initial set of approved images
+    conn = connect_to_database()
+    gallery_images = []
+    if conn:
+        cursor = conn.cursor(dictionary=True)
+        cursor.execute("SELECT filename FROM images WHERE approved = 1 LIMIT 12")
+        gallery_images = [row["filename"] for row in cursor.fetchall()]
+        cursor.close()
+        conn.close()
+
+    return render_template("gallery.html", images=gallery_images)
+
+
+@app.route("/load-more-images", methods=["GET"])
+def load_more_images():
+    start = int(request.args.get("start", 0))
+    limit = int(request.args.get("limit", 12))
 
     conn = connect_to_database()
     gallery_images = []
     if conn:
-        try:
-            cursor = conn.cursor()
-            cursor.execute("SELECT filename FROM images WHERE approved = 1")
-            gallery_images = [row[0] for row in cursor.fetchall()]
-            cursor.close()
-        except Exception as db_error:
-            flash(f"Error fetching images: {db_error}", "danger")
-        finally:
-            conn.close()
+        cursor = conn.cursor(dictionary=True)
+        cursor.execute(
+            "SELECT filename FROM images WHERE approved = 1 LIMIT %s OFFSET %s", 
+            (limit, start)
+        )
+        gallery_images = [row["filename"] for row in cursor.fetchall()]
+        cursor.close()
+        conn.close()
 
-    return render_template("gallery.html", images=gallery_images)
+    return jsonify(gallery_images)
+
+
+
 
 
 @app.route("/admin-dashboard")
@@ -358,6 +378,25 @@ def approve_image(image_id):
     return redirect(url_for("admin_dashboard"))
 
 
+# @app.route("/delete-image/<int:image_id>", methods=["POST"])
+# @login_required
+# def delete_image(image_id):
+#     conn = connect_to_database()
+#     if conn:
+#         cursor = conn.cursor(dictionary=True)
+#         cursor.execute("SELECT filename FROM images WHERE id = %s", (image_id,))
+#         image = cursor.fetchone()
+#         if image:
+#             file_path = os.path.join(app.config["UPLOAD_FOLDER"], image["filename"])
+#             if os.path.exists(file_path):
+#                 os.remove(file_path)
+#             cursor.execute("DELETE FROM images WHERE id = %s", (image_id,))
+#             conn.commit()
+#         cursor.close()
+#         conn.close()
+#     flash("Image deleted successfully!", "success")
+#     return redirect(url_for("admin_dashboard"))
+
 @app.route("/delete-image/<int:image_id>", methods=["POST"])
 @login_required
 def delete_image(image_id):
@@ -367,15 +406,19 @@ def delete_image(image_id):
         cursor.execute("SELECT filename FROM images WHERE id = %s", (image_id,))
         image = cursor.fetchone()
         if image:
-            file_path = os.path.join(app.config["UPLOAD_FOLDER"], image["filename"])
-            if os.path.exists(file_path):
-                os.remove(file_path)
+            # Delete image from Cloudinary
+            public_id = image["filename"].split("/")[-1].split(".")[0]
+            cloudinary.uploader.destroy(public_id)
+
+            # Remove from database
             cursor.execute("DELETE FROM images WHERE id = %s", (image_id,))
             conn.commit()
         cursor.close()
         conn.close()
     flash("Image deleted successfully!", "success")
     return redirect(url_for("admin_dashboard"))
+
+
 
 @app.route("/add-admin", methods=["GET", "POST"])
 @login_required

@@ -1208,12 +1208,13 @@ button:focus {
 	font-size: 0.9rem;
 	opacity: 0.8;
 }
+
 /* Gallery Grid */
 .gallery-grid {
 	display: grid;
 	grid-template-columns: repeat(4, 1fr); /* Default: 4 items in a row */
-	gap: 10px;
-	padding: 0;
+	gap: 15px; /* Increased spacing for a cleaner layout */
+	padding: 10px;
 	margin: 0 auto;
 	max-width: 1200px;
 }
@@ -1225,21 +1226,27 @@ button:focus {
 	justify-content: center;
 	align-items: center;
 	box-sizing: border-box;
+	border-radius: 8px; /* Add some rounding to images for aesthetics */
+	width: 100%; /* Ensure items stretch to fit the grid cell */
+	height: 200px; /* Fixed height for uniform display */
 }
 
 /* Image Styling */
 .gallery-item img {
-	width: 100%; /* Default: Images fill their container */
-	height: auto; /* Maintain aspect ratio */
-	object-fit: cover;
+	width: 100%; /* Images fill the container width */
+	height: 100%; /* Images fill the container height */
+	object-fit: cover; /* Maintain aspect ratio and crop to fit the container */
+	border-radius: 8px; /* Ensure rounded corners match the container */
+	transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
 .gallery-item img:hover {
-	transform: scale(1.05);
+	transform: scale(1.05); /* Slight zoom effect on hover */
+	box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Shadow effect on hover */
 }
 
 /* Responsive Breakpoints */
-@media (max-width: 992px) {
+@media (max-width: 1024px) {
 	.gallery-grid {
 		grid-template-columns: repeat(3, 1fr); /* 3 items in a row */
 	}
@@ -1255,11 +1262,10 @@ button:focus {
 	.gallery-grid {
 		grid-template-columns: 1fr; /* 1 item in a row */
 	}
-	.gallery-item img {
-		width: 120%; /* Increase image width on small devices */
+	.gallery-item {
+		height: 150px; /* Reduce height for smaller screens */
 	}
 }
-
 
 /* Modal Styles */
 .modal {
@@ -1296,32 +1302,6 @@ button:focus {
 	color: #bbb;
 }
 
-/* Navigation Arrows */
-.prev,
-.next {
-	position: absolute;
-	top: 50%;
-	color: white;
-	font-size: 50px;
-	cursor: pointer;
-	padding: 10px;
-	background-color: rgba(0, 0, 0, 0.5);
-	border-radius: 50%;
-	transform: translateY(-50%);
-}
-
-.prev {
-	left: 20px;
-}
-
-.next {
-	right: 20px;
-}
-
-.prev:hover,
-.next:hover {
-	background-color: rgba(0, 0, 0, 0.8);
-}
 
 /* Contact section */
 .contact-section {
@@ -2444,8 +2424,8 @@ p {
 	position: fixed;
 	top: 0;
 	left: 0;
-	width: 100%;
-	height: 100%;
+	width: 70%;
+	height: auto;
 	background-color: rgba(0, 0, 0, 0.8);
 	z-index: 1000;
 	overflow: auto;
@@ -2501,6 +2481,53 @@ p {
 		right: 20px;
 		font-size: 30px;
 	}
+
+	/* Responsive behavior */
+@media (max-width: 1024px) {
+	/* For medium screens, display 3 images in a row */
+	.gallery-container {
+		grid-template-columns: repeat(3, 1fr);
+	}
+}
+
+@media (max-width: 768px) {
+	/* For smaller screens, display 2 images in a row */
+	.gallery-container {
+		grid-template-columns: repeat(2, 1fr);
+	}
+	.modal-content {
+		max-width: 90%;
+		max-height: 90%;
+	}
+
+	.close {
+		top: 10px;
+		right: 20px;
+		font-size: 30px;
+	}
+}
+
+@media (max-width: 480px) {
+	/* For very small screens, display 1 image in a row */
+	.gallery-container {
+		grid-template-columns: repeat(3, 1fr);
+	}
+
+	.load-more {
+		grid-column: span 2;
+		padding: 7px 15px;
+		border: none;
+		border-radius: 5px;
+		background-color: #5095e3;
+		color: #fff;
+		font-size: 0.8rem;
+		cursor: pointer;
+		transition: background-color 0.3s ease;
+		width: 30%;
+		margin: 10px 2%;
+	}
+}
+
 }
 
 /* Section for the timer  */
