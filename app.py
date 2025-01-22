@@ -239,50 +239,6 @@ def logout():
     return redirect(url_for("login"))
 
 
-# @app.route("/gallery", methods=["GET", "POST"])
-# def gallery():
-#     if request.method == "POST":
-#         uploaded_file = request.files.get("image")
-#         if (
-#             uploaded_file
-#             and uploaded_file.filename
-#             and allowed_file(uploaded_file.filename)
-#         ):
-#             filename, extension = os.path.splitext(uploaded_file.filename)
-#             unique_filename = (
-#                 f"{filename}_{datetime.now().strftime('%Y%m%d%H%M%S')}{extension}"
-#             )
-#             file_path = os.path.join(app.config["UPLOAD_FOLDER"], unique_filename)
-#             uploaded_file.save(file_path)
-
-#             conn = connect_to_database()
-#             if conn:
-#                 cursor = conn.cursor()
-#                 cursor.execute(
-#                     """
-#                     INSERT INTO images (filename, upload_time, approved)
-#                     VALUES (%s, %s, %s)
-#                     """,
-#                     (unique_filename, datetime.now(), 0),
-#                 )
-#                 conn.commit()
-#                 cursor.close()
-#                 conn.close()
-
-#             flash("Image uploaded successfully and pending approval!", "success")
-#             return redirect(url_for("gallery"))
-
-#     conn = connect_to_database()
-#     gallery_images = []
-#     if conn:
-#         cursor = conn.cursor()
-#         cursor.execute("SELECT filename FROM images WHERE approved = 1")
-#         gallery_images = [row[0] for row in cursor.fetchall()]
-#         cursor.close()
-#         conn.close()
-
-#     return render_template("gallery.html", images=gallery_images)
-
 @app.route("/gallery", methods=["GET", "POST"])
 def gallery():
     if request.method == "POST":
@@ -622,6 +578,29 @@ def contact():
 @app.route('/event-highlights')
 def event_highlights():
     return render_template('event_highlight.html')
+
+
+# search bar function
+@app.route('/search_profiles', methods=['GET'])
+def search_profiles():
+    try:
+        # Load the Excel file and sheet dynamically
+        df = pd.read_excel(file_path, sheet_name="Getting to Know the Delegates")
+        
+        query = request.args.get('query', '').strip().lower()
+        if not query:
+            return jsonify({'results': df.to_dict(orient='records')})
+
+        # Perform case-insensitive substring search in the 'NAME' column
+        if 'NAME' in df.columns:
+            results = df[df['NAME'].str.contains(query, case=False, na=False)].to_dict(orient='records')
+        else:
+            return jsonify({'error': "'NAME' column not found in the file"}), 400
+
+        return jsonify({'results': results})
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 
 
