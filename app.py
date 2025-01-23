@@ -132,7 +132,6 @@ def initialize_database():
             )
             """
         )
-
         cursor.execute("""
         UPDATE speakers
         SET name = 'Folusho Phillips'
