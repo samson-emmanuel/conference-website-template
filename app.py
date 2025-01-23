@@ -132,6 +132,28 @@ def initialize_database():
             )
             """
         )
+
+           # Ensure speakers table exists
+        cursor.execute(
+            """
+            CREATE TABLE IF NOT EXISTS speakers (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                name TEXT NOT NULL,
+                position TEXT NOT NULL,
+                bio TEXT NOT NULL,
+                image_url TEXT NOT NULL,
+                facebook_url TEXT,
+                twitter_url TEXT,
+                linkedin_url TEXT
+        )
+        """
+    )
+
+        cursor.execute("""
+        UPDATE speakers
+        SET name = 'Folusho Phillips'
+        WHERE name = 'Folusho Philips'
+    """)
         cursor.execute(
             """
             CREATE TABLE IF NOT EXISTS questions (
@@ -156,7 +178,7 @@ def initialize_database():
                 print("Column 'public_id' already exists.")
             else:
                 print(f"Error: {err}")
-
+        
         conn.commit()
         cursor.close()
         conn.close()
