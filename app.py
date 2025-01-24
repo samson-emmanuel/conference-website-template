@@ -137,6 +137,29 @@ def initialize_database():
         SET name = 'Folusho Phillips'
         WHERE name = 'Folusho Philips'
     """)
+        
+        cursor.execute("""
+        INSERT INTO speaker (
+            name, 
+            position, 
+            bio, 
+            image_url, 
+            facebook_url, 
+            twitter_url, 
+            linkedin_url
+        ) VALUES (%s, %s, %s, %s, %s, %s, %s)
+    """, (
+        'Nneka Enwereji', 
+        'MD/CEO Citibank Nigeria Limited\nCiti Country Officer and Banking\nHead, Nigeria and Ghana', 
+        'Nneka Enwereji is the MD/CEO Citibank Nigeria Limited and has a proven track record of being a resilient leader, growing businesses, deepening client relationships, and building strong partnerships. Prior to her appointment, Nneka was Citi’s Head of Global Network Banking (GNB) across Sub-Saharan Africa (SSA), and she led the team to record growth, amidst considerable market complexities. Her previous roles include the GNB Co-Head for Middle East and Africa (MEA), Africa Trade Services Head and Financial Institutions SSA Trade Head. Nneka brings a wealth of experience and her 31-year banking career spans Markets, Corporate & Investment Banking, Transaction Services, Risk Management and Operations. She has been an Executive Director on the Citi Nigeria board and has also served on different boards in a non-executive capacity. Nneka holds a degree in Computer Science and Economics with first class honours from the Obafemi Awolowo University and an MBA from the Warwick Business School, U.K. She has also attended executive programs at Yale School of Management and University of California, Berkeley.', 
+        'static/images/nnekaEnwereji.png', 
+        'www.facebook.com', 
+        'www.twitter.com', 
+        'www.linkedin.com'
+    ))
+
+
+
         cursor.execute(
             """
             CREATE TABLE IF NOT EXISTS questions (
