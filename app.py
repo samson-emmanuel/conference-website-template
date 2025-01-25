@@ -132,11 +132,6 @@ def initialize_database():
             )
             """
         )
-
-        cursor.execute("""
-        DELETE FROM speakers
-        WHERE id IN (13, 14);
-        """)
     
 
 
