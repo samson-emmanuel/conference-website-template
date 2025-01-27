@@ -17,9 +17,9 @@ from flask_mail import Mail, Message
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_wtf.csrf import CSRFProtect, validate_csrf
 from wtforms import ValidationError
-from flask_limiter import Limiter
-from flask_limiter.util import get_remote_address
-import logging
+# from flask_limiter import Limiter
+# from flask_limiter.util import get_remote_address
+# import logging
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
@@ -72,7 +72,7 @@ mail = Mail(app)
 csrf = CSRFProtect(app)
 
 # Initialize Rate Limiting
-limiter = Limiter(app=app, key_func=get_remote_address)
+# limiter = Limiter(app=app, key_func=get_remote_address)
 
 # Load the data from the Excel file
 file_path = "static/2025_LC_DELEGATE_PROFILE.xlsx"
