@@ -33,7 +33,6 @@
 </body>
 </html> -->
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -78,6 +77,9 @@
     <div class="login-container">
         <h2>Admin Login</h2>
         <form method="POST" action="{{ url_for('login') }}">
+            <!-- Add the CSRF token here -->
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            
             <div class="mb-3">
                 <label for="email" class="form-label">Email:</label>
                 <input type="email" name="email" id="email" class="form-control" placeholder="Enter your email" required>

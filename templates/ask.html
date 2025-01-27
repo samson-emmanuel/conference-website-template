@@ -1,3 +1,4 @@
+
 {% extends 'base.html' %}
 
 {% block title %}Ask a Question{% endblock %}
@@ -7,10 +8,16 @@
     <div class="container">
         <h2>Ask a Question</h2>
         <form onsubmit="handleAsk(event)">
+            <!-- Add CSRF Token for Security -->
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
             <textarea name="question" placeholder="Your Question" required></textarea>
-            <button type="submit">Ask</button>
+            <button type="submit" id="submit-button">Ask</button>
+            <!-- Loading Indicator -->
+            <div id="loading-indicator" style="display: none;">Sending...</div>
         </form>
-        <p id="success-message"></p>
+        <p id="success-message" class="success-message"></p>
+        <p id="error-message" class="error-message"></p>
     </div>
 </section>
 
@@ -19,18 +26,32 @@
         event.preventDefault();
 
         const textarea = document.querySelector('textarea[name="question"]');
+        const submitButton = document.getElementById('submit-button');
+        const loadingIndicator = document.getElementById('loading-indicator');
+        const successMessage = document.getElementById('success-message');
+        const errorMessage = document.getElementById('error-message');
+
         const question = textarea.value.trim();
 
         if (!question) {
-            alert("Please enter a question!");
+            errorMessage.textContent = "Please enter a question!";
             return;
         }
+
+        // Clear messages
+        successMessage.textContent = "";
+        errorMessage.textContent = "";
+
+        // Disable the submit button and show loading indicator
+        submitButton.disabled = true;
+        loadingIndicator.style.display = "block";
 
         try {
             const response = await fetch('/ask-question', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': document.querySelector('input[name="csrf_token"]').value
                 },
                 body: JSON.stringify({ question })
             });
@@ -38,15 +59,36 @@
             const data = await response.json();
 
             if (data.status === "success") {
-                document.getElementById('success-message').textContent = "Question asked successfully!";
-                textarea.value = "";
+                successMessage.textContent = "Question asked successfully!";
+                textarea.value = ""; // Clear the textarea
             } else {
-                alert(data.message || "An error occurred.");
+                errorMessage.textContent = data.message || "An error occurred. Please try again.";
             }
         } catch (error) {
             console.error("Error submitting question:", error);
-            alert("An error occurred while submitting your question.");
+            errorMessage.textContent = "An error occurred while submitting your question.";
+        } finally {
+            // Re-enable the submit button and hide loading indicator
+            submitButton.disabled = false;
+            loadingIndicator.style.display = "none";
         }
     }
 </script>
+
+<style>
+    .success-message {
+        color: green;
+        margin-top: 10px;
+    }
+
+    .error-message {
+        color: red;
+        margin-top: 10px;
+    }
+
+    #loading-indicator {
+        margin-top: 10px;
+        font-style: italic;
+    }
+</style>
 {% endblock %}
