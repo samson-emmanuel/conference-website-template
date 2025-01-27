@@ -78,13 +78,38 @@
 
 
 <!-- Speakers section -->
-<section class="event-showcase">
+<!-- <section class="event-showcase">
     <h2 style="color: white !important;">See Our Speakers</h2>
     <p>
         Know more about all our speakers
     </p>
     <div class="showcase-grid">
         {% for speaker in speakers %}
+        <div class="profile-card">
+            <a href="{{ url_for('speaker_page', speaker_id=speaker['id']) }}" style="text-decoration: none;">
+                <img src="{{ speaker['image_url'] }}" alt="{{ speaker['name'] }}">
+                <div class="card-details">
+                    <h3>{{ speaker['name'] }}</h3>
+                    <p><span> <b>Position: </b></span>{{ speaker['position'] }}</p>
+                </div>
+            </a>
+            <div class="icon-links">
+                <a href="{{ speaker['facebook_url'] }}"><i class="fab fa-facebook"></i></a>
+                <a href="{{ speaker['twitter_url'] }}"><i class="fab fa-twitter"></i></a>
+                <a href="{{ speaker['linkedin_url'] }}"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section> -->
+
+<section class="event-showcase">
+    <h2 style="color: white !important;">See Our Speakers</h2>
+    <p>
+        Know more about all our speakers
+    </p>
+    <div class="showcase-grid">
+        {% for speaker in speakers | reverse %}
         <div class="profile-card">
             <a href="{{ url_for('speaker_page', speaker_id=speaker['id']) }}" style="text-decoration: none;">
                 <img src="{{ speaker['image_url'] }}" alt="{{ speaker['name'] }}">
@@ -353,7 +378,7 @@
                 <p>Morning Tea Break</p>
             </div>
             <div class="speaker-card">
-                <img src="/static/images/WaleOyedeji.png" alt="Speaker 11">
+                <img src="/static/images/waleOyedeji.png" alt="Speaker 11">
                 <h3>Wale Oyedeji</h3>
                 <p>10:15 AM - 11:30 AM</p>
                 <p>Keynote Address: <br>Pushing Boundaries with Innovation & Excellence</p>
