@@ -78,13 +78,24 @@ csrf = CSRFProtect(app)
 file_path = "static/2025_LC_DELEGATE_PROFILE.xlsx"
 df = pd.read_excel(file_path, sheet_name="Getting to Know the Delegates")
 
+
 # Database Connection
 def connect_to_database():
     try:
-        conn = mysql.connector.connect(**DATABASE_CONFIG)
+        db_user = os.getenv('DATABASE_USER')
+        db_pass = os.getenv('DATABASE_PASSWORD')
+        db_name = os.getenv('DATABASE_NAME')
+        unix_socket = os.getenv('DATABASE_HOST')
+
+        conn = mysql.connector.connect(
+            user=db_user,
+            password=db_pass,
+            database=db_name,
+            unix_socket=unix_socket
+        )
         return conn
     except Exception as e:
-        app.logger.error(f"Database connection failed: {e}")
+        print(f"Database connection failed: {e}")
         return None
 
 # Initialize Database
