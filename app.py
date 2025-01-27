@@ -644,4 +644,3 @@ def search_profiles():
 
 if __name__ == "__main__":
     app.run(debug=os.getenv("FLASK_DEBUG", "False").lower() == "true")
-    print("Pillow version:", Image.__version__)
