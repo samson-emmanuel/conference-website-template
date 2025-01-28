@@ -2072,7 +2072,7 @@ p {
 		gap: 1rem;
 	}
 	.hero-text h1 {
-		font-size: 2.5rem;
+		font-size: 2rem;
 	}
 	.service-cards {
 		gap: 2rem;
@@ -2593,7 +2593,7 @@ p {
 	} */
 
 	.hero-text p {
-		font-size: 0.9rem;
+		font-size: 0.8rem;
 	}
 
 	.countdown-timer {
@@ -2670,9 +2670,9 @@ p {
 
 /* Small screens (landscape phones) */
 @media (max-width: 768px) {
-	.countdown-overlay {
+	/* .countdown-overlay {
 		margin-top: 50%;
-	}
+	} */
 
 	.countdown-timer {
 		gap: 8px;

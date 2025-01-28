@@ -96,88 +96,10 @@
     };
 
     // Initialize the countdown timer
-setupCountdown("countdown-timer", new Date("2025-01-29T00:00:00").getTime());
+setupCountdown("countdown-timer", new Date("2025-01-29T14:00:00").getTime());
     
 
 
-
-
-    // const setupCountUp = (timerId, startTime, endTime) => {
-    //     const timerElement = document.getElementById(timerId);
-    
-    //     const updateTimer = () => {
-    //         const now = new Date().getTime();
-    
-    //         if (now >= startTime && now <= endTime) {
-    //             let elapsedTime = now - startTime;
-    
-    //             // Handle Day 1 (ends at 11:59 PM of the same day)
-    //             const day1End = new Date(startTime);
-    //             day1End.setHours(23, 59, 59, 999);
-    
-    //             let days, hours, minutes, seconds;
-    
-    //             if (now <= day1End.getTime()) {
-    //                 // Calculate time for Day 1
-    //                 days = 0;
-    //                 hours = Math.floor((elapsedTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    //                 minutes = Math.floor((elapsedTime % (1000 * 60 * 60)) / (1000 * 60));
-    //                 seconds = Math.floor((elapsedTime % (1000 * 60)) / 1000);
-    //             } else {
-    //                 // Handle Day 2 onwards
-    //                 elapsedTime = now - day1End.getTime();
-    
-    //                 // Day 2 (normal 24-hour day)
-    //                 const day2End = new Date(day1End);
-    //                 day2End.setDate(day2End.getDate() + 1);
-    
-    //                 if (now <= day2End.getTime()) {
-    //                     days = 1;
-    //                     hours = Math.floor((elapsedTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    //                     minutes = Math.floor((elapsedTime % (1000 * 60 * 60)) / (1000 * 60));
-    //                     seconds = Math.floor((elapsedTime % (1000 * 60)) / 1000);
-    //                 } else {
-    //                     // Handle Day 3 (ends at 11:00 PM)
-    //                     const day3End = new Date(day2End);
-    //                     day3End.setHours(23, 0, 0, 0);
-    
-    //                     if (now <= day3End.getTime()) {
-    //                         elapsedTime = now - day2End.getTime();
-    //                         days = 2;
-    //                         hours = Math.floor((elapsedTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    //                         minutes = Math.floor((elapsedTime % (1000 * 60 * 60)) / (1000 * 60));
-    //                         seconds = Math.floor((elapsedTime % (1000 * 60)) / 1000);
-    //                     } else {
-    //                         timerElement.style.display = "none"; // Hide timer after Day 3 ends
-    //                         clearInterval(interval);
-    //                         return;
-    //                     }
-    //                 }
-    //             }
-    
-    //             timerElement.innerHTML = `
-    //                 <div class="time-box"><span>${days}</span><small>Days</small></div>
-    //                 <div class="time-box"><span>${hours}</span><small>Hours</small></div>
-    //                 <div class="time-box"><span>${minutes}</span><small>Minutes</small></div>
-    //                 <div class="time-box"><span>${seconds}</span><small>Seconds</small></div>
-    //             `;
-    //         } else if (now > endTime) {
-    //             timerElement.style.display = "none"; // Hide timer when the event ends
-    //             clearInterval(interval);
-    //         }
-    //     };
-    
-    //     updateTimer();
-    //     const interval = setInterval(updateTimer, 1000);
-    // };
-    
-    // // Initialize the count-up timer
-    // setupCountUp(
-    //     "count-up-timer",
-    //     new Date("2025-01-20T14:00:00").getTime(), // Start at 2 PM
-    //     new Date("2025-01-23T23:00:00").getTime() // End at 11 PM on the 3rd day
-// );
-    
 
 const setupCountUp = (timerId, startTime, endTime) => {
     const timerElement = document.getElementById(timerId);
