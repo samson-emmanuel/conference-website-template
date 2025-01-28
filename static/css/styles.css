@@ -649,6 +649,7 @@ button:focus {
 
 	.about h2 {
 		font-size: 2rem;
+		margin-top: 100px;
 	}
 
 	.about p {
@@ -2086,9 +2087,9 @@ p {
 	.hero {
 		padding: 1.7rem;
 	}
-	.hero-text h1 {
+	/* .hero-text h1 {
 		font-size: 1.2rem;
-	}
+	} */
 	.contact-form input,
 	.contact-form textarea {
 		width: 100%;
@@ -2143,7 +2144,7 @@ p {
 		text-align: center;
 	}
 	.hero-text h1 {
-		font-size: 1.3rem;
+		font-size: 150%;
 	}
 	.gallery-grid {
 		grid-template-columns: repeat(2, 1fr);
