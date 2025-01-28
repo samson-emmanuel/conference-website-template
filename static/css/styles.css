@@ -149,6 +149,7 @@ section {
 
 .navbar .nav-links li {
 	position: relative;
+	text-align: center;
 }
 
 .navbar .nav-links a {
@@ -426,8 +427,6 @@ h2 {
 	color: #777;
 	margin-bottom: 2rem;
 }
-
-
 
 /* Section for the scheduling of the event */
 h2,
@@ -1303,7 +1302,6 @@ button:focus {
 	color: #bbb;
 }
 
-
 /* Contact section */
 .contact-section {
 	max-width: 100%;
@@ -1490,7 +1488,7 @@ p {
 	text-align: center;
 	margin: 10px auto;
 	/* max-width: 600px; */
-	color: #ccc; 
+	color: #ccc;
 }
 
 .event-showcase {
@@ -2072,7 +2070,7 @@ p {
 		gap: 1rem;
 	}
 	.hero-text h1 {
-		font-size: 2rem;
+		font-size: 1.6rem;
 	}
 	.service-cards {
 		gap: 2rem;
@@ -2475,7 +2473,6 @@ p {
 	margin: 10px 2%;
 }
 
-
 /* Responsive behavior */
 @media (max-width: 768px) {
 	.modal-content {
@@ -2490,51 +2487,50 @@ p {
 	}
 
 	/* Responsive behavior */
-@media (max-width: 1024px) {
-	/* For medium screens, display 3 images in a row */
-	.gallery-container {
-		grid-template-columns: repeat(3, 1fr);
-	}
-}
-
-@media (max-width: 768px) {
-	/* For smaller screens, display 2 images in a row */
-	.gallery-container {
-		grid-template-columns: repeat(2, 1fr);
-	}
-	.modal-content {
-		max-width: 90%;
-		max-height: 90%;
+	@media (max-width: 1024px) {
+		/* For medium screens, display 3 images in a row */
+		.gallery-container {
+			grid-template-columns: repeat(3, 1fr);
+		}
 	}
 
-	.close {
-		top: 10px;
-		right: 20px;
-		font-size: 30px;
-	}
-}
+	@media (max-width: 768px) {
+		/* For smaller screens, display 2 images in a row */
+		.gallery-container {
+			grid-template-columns: repeat(2, 1fr);
+		}
+		.modal-content {
+			max-width: 90%;
+			max-height: 90%;
+		}
 
-@media (max-width: 480px) {
-	/* For very small screens, display 1 image in a row */
-	.gallery-container {
-		grid-template-columns: repeat(3, 1fr);
+		.close {
+			top: 10px;
+			right: 20px;
+			font-size: 30px;
+		}
 	}
 
-	.load-more {
-		grid-column: span 2;
-		padding: 7px 15px;
-		border: none;
-		border-radius: 5px;
-		background-color: #5095e3;
-		color: #fff;
-		font-size: 0.8rem;
-		cursor: pointer;
-		transition: background-color 0.3s ease;
-		width: 30%;
-		margin: 10px 2%;
-	}
-}
+	@media (max-width: 480px) {
+		/* For very small screens, display 1 image in a row */
+		.gallery-container {
+			grid-template-columns: repeat(3, 1fr);
+		}
 
+		.load-more {
+			grid-column: span 2;
+			padding: 7px 15px;
+			border: none;
+			border-radius: 5px;
+			background-color: #5095e3;
+			color: #fff;
+			font-size: 0.8rem;
+			cursor: pointer;
+			transition: background-color 0.3s ease;
+			width: 30%;
+			margin: 10px 2%;
+		}
+	}
 }
 
 /* Section for the timer  */
@@ -2629,8 +2625,7 @@ p {
 		0,
 		0.8
 	); /* Slightly transparent background for timer */
-	padding: 10px 0
-	;
+	padding: 10px 0;
 	border-radius: 10px; /* Rounded corners */
 	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
@@ -2662,6 +2657,7 @@ p {
 	.countdown-timer {
 		gap: 10px;
 		padding: 8px 16px; /* Reduce padding */
+		margin-top: 100px;
 	}
 
 	.countdown-timer .time-box span {
@@ -2714,98 +2710,104 @@ p {
 	}
 }
 
-
-
 /* General styling for the gallery container */
 .gallery-container {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 images per row */
-    gap: 10px; /* Spacing between images */
-    padding: 10px;
-    box-sizing: border-box;
+	display: grid;
+	grid-template-columns: repeat(4, 1fr); /* 4 images per row */
+	gap: 10px; /* Spacing between images */
+	padding: 10px;
+	box-sizing: border-box;
 }
 
 /* Styling for each image wrapper */
 .image-wrapper {
-    position: relative;
-    overflow: hidden;
-    cursor: pointer;
-    border-radius: 8px; /* Rounded corners for the images */
-    width: 100%;
-    height: 90%!important; /* Fixed height for uniformity */
-    transition: transform 0.3s, box-shadow 0.3s;
+	position: relative;
+	overflow: hidden;
+	cursor: pointer;
+	border-radius: 8px; /* Rounded corners for the images */
+	width: 100%;
+	height: 90% !important; /* Fixed height for uniformity */
+	transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .image-wrapper img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Ensures uniform size by cropping */
-    display: block;
-    transition: transform 0.3s ease-in-out;
+	width: 100%;
+	height: 100%;
+	object-fit: cover; /* Ensures uniform size by cropping */
+	display: block;
+	transition: transform 0.3s ease-in-out;
 }
 
 .image-wrapper:hover {
-    transform: scale(1.05); /* Slight zoom effect on hover */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Shadow effect */
+	transform: scale(1.05); /* Slight zoom effect on hover */
+	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Shadow effect */
 }
 
 /* Modal styling */
 .modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.8); /* Dark overlay background */
-    justify-content: center;
-    align-items: center;
+	display: none;
+	position: fixed;
+	z-index: 1000;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.8); /* Dark overlay background */
+	justify-content: center;
+	align-items: center;
 }
 
 .modal-content {
-    max-width: 90%;
-    max-height: 90%;
-    border-radius: 8px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+	max-width: 90%;
+	max-height: 90%;
+	border-radius: 8px;
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
 
 /* Close button styling */
 .close {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    color: white;
-    font-size: 30px;
-    font-weight: bold;
-    cursor: pointer;
-    z-index: 1001;
-    background: transparent;
-    border: none;
+	position: absolute;
+	top: 20px;
+	right: 20px;
+	color: white;
+	font-size: 30px;
+	font-weight: bold;
+	cursor: pointer;
+	z-index: 1001;
+	background: transparent;
+	border: none;
 }
 
 /* Responsive styles */
 @media (max-width: 1200px) {
-    .gallery-container {
-        grid-template-columns: repeat(3, 1fr); /* 3 images per row for medium screens */
-    }
-}
-
-@media (max-width: 768px) {
-    .gallery-container {
-        grid-template-columns: repeat(2, 1fr); /* 2 images per row for small screens */
-    }
-}
-
-@media (max-width: 480px) {
-    .gallery-container {
-        grid-template-columns: repeat(4, 1fr); /* 1 image per row for extra small screens */
-    }
-	.image-wrapper{
-		height: 100px;
+	.gallery-container {
+		grid-template-columns: repeat(
+			3,
+			1fr
+		); /* 3 images per row for medium screens */
 	}
 }
 
+@media (max-width: 768px) {
+	.gallery-container {
+		grid-template-columns: repeat(
+			2,
+			1fr
+		); /* 2 images per row for small screens */
+	}
+}
+
+@media (max-width: 480px) {
+	.gallery-container {
+		grid-template-columns: repeat(
+			4,
+			1fr
+		); /* 1 image per row for extra small screens */
+	}
+	.image-wrapper {
+		height: 100px;
+	}
+}
 
 /* Treasure hunt page */
 .header-section {
@@ -2829,7 +2831,7 @@ p {
 
 .rotation-container {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+	grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
 	gap: 20px;
 }
 
@@ -2860,7 +2862,7 @@ p {
 .rotation-time {
 	font-size: 1.8rem;
 	margin-bottom: 10px;
-	color: #4CAF50;
+	color: #4caf50;
 }
 
 .rotation-details {
