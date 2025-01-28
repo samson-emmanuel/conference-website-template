@@ -7,9 +7,9 @@
 {% block content %}
 <section class="hero">
     <div class="hero-content">
-        
+
         <div class="hero-text">
-            
+
             <!-- <section class="countdown-overlay">
                 <div id="countdown-timer" class="countdown-timer"></div>
             </section> -->
@@ -17,7 +17,7 @@
             <section class="countdown-overlay">
                 <div id="countdown-timer" class="countdown-timer"></div>
             </section>
-            
+
 
 
             <h1>Lafarge Africa <br> Leadership <br> Conference <br> 2025</h1>
@@ -65,7 +65,7 @@
 </section>
 
 <section class="countdowns">
-    <h2 id="event-header" style="display: none;">Event Timer</h2>    
+    <h2 id="event-header" style="display: none;">Event Timer</h2>
 </section>
 
 <section class="count-up">
@@ -74,34 +74,6 @@
 
 
 
-
-
-
-<!-- Speakers section -->
-<!-- <section class="event-showcase">
-    <h2 style="color: white !important;">See Our Speakers</h2>
-    <p>
-        Know more about all our speakers
-    </p>
-    <div class="showcase-grid">
-        {% for speaker in speakers %}
-        <div class="profile-card">
-            <a href="{{ url_for('speaker_page', speaker_id=speaker['id']) }}" style="text-decoration: none;">
-                <img src="{{ speaker['image_url'] }}" alt="{{ speaker['name'] }}">
-                <div class="card-details">
-                    <h3>{{ speaker['name'] }}</h3>
-                    <p><span> <b>Position: </b></span>{{ speaker['position'] }}</p>
-                </div>
-            </a>
-            <div class="icon-links">
-                <a href="{{ speaker['facebook_url'] }}"><i class="fab fa-facebook"></i></a>
-                <a href="{{ speaker['twitter_url'] }}"><i class="fab fa-twitter"></i></a>
-                <a href="{{ speaker['linkedin_url'] }}"><i class="fab fa-linkedin"></i></a>
-            </div>
-        </div>
-        {% endfor %}
-    </div>
-</section> -->
 
 <section class="event-showcase">
     <h2 style="color: white !important;">See Our Speakers</h2>
@@ -115,7 +87,7 @@
                 <img src="{{ speaker['image_url'] }}" alt="{{ speaker['name'] }}">
                 <div class="card-details">
                     <h3>{{ speaker['name'] }}</h3>
-                    <p><span> <b>Position: </b></span>{{ speaker['position'] }}</p>
+                    <p>{{ speaker['position'] }}</p>
                 </div>
             </a>
             <div class="icon-links">
@@ -139,28 +111,33 @@
         <div class="tabs">
             <div class="tab active" data-day="day1">
                 1st Day - 29 January, 2025 <br> <br> Celebrating Excellence <br>
-                <button id="toggleButton" style="background-color: transparent; padding: 20px 5px 0 0; font-size: 14px; border: none; outline: none; text-transform: none; margin-bottom: 15px; color: white;">Click
+                <button id="toggleButton"
+                    style="background-color: transparent; padding: 20px 5px 0 0; font-size: 14px; border: none; outline: none; text-transform: none; margin-bottom: 15px; color: white;">Click
                     to view dress code</button>
                 <div id="content" style="display: none; font-size: 14px;">
                     <span style="color: aqua;"> <strong>Corporate Casual</strong></span> <br>
-                    <b>Men: </b><span style="font-size: 11.5px;">Any Coloured blazer of choice, paired with jeans or chinos.</span>
-                    <b>Women: </b><span style="font-size: 11.5px;">Corporate casual attire paired with any colour blazer of
+                    <b>Men: </b><span style="font-size: 11.5px;">Any Coloured blazer of choice, paired with jeans or
+                        chinos.</span>
+                    <b>Women: </b><span style="font-size: 11.5px;">Corporate casual attire paired with any colour blazer
+                        of
                         choice.</span>
                 </div>
             </div>
-        
+
             <div class="tab" data-day="day2">
                 2nd Day - 30 January, 2025 <br> <br> Pushing Boundaries with Innovation & Excellence <br>
-                <button id="toggleButton2" style="background-color: transparent; padding: 20px 5px 0 0; font-size: 14px; border: none; outline: none; text-transform: none; margin-bottom: 15px; color: white;">Click
+                <button id="toggleButton2"
+                    style="background-color: transparent; padding: 20px 5px 0 0; font-size: 14px; border: none; outline: none; text-transform: none; margin-bottom: 15px; color: white;">Click
                     to view dress code</button>
                 <div id="content2" style="display: none; font-size: 14px;">
                     Branded LAP Leadership Conference Denim, <br> paired with any trouser or skirt of choice
                 </div>
             </div>
-        
+
             <div class="tab" data-day="day3">
                 3rd Day - 31 January, 2025 <br> <br> New Era of Growth <br>
-                <button id="toggleButton3" style="background-color: transparent; padding: 20px 5px 0 0; font-size: 14px; border: none; outline: none; text-transform: none; margin-bottom: 15px; color: white;">Click
+                <button id="toggleButton3"
+                    style="background-color: transparent; padding: 20px 5px 0 0; font-size: 14px; border: none; outline: none; text-transform: none; margin-bottom: 15px; color: white;">Click
                     to view dress code</button>
                 <div id="content3" style="display: none; font-size: 14px;">
                     Branded LAP Leadership Conference T-Shirt <br> <br>
@@ -232,7 +209,7 @@
                 <p>05:45 PM - 06:15 PM</p>
                 <p>Opening Remark - Driving Innovation & Excellence Expanding Growth Beyond Limit</p>
             </div>
-            
+
             <div class="speaker-card">
                 <img src="/static/images/folusoPhilip.png" alt="Folusho Philip">
                 <h3>Folusho Philips</h3>
@@ -383,7 +360,7 @@
                 <p>10:15 AM - 11:30 AM</p>
                 <p>Keynote Address: <br>Pushing Boundaries with Innovation & Excellence</p>
             </div>
-            
+
             <div class="speaker-card">
                 <img src="/static/images/others/01-8.jpg" alt="Speaker 11">
                 <h3>All</h3>
@@ -409,7 +386,8 @@
                 <img src="/static/images/others/01-8.jpg" alt="Speaker 11">
                 <h3>Internal Panelist</h3>
                 <p>02:30 PM - 03:30 PM</p>
-                <p>Panel Discussion: <br>Pushing Boundaried with Innovation & Excellence - What does it mean for Lafarge Africa</p>
+                <p>Panel Discussion: <br>Pushing Boundaried with Innovation & Excellence - What does it mean for Lafarge
+                    Africa</p>
             </div>
 
             <div class="speaker-card">
@@ -726,8 +704,8 @@
     // Define the image paths
     const imagePaths = [
         'static/images/dresscode/day1.png',
-        'static/images/dresscode/day2.png', 
-        'static/images/dresscode/day3.png'        
+        'static/images/dresscode/day2.png',
+        'static/images/dresscode/day3.png'
     ];
 
     // List of content div IDs

@@ -19,11 +19,12 @@
             <a href="/" class="logo" id="logo"><img src="/static/images/lafarge-conference-logo - Copy.png" alt=""></a>
 
             <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
-            
+
             <ul class="nav-links">
                 <li><a href="/">Home</a></li>
                 <li><a href="/about">About</a></li>
                 <li><a href="/ask">Ask question</a></li>
+                <li><a href="/treasure_hunt">Treasure Hunt</a></li>
                 <li><a href="/know_your_delegates">Know your delegates</a></li>
                 <li class="dropdown">
                     <a href="#">Gallery</a>
@@ -33,12 +34,12 @@
                     </ul>
                 </li>
                 <li><a href="/event-highlights">Highlights</a></li>
-                <li><a href="/contact">Contact</a></li>
+                <!-- <li><a href="/contact">Contact</a></li> -->
             </ul>
         </div>
     </nav>
 
-    
+
 
     <main>
         {% block content %}{% endblock %}
@@ -57,15 +58,17 @@
             <div class="social-icons">
                 <a href="https://facebook.com/lafargeafricaplc" target="_blank"><i class="fab fa-facebook"></i></a>
                 <a href="https://twitter.com/lafarge_africa" target="_blank"><i class="fab fa-twitter"></i></a>
-                <a href="https://www.instagram.com/lafarge__africa/" target="_blank"><i class="fab fa-instagram"></i></a>
-                <a href="https://linkedin.com/company/lafargeafrica/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="https://www.instagram.com/lafarge__africa/" target="_blank"><i
+                        class="fab fa-instagram"></i></a>
+                <a href="https://linkedin.com/company/lafargeafrica/" target="_blank"><i
+                        class="fab fa-linkedin"></i></a>
             </div>
             <div class="footer-credit">
                 <p>&copy; 2024 Lafarge Conference. All rights reserved.</p>
             </div>
         </div>
     </footer>
-    
+
     <script>
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -80,11 +83,11 @@
     <script>
 
         function toggleMenu() {
-    const navLinks = document.querySelector('.nav-links');
-    navLinks.style.display = navLinks.style.display === 'block' ? 'none' : 'block';
-}
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.style.display = navLinks.style.display === 'block' ? 'none' : 'block';
+        }
 
-    </script>    
+    </script>
     <script src="/static/js/script.js"></script>
 
 </body>

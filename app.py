@@ -17,6 +17,7 @@ from flask_mail import Mail, Message
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_wtf.csrf import CSRFProtect, validate_csrf
 from wtforms import ValidationError
+
 # from flask_limiter import Limiter
 # from flask_limiter.util import get_remote_address
 # import logging
@@ -32,11 +33,11 @@ app = Flask(__name__)
 
 # Configuration
 DATABASE_CONFIG = {
-    'host': Config.DATABASE_HOST,
-    'user': Config.DATABASE_USER,
-    'password': Config.DATABASE_PASSWORD,
-    'database': Config.DATABASE_NAME,
-    'auth_plugin': 'mysql_native_password'  # Explicitly specify the plugin
+    "host": Config.DATABASE_HOST,
+    "user": Config.DATABASE_USER,
+    "password": Config.DATABASE_PASSWORD,
+    "database": Config.DATABASE_NAME,
+    "auth_plugin": "mysql_native_password",  # Explicitly specify the plugin
 }
 UPLOAD_FOLDER = "static/uploads"
 ALLOWED_EXTENSIONS = {".jpg", ".jpeg", ".png", ".gif"}
@@ -45,20 +46,20 @@ app.secret_key = secrets.token_hex(32)  # Strong secret key
 
 # Flask-Mail Configuration
 app.config.update(
-    MAIL_SERVER=os.getenv('MAIL_SERVER', 'smtp.gmail.com'),
-    MAIL_PORT=int(os.getenv('MAIL_PORT', 587)),
-    MAIL_USE_TLS=os.getenv('MAIL_USE_TLS', 'True').lower() == 'true',
-    MAIL_USE_SSL=os.getenv('MAIL_USE_SSL', 'False').lower() == 'false',
-    MAIL_USERNAME=os.getenv('MAIL_USERNAME'),
-    MAIL_PASSWORD=os.getenv('MAIL_PASSWORD'),
-    MAIL_DEFAULT_SENDER=os.getenv('MAIL_DEFAULT_SENDER', 'uploading@example.com')
+    MAIL_SERVER=os.getenv("MAIL_SERVER", "smtp.gmail.com"),
+    MAIL_PORT=int(os.getenv("MAIL_PORT", 587)),
+    MAIL_USE_TLS=os.getenv("MAIL_USE_TLS", "True").lower() == "true",
+    MAIL_USE_SSL=os.getenv("MAIL_USE_SSL", "False").lower() == "false",
+    MAIL_USERNAME=os.getenv("MAIL_USERNAME"),
+    MAIL_PASSWORD=os.getenv("MAIL_PASSWORD"),
+    MAIL_DEFAULT_SENDER=os.getenv("MAIL_DEFAULT_SENDER", "uploading@example.com"),
 )
 
 
 cloudinary.config(
-    cloud_name = 'dacopk5b3',
-    api_key = '966134237713365',
-    api_secret = 'B40Jh6p02w0cKiiW-jMomI5M0Ys'
+    cloud_name="dacopk5b3",
+    api_key="966134237713365",
+    api_secret="B40Jh6p02w0cKiiW-jMomI5M0Ys",
 )
 # Initialize Flask-Login
 login_manager = LoginManager()
@@ -82,21 +83,19 @@ df = pd.read_excel(file_path, sheet_name="Getting to Know the Delegates")
 # Database Connection
 def connect_to_database():
     try:
-        db_user = os.getenv('DATABASE_USER')
-        db_pass = os.getenv('DATABASE_PASSWORD')
-        db_name = os.getenv('DATABASE_NAME')
-        unix_socket = os.getenv('DATABASE_HOST')
+        db_user = os.getenv("DATABASE_USER")
+        db_pass = os.getenv("DATABASE_PASSWORD")
+        db_name = os.getenv("DATABASE_NAME")
+        unix_socket = os.getenv("DATABASE_HOST")
 
         conn = mysql.connector.connect(
-            user=db_user,
-            password=db_pass,
-            database=db_name,
-            unix_socket=unix_socket
+            user=db_user, password=db_pass, database=db_name, unix_socket=unix_socket
         )
         return conn
     except Exception as e:
         print(f"Database connection failed: {e}")
         return None
+
 
 # Initialize Database
 def initialize_database():
@@ -149,7 +148,9 @@ def initialize_database():
         cursor.execute("SELECT COUNT(*) FROM admins")
         if cursor.fetchone()[0] == 0:
             hashed_password = generate_password_hash("samson112233!!")
-            app.logger.debug(f"Hashed password: {hashed_password}")  # Log the hashed password
+            app.logger.debug(
+                f"Hashed password: {hashed_password}"
+            )  # Log the hashed password
             cursor.execute(
                 "INSERT INTO admins (email, password) VALUES (%s, %s)",
                 ("samson.emmanuel.ext@lafarge.com", hashed_password),
@@ -159,13 +160,16 @@ def initialize_database():
         cursor.close()
         conn.close()
 
+
 initialize_database()
+
 
 # Admin User Model
 class Admin(UserMixin):
     def __init__(self, id, email):
         self.id = id
         self.email = email
+
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -181,13 +185,12 @@ def load_user(user_id):
     return None
 
 
-
-
 def allowed_file(filename):
     ALLOWED_EXTENSIONS = {"jpg", "jpeg", "png", "gif"}
-    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+    return "." in filename and filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
 
-# admin dashboard    
+
+# admin dashboard
 @app.route("/admin-dashboard", methods=["GET", "POST"])
 @login_required
 def admin_dashboard():
@@ -224,7 +227,7 @@ def admin_dashboard():
     else:
         flash("Database connection failed. Please try again later.", "danger")
         return redirect(url_for("login"))
-    
+
 
 # images approval
 @app.route("/approve-image/<int:image_id>", methods=["POST"])
@@ -259,25 +262,48 @@ def index():
         conn.close()
     return render_template("index.html", speakers=speakers)
 
+
 @app.route("/know_your_delegates")
 def know_your_delegates():
     profiles = df.head(30).to_dict(orient="records")
     return render_template("know_your_delegates.html", profiles=profiles)
 
-@app.route("/load_more", methods=["POST"])
+
+# @app.route("/load_more", methods=["POST"])
+# def load_more():
+#     try:
+#         start = int(request.form.get("start", 0))
+#         end = start + 10
+
+#         if start >= len(df):
+#             return jsonify([])
+
+#         profiles = df.iloc[start:end].fillna("").to_dict(orient="records")
+#         return jsonify(profiles)
+#     except Exception as e:
+#         app.logger.error(f"Error in /load_more: {e}")
+#         return jsonify({"error": "Failed to load more profiles."}), 500
+
+@app.route("/load_more", methods=["GET"])
 def load_more():
     try:
-        start = int(request.form.get("start", 0))
+        # Get the 'start' parameter from the query string (default to 0 if not provided)
+        start = int(request.args.get("start", 0))
         end = start + 10
 
+        # Check if 'start' exceeds the DataFrame length
         if start >= len(df):
             return jsonify([])
 
+        # Fetch profiles and fill NaN values with empty strings
         profiles = df.iloc[start:end].fillna("").to_dict(orient="records")
         return jsonify(profiles)
     except Exception as e:
         app.logger.error(f"Error in /load_more: {e}")
         return jsonify({"error": "Failed to load more profiles."}), 500
+
+
+
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -299,7 +325,9 @@ def login():
 
             if admin:
                 stored_password = admin["password"]
-                app.logger.debug(f"Stored password: {stored_password}")  # Log the stored password
+                app.logger.debug(
+                    f"Stored password: {stored_password}"
+                )  # Log the stored password
 
                 # Check if the stored password is hashed
                 if stored_password.startswith("pbkdf2:sha256:"):
@@ -309,7 +337,9 @@ def login():
                         login_user(user)
                         return redirect(url_for("admin_dashboard"))
                     else:
-                        app.logger.debug("Hashed password mismatch")  # Log password mismatch
+                        app.logger.debug(
+                            "Hashed password mismatch"
+                        )  # Log password mismatch
                         flash("Invalid credentials. Please try again.", "danger")
                 else:
                     # Compare plaintext passwords
@@ -318,7 +348,9 @@ def login():
                         login_user(user)
                         return redirect(url_for("admin_dashboard"))
                     else:
-                        app.logger.debug("Plaintext password mismatch")  # Log password mismatch
+                        app.logger.debug(
+                            "Plaintext password mismatch"
+                        )  # Log password mismatch
                         flash("Invalid credentials. Please try again.", "danger")
             else:
                 app.logger.debug("Admin not found")  # Log admin not found
@@ -331,7 +363,6 @@ def login():
             conn.close()
 
     return render_template("login.html")
-
 
 
 @app.route("/logout", methods=["POST"])
@@ -347,10 +378,12 @@ def validate_image(file):
         img = Image.open(file)
         img.verify()  # Ensure the file is a valid image
         file.seek(0)  # Reset file pointer after verification
+
         return True
     except Exception as e:
         app.logger.error(f"Image validation error: {e}")
         return False
+
 
 @app.route("/gallery", methods=["GET", "POST"])
 def gallery():
@@ -364,12 +397,18 @@ def gallery():
 
         # Validate file extension and MIME type
         if not allowed_file(uploaded_file.filename):
-            flash("Invalid file type. Please upload an image (jpg, jpeg, png, gif).", "danger")
+            flash(
+                "Invalid file type. Please upload an image (jpg, jpeg, png, gif).",
+                "danger",
+            )
             return redirect(url_for("gallery"))
 
         # Validate image content (optional)
         if not validate_image(uploaded_file):
-            flash("Invalid image file. Please upload a valid image (jpg, jpeg, png, gif).", "danger")
+            flash(
+                "Invalid image file. Please upload a valid image (jpg, jpeg, png, gif).",
+                "danger",
+            )
             return redirect(url_for("gallery"))
 
         # Upload to Cloudinary
@@ -408,22 +447,25 @@ def gallery():
     return render_template("gallery.html", images=gallery_images)
 
 
-
-
 @app.route("/delete-image/<int:image_id>", methods=["POST"])
 @login_required
 def delete_image(image_id):
     conn = connect_to_database()
     if conn:
         cursor = conn.cursor(dictionary=True)
-        cursor.execute("SELECT cloudinary_public_id FROM images WHERE id = %s", (image_id,))
+        cursor.execute(
+            "SELECT cloudinary_public_id FROM images WHERE id = %s", (image_id,)
+        )
         image = cursor.fetchone()
         if image:
             # Delete the image from Cloudinary
             try:
                 cloudinary.uploader.destroy(image["cloudinary_public_id"])
             except Exception as cloudinary_error:
-                flash(f"Failed to delete image from Cloudinary: {cloudinary_error}", "danger")
+                flash(
+                    f"Failed to delete image from Cloudinary: {cloudinary_error}",
+                    "danger",
+                )
 
             # Delete the image record from the database
             cursor.execute("DELETE FROM images WHERE id = %s", (image_id,))
@@ -434,14 +476,13 @@ def delete_image(image_id):
     return redirect(url_for("admin_dashboard"))
 
 
-
 @app.route("/add-admin", methods=["GET", "POST"])
 @login_required
 def add_admin():
     if request.method == "POST":
         try:
             # Validate CSRF token
-            validate_csrf(request.form.get('csrf_token'))
+            validate_csrf(request.form.get("csrf_token"))
         except ValidationError:
             flash("Invalid CSRF token. Please try again.", "danger")
             return redirect(url_for("add_admin"))
@@ -466,6 +507,7 @@ def add_admin():
 
     return render_template("add_admin.html")
 
+
 @app.route("/admins", methods=["GET"])
 @login_required
 def manage_admins():
@@ -478,6 +520,7 @@ def manage_admins():
         cursor.close()
         conn.close()
     return render_template("manage_admins.html", admins=admins)
+
 
 @app.route("/delete-admin/<int:admin_id>", methods=["POST"])
 @login_required
@@ -492,6 +535,7 @@ def delete_admin(admin_id):
     flash("Admin account deleted successfully!", "success")
     return redirect(url_for("manage_admins"))
 
+
 @app.route("/delete-message/<int:message_id>", methods=["POST"])
 @login_required
 def delete_message(message_id):
@@ -504,6 +548,7 @@ def delete_message(message_id):
         conn.close()
     flash("Message deleted successfully!", "success")
     return redirect(url_for("admin_dashboard"))
+
 
 @app.route("/delete-question/<int:question_id>", methods=["POST"])
 @login_required
@@ -518,6 +563,7 @@ def delete_question(question_id):
     flash("Question deleted successfully!", "success")
     return redirect(url_for("admin_dashboard"))
 
+
 @app.route("/previous_year_images")
 def previous_year_images():
     image_folder = os.path.join(app.static_folder, "conference2024")
@@ -528,9 +574,11 @@ def previous_year_images():
     ]
     return render_template("previous_year_images.html", images=images)
 
+
 @app.route("/ask")
 def ask():
     return render_template("ask.html")
+
 
 @app.route("/ask-question", methods=["POST"])
 def ask_question():
@@ -545,7 +593,9 @@ def ask_question():
             conn.commit()
             cursor.close()
             conn.close()
-        return jsonify({"status": "success", "message": "Question submitted successfully!"})
+        return jsonify(
+            {"status": "success", "message": "Question submitted successfully!"}
+        )
     return jsonify({"status": "error", "message": "Question is required"}), 400
 
 
@@ -566,6 +616,7 @@ def get_speaker_by_id(speaker_id):
         return speaker
     return None
 
+
 @app.route("/speaker/<int:speaker_id>")
 def speaker_page(speaker_id):
     speaker = get_speaker_by_id(speaker_id)
@@ -573,8 +624,9 @@ def speaker_page(speaker_id):
         return "Speaker not found", 404
 
     # Ensure correct path for static images
-    speaker['image_url'] = url_for('static', filename=f'images/{speaker["image_url"]}')
+    speaker["image_url"] = url_for("static", filename=f'images/{speaker["image_url"]}')
     return render_template("speaker.html", speaker=speaker)
+
 
 @app.route("/contact", methods=["GET", "POST"])
 def contact():
@@ -586,7 +638,9 @@ def contact():
         message = request.form.get("message")
 
         if not all([name, email, number, subject, message]):
-            flash("All fields are required. Please fill in the form completely.", "danger")
+            flash(
+                "All fields are required. Please fill in the form completely.", "danger"
+            )
             return redirect(url_for("contact"))
 
         conn = connect_to_database()
@@ -617,30 +671,41 @@ def contact():
 
     return render_template("contact.html", messages=messages)
 
-@app.route('/event-highlights')
-def event_highlights():
-    return render_template('event_highlight.html')
 
-@app.route('/search_profiles', methods=['GET'])
+@app.route("/event-highlights")
+def event_highlights():
+    return render_template("event_highlight.html")
+
+
+@app.route("/search_profiles", methods=["GET"])
 def search_profiles():
     try:
         # Load the Excel file and sheet dynamically
         df = pd.read_excel(file_path, sheet_name="Getting to Know the Delegates")
-        
-        query = request.args.get('query', '').strip().lower()
+
+        query = request.args.get("query", "").strip().lower()
         if not query:
-            return jsonify({'results': df.to_dict(orient='records')})
+            return jsonify({"results": df.to_dict(orient="records")})
 
         # Perform case-insensitive substring search in the 'NAME' column
-        if 'NAME' in df.columns:
-            results = df[df['NAME'].str.contains(query, case=False, na=False)].to_dict(orient='records')
+        if "NAME" in df.columns:
+            results = df[df["NAME"].str.contains(query, case=False, na=False)].to_dict(
+                orient="records"
+            )
         else:
-            return jsonify({'error': "'NAME' column not found in the file"}), 400
+            return jsonify({"error": "'NAME' column not found in the file"}), 400
 
-        return jsonify({'results': results})
+        return jsonify({"results": results})
 
     except Exception as e:
-        return jsonify({'error': str(e)}), 500
+        return jsonify({"error": str(e)}), 500
+    
+
+@app.route('/treasure_hunt')
+def treasure_hunt():
+    return render_template('treasure_hunt.html')
+
+
 
 if __name__ == "__main__":
     app.run(debug=os.getenv("FLASK_DEBUG", "False").lower() == "true")
