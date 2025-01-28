@@ -2150,6 +2150,11 @@ p {
 		grid-template-columns: repeat(2, 1fr);
 		gap: 1rem;
 	}
+
+	.hero-text p {
+		font-size: 0.9rem;
+		margin-bottom: 30px;
+	}
 	.contact-form input,
 	.contact-form textarea {
 		width: 100%;
