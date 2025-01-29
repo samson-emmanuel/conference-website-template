@@ -2895,6 +2895,89 @@ p {
 	}
 }
 
+/* Group selection styling */
+.group-selection {
+    text-align: center;
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.group-selection label {
+    font-size: 1.2rem;
+    font-weight: bold;
+    /* color: #3a4183; */
+    display: block;
+    margin-bottom: 10px;
+}
+
+#group-dropdown {
+    width: 60%;
+    padding: 12px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+    background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    outline: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    appearance: none;
+}
+
+#group-dropdown:hover {
+    background: linear-gradient(90deg, #2575fc 0%, #6a11cb 100%);
+}
+
+#group-dropdown option {
+    font-size: 1rem;
+    padding: 10px;
+    /* background: #ffffff; */
+    color: #3a4183;
+}
+
+#group-dropdown:focus {
+    box-shadow: 0 0 10px rgba(106, 17, 203, 0.3);
+}
+
+/* Group members display */
+.group-members {
+    margin-top: 20px;
+    text-align: left;
+    padding: 15px;
+    background: #5e5eaa;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.group-members h3 {
+    color: #3a4183;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.group-members ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.group-members li {
+    padding: 8px;
+    font-size: 1rem;
+    color: #333;
+    border-bottom: 1px solid #ddd;
+}
+
+.group-members li:last-child {
+    border-bottom: none;
+}
+
 
 /* styling for the sitting arrangement */
 

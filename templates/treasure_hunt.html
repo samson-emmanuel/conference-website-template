@@ -67,5 +67,200 @@
         </div>
     </div>
 </section>
-{% endblock %}
+<!-- Group selection dropdown -->
+<section class="group-selection">
+    <label for="group-dropdown">Select a Group:</label>
+    <select id="group-dropdown" onchange="displayGroupMembers()" class="group-dropdown">
+        <option value="">-- Select Group --</option>
+        <option value="G1" class="group1">Group 1</option>
+        <option value="G2" class="group2">Group 2</option>
+        <option value="G3" class="group3">Group 3</option>
+        <option value="G4" class="group4">Group 4</option>
+        <option value="G5" class="group5">Group 5</option>
+    </select>
 
+    <div id="group-members" class="group-members"></div>
+</section>
+
+<style>
+    .group-selection {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .group-members table {
+        width: 60%;
+        margin: 20px auto;
+        border-collapse: collapse;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        background-color: white;
+    }
+
+    .group-members th, .group-members td {
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: left;
+        color: black;
+    }
+
+    .group-members th {
+        background-color: #3a4183;
+        color: black;
+    }
+</style>
+
+<script>
+    const groupData = {
+        "G1": ["ALADE-AKINYEMI, LOLU", "UGWOERUCHUKWU, STELLA NNEOMA", "AMINU, IBRAHIM", "MOSUGU, EMMANUEL AWONTO", "OSAGIE, EKPEN OBA", "MITAIRE, ONAVWIE EMMANUEL", "RICHARD, CHINEDU NNAMANI", "ONABAJO, ADESEGUN OLATUNBOSUN", "SHOYOYE, JOHN OLUSEGUN",
+            "ORIADE, JAMIU OLADIPUPO",
+            "IWENDI, PETER NDUBUISI,",
+            "YERRABELLY, VENKAT NARSIMHA RAO",
+            "ADEBOYE, OWOYEMI AZEEZ",
+            "SALAKO, JAMIU",
+            "HAMMA, IBRAHIM",
+            "ATSU-ABUATO, JULIET",
+            "John Olusesan AJALA",
+            "AKINPELU, IBIDUNNI AINA",
+            "MADAKI, MUSA BUNGUM",
+            "ARUA, OGBONNA AGWU",
+            "YAKUBU, MUHAMMAD MUSTAPHA",
+            "OLATOYINBO, KAZEEM",
+            "AKPATA, ADERONKE EKONG",
+            "Gloria Ushie",
+            "ODENIYI, AKINOLA TEMITOPE",
+            "EKPENYONG, AKIBA EKPO",
+            "Adeyemi Ariyo ",
+            "OGUNKUNLE, AANU OLAOLUWA"],
+
+        "G2": ["EDWARDS, MARK REGINALD", "UKAP, AKAN GEORGE", "OSSAI OPUTE, SANDRA CHINEDU", "ALAKA, LATEEF BABATUNDE", "MA'AJI, ALIYU ILIYASU", "YAKUBU, ALIU YUSUF",
+            "UKPEBOR, THOMPSON OSALEN",
+            "SHARMA, PUNEET",
+            "OLAKANMI-NOBLE, OLUWAFUNKE FRANCISCA",
+            "DOSUMU, TEMITOPE OLUJOKE",
+            "ANAOBI, PHILIP HASSAN",
+            "AINA, OLUWATOSIN ADEOLA",
+            "KUPOLATI, ELIJAH OLUFEMI",
+            "MUSA, DAYYAB",
+            "BAKARE, ADEKUNLE GANIYU",
+            "KUNDE, ALI",
+            "ADEWUYI, OLUSOJI",
+            "AKINGBADE, ABIODUN",
+            "ESIONYE, NNAMDI ONYEBUENYI",
+            "IWUEZE-IFEANYI, CHIDINMA JOY",
+            "OKONKWO, CHUKWUEMEKA PATRICK",
+            "EDUN, OLUWOLE ADEDAYO",
+            "EBADAN, PHILLIAN AKHERE",
+            "INIKA, BAM EKO",
+            "Dayo Omotosho",
+            "Onabolu Ayo",
+            "EZEMBAKWE, RACHAEL OLUBUSOLA",
+            "Saidi FARAGI AHMED"],
+
+
+        "G3": ["DICKSON IMARENEZOR AZEMHETA", "OLAKANLE, OLANIKE MODUPE", "MOSES, OLUYOMI OLULEKE", "AYEKPESA, EGHEORIARERE MIGHTY", "GRAHAM-DOUGLAS, VIOLA IBISO",
+            "INYANG, INYANG BASSEY",
+            "KOLADE, OLUBIYI BAMIDELE",
+            "POLLYN, GABRIEL ABINYE",
+            "MOHAMMED, ADAMU ADAJI",
+            "ADAMU, FRANCIS KAYODE",
+            "ALIMI, OLANIYI RAUF",
+            "HASSAN, AHMED",
+            "EGBO, EGBO GODSPOWER",
+            "Omope Samuel",
+            "AWOLOLA, OLUWASEUN SAMUEL",
+            "AGHATISE, OLUWATOYIN OSAZEMEN",
+            "JIMOH, TAIWO LUQMAN",
+            "ADESINA, ADEWALE BENJAMIN",
+            "OLORODE, MORENIKEJI OYEPERO",
+            "OWOLABI, OLUGBEMIGA AYOYIMIKA",
+            "ARAGHO, JEMINE MICHAEL",
+            "OJIEH, LAMBERT UGOCHUKWU",
+            "AKINDOLIRE, MOFE KEVBE",
+            "ONWUGBUTA, KINGSLEY NDUBUEZE",
+            "MADOJUTIMI, OLUFUNKE",
+            "OKORONKWO, CHIMAOBI",
+            "SALAM, ADEYINKA LUKEMAN",
+            "DEJI ESAN",
+            "EMMANUEL, ADEBOBOLA SUNDAY"],
+
+
+        "G4": ["WILLIAMSON, DEREK", "ODEWUSI, SAMSON OLUSOLA", "OKOJIE, ANTHONILIOUS ANETO", "ADELEYE, OLATUNJI ADEDEJI", "GYEBO, JOEL BABA MABO",
+            "SOBOLA, AUGUSTINA IFEYINWA",
+            "ODUFOTE, BABATUNDE OLUGBENGA",
+            "AGBAJE, ABUBAKAR SEGUN",
+            "WEERASINGHE, JAWARAN WEERAGE JANAKA THUSHAN",
+            "NGULDE, ABUBAKAR IBRAHIM",
+            "IBIYEMI, AFOLABI GABRIEL",
+            "UYOK, IDARA ALBERT",
+            "KAREEM, GANIYU SALAM BABATUNDE ",
+            "OLAYEMI, ABIODUN OLALEKAN",
+            "OGUNYINKA, OLAKUNLE SUNDAY",
+            "MILAD, HANNA AZIZ HANNA",
+            "JAMES, NSIDIETI VICTOR",
+            "Abdulwasiu AJETUNMOBI",
+            "UNUKPO, PETER AGHOGHO",
+            "ALODE, ADEWUNMI AJIKE",
+            "NWANZE, UCHENNA ONUKWUBE",
+            "BEDE-NWOKOYE, UGOCHI DAWN",
+            "YISAU, BUNMI MUINAT",
+            "AKPAN, MFONOBONG KINGSLEY",
+            "ONAOLAPO, SHARAFA MORADEYO",
+            "OHAEGBU, PATRICK NKENCHO",
+            "LAMIDI, ADEOLU IDRIS",
+        ],
+        "G5": ["AKINTOLU, KAYODE IBRAHIM", "STEPHEN DARAMOLA", "TORIOLA, ADEBIMPE OLATUNBOSUN", "OMOTUNDE, ALAYODE MOBOLAJI", "ONIMOWO, GBENGA GABRIEL",
+            "BAKARE, OLAWALE LATEEF",
+            "KAYODE, OLUWASEUN EMMANUEL",
+            "ILABOYA, EMMANUEL SUNDAY",
+            "FRANK-DURUGBOR, GINIKANWA GOLD",
+            "OBARO, IFEOMA ANNETTE",
+            "FABIYI, OLUWASEUN MOSES",
+            "ADEDOKUN, DANIEL OLADELE",
+            "SALAMI, GREGORY IMOUKHUEDE",
+            "OKUTACHI, PETER AROME",
+            "SHOKUNBI, MICHEAL ATANDA",
+            "ODIMAYO, OLUROTIMI",
+            "EKPO, OKON MOSES",
+            "IYANGO, EMMANUEL OKARA",
+            "GBADEGESIN, ANUOLUWAPO ADEOLA",
+            "ESSIEN, EKPENYONG EFFIOM",
+            "ORABUCHE, COLLINS IKECHUKWU",
+            "AZEEZ-ENILOLOBO, MOSUNMOLA",
+            "MELA, DIO MELA",
+            "KUJEBE, ADETAYO MICHAEL",
+            "ABOSEDE, LANRE AUGUSTINE",
+            "LAWAL, OLUWAFAYOKE ANUOLUWA",
+            "Wayne Campbell"
+        ]
+    };
+
+    function displayGroupMembers() {
+        const selectedGroup = document.getElementById("group-dropdown").value;
+        const membersDiv = document.getElementById("group-members");
+
+        if (selectedGroup && groupData[selectedGroup]) {
+            let tableHtml = `<h3 style='color: ${getGroupColor(selectedGroup)};'>Members of ${selectedGroup.replace('G', 'Group ')}</h3>`;
+            tableHtml += `<table><tr><th>#</th><th>Name</th></tr>`;
+            groupData[selectedGroup].forEach((member, index) => {
+                tableHtml += `<tr><td>${index + 1}</td><td>${member}</td></tr>`;
+            });
+            tableHtml += `</table>`;
+            membersDiv.innerHTML = tableHtml;
+        } else {
+            membersDiv.innerHTML = "";
+        }
+    }
+
+    function getGroupColor(group) {
+        const colors = {
+            "G1": "green",
+            "G2": "blue",
+            "G3": "red",
+            "G4": "orange",
+            "G5": "black"
+        };
+        return colors[group] || "black";
+    }
+</script>
+{% endblock %}
