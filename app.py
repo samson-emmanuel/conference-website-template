@@ -706,15 +706,6 @@ def treasure_hunt():
     return render_template('treasure_hunt.html')
 
 
-# def seating():
-#     file_path = os.path.join(app.static_folder, "seating.xlsx")
-#     df = pd.read_excel(file_path)
-#     return df.to_dict(orient='records')
-
-# @app.route('/seating')
-# def seat_page():
-#     seating_data = seating()
-#     return render_template('seating.html', seating_data=seating_data)
 
 def seating():
     file_path = os.path.join(app.static_folder, "seating.xlsx")
