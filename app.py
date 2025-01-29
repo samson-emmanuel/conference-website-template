@@ -56,13 +56,11 @@ app.config.update(
 )
 
 
-
 cloudinary.config(
-    cloud_name=os.getenv("CLOUDINARY_CLOUD_NAME"),
-    api_key=os.getenv("CLOUDINARY_API_KEY"),
-    api_secret=os.getenv("CLOUDINARY_API_SECRET"),
+    cloud_name="dacopk5b3",
+    api_key="966134237713365",
+    api_secret="B40Jh6p02w0cKiiW-jMomI5M0Ys",
 )
-
 # Initialize Flask-Login
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -153,11 +151,11 @@ def initialize_database():
             app.logger.debug(
                 f"Hashed password: {hashed_password}"
             )  # Log the hashed password
-            # cursor.execute(
-            #     "INSERT INTO admins (email, password) VALUES (%s, %s)",
-            #     ("samson.emmanuel.ext@lafarge.com", hashed_password),
-            # )
-            # app.logger.debug("Demo admin inserted successfully.")
+            cursor.execute(
+                "INSERT INTO admins (email, password) VALUES (%s, %s)",
+                ("samson.emmanuel.ext@lafarge.com", hashed_password),
+            )
+            app.logger.debug("Demo admin inserted successfully.")
         conn.commit()
         cursor.close()
         conn.close()
@@ -294,7 +292,6 @@ def load_more():
 
 
 @app.route("/login", methods=["GET", "POST"])
-# @limiter.limit("5 per minute")
 def login():
     if request.method == "POST":
         email = request.form.get("email").lower()  # Convert email to lowercase
@@ -569,7 +566,6 @@ def ask():
 
 
 @app.route("/ask-question", methods=["POST"])
-# @limiter.limit("5 per minute")
 def ask_question():
     data = request.get_json()
     question = data.get("question")
@@ -618,7 +614,6 @@ def speaker_page(speaker_id):
 
 
 @app.route("/contact", methods=["GET", "POST"])
-# @limiter.limit("5 per minute")
 def contact():
     if request.method == "POST":
         name = request.form.get("name")
