@@ -45,22 +45,18 @@ app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 app.secret_key = secrets.token_hex(32)  # Strong secret key
 
 # Flask-Mail Configuration
-app.config.update(
-    MAIL_SERVER=os.getenv("MAIL_SERVER", "smtp.gmail.com"),
-    MAIL_PORT=int(os.getenv("MAIL_PORT", 587)),
-    MAIL_USE_TLS=os.getenv("MAIL_USE_TLS", "True").lower() == "true",
-    MAIL_USE_SSL=os.getenv("MAIL_USE_SSL", "False").lower() == "false",
-    MAIL_USERNAME=os.getenv("MAIL_USERNAME"),
-    MAIL_PASSWORD=os.getenv("MAIL_PASSWORD"),
-    MAIL_DEFAULT_SENDER=os.getenv("MAIL_DEFAULT_SENDER", "uploading@example.com"),
-)
 
 
+
+
+# Cloudinary Configuration
 cloudinary.config(
-    cloud_name="dacopk5b3",
-    api_key="966134237713365",
-    api_secret="B40Jh6p02w0cKiiW-jMomI5M0Ys",
+    cloud_name=os.getenv("CLOUDINARY_CLOUD_NAME"),
+    api_key=os.getenv("CLOUDINARY_API_KEY"),
+    api_secret=os.getenv("CLOUDINARY_API_SECRET"),
 )
+
+
 # Initialize Flask-Login
 login_manager = LoginManager()
 login_manager.init_app(app)
