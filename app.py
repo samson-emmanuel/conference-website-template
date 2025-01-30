@@ -47,13 +47,10 @@ app.secret_key = secrets.token_hex(32)  # Strong secret key
 # Flask-Mail Configuration
 
 
-
-
-# Cloudinary Configuration
 cloudinary.config(
-    cloud_name=os.getenv("CLOUDINARY_CLOUD_NAME"),
-    api_key=os.getenv("CLOUDINARY_API_KEY"),
-    api_secret=os.getenv("CLOUDINARY_API_SECRET"),
+    cloud_name="dacopk5b3",
+    api_key="966134237713365",
+    api_secret="B40Jh6p02w0cKiiW-jMomI5M0Ys",
 )
 
 
