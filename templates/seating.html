@@ -14,7 +14,7 @@
             </thead>
             <tbody>
                 {% for row in seating_data %}
-                <tr class="align-middle {% if 'TABLE' in row.values()|join(' ') %}TABLE-header-style{% endif %}">
+                <tr class="align-middle {% if 'table' in row.values()|join(' ')|lower %}table-header-style{% endif %}">
                     {% for value in row.values() %}
                     <td class="p-3 text-center">{{ value }}</td>
                     {% endfor %}
