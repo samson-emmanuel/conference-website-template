@@ -1,0 +1,85 @@
+body {
+    background-color: #1a1a2e;
+    color: #e0e0e0;
+}
+
+.container {
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+.seating-title {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #00aaff;
+    margin-bottom: 40px;
+    text-shadow: 0 0 10px rgba(0, 170, 255, 0.5);
+}
+
+.table-responsive {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.table {
+    background-color: #2a2d45;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.table thead {
+    background: linear-gradient(45deg, #007bff, #00aaff);
+    color: white;
+}
+
+.table th {
+    padding: 20px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: none;
+}
+
+.table tbody tr {
+    border-bottom: 1px solid #40445f;
+    transition: background-color 0.3s ease;
+}
+
+.table tbody tr:last-child {
+    border-bottom: none;
+}
+
+.table tbody tr:hover {
+    background-color: #40445f;
+}
+
+.table td {
+    padding: 15px 20px;
+    font-size: 1rem;
+    vertical-align: middle;
+    border: none;
+}
+
+.table-header-style td {
+    font-size: 1.2rem !important;
+    font-weight: bold !important;
+    background: #1f2233 !important;
+    color: #00aaff !important;
+    text-align: center;
+    padding: 20px !important;
+}
+
+@media (max-width: 768px) {
+    .seating-title {
+        font-size: 2rem;
+    }
+
+    .table th,
+    .table td {
+        padding: 15px;
+        font-size: 0.9rem;
+    }
+}
