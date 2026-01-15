@@ -4,10 +4,6 @@
 <div id="floating-text"></div>
 
 
-{% block styles %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/countdown.css') }}">
-{% endblock %}
-
 {% block content %}
 <section class="hero">
     <div class="hero-content">
@@ -15,18 +11,10 @@
         <div class="hero-text">
 
             <h1>Lafarge Africa <br>Leadership <br>Conference <br> 2026</h1>
-            <p style="font-size: 25px;"><span style="font-weight: bolder; color: aqua; font-size: 30px;">Theme: </span> <br>Driving Innovation and Excellence: Expanding <br>Growth Beyond Limit.</p>
+            <p><span style="font-weight: bolder; color: aqua; font-size: larger;">Theme: </span> <br>Driving Innovation and Excellence: Expanding <br>Growth Beyond Limit.</p>
             <section class="countdown-overlay">
                 <div id="countdown-timer" class="countdown-timer"></div>
             </section>
-            <div id="new-countdown-container" class="new-countdown-container">
-                <div id="new-countdown">
-                    <div><span id="days"></span> Days</div>
-                    <div><span id="hours"></span> Hours</div>
-                    <div><span id="minutes"></span> Minutes</div>
-                    <div><span id="seconds"></span> Seconds</div>
-                </div>
-            </div>
         </div>
     </div>
 </section>
@@ -330,7 +318,7 @@
     <div class="faq-flex">
         <div class="faq-item">
             <div class="faq-question" onclick="toggleFaq(this)">What is the theme of the conference?</div>
-            <div class="faq-answer theme">The theme of the conference is "Innovation & Excellence: Exponential Growth Through Disciplined Execution."</div>
+            <div class="faq-answer">The theme of the conference is "Innovation & Excellence: Exponential Growth Through Disciplined Execution."</div>
         </div>
         <div class="faq-item">
             <div class="faq-question" onclick="toggleFaq(this)">Where is the conference being held?</div>
@@ -636,38 +624,6 @@
 
         // Append the button to the parent of the content div
         contentDiv.parentElement.appendChild(imgButton);
-    });
-</script>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const countdownContainer = document.getElementById('new-countdown-container');
-        const daysEl = document.getElementById('days');
-        const hoursEl = document.getElementById('hours');
-        const minutesEl = document.getElementById('minutes');
-        const secondsEl = document.getElementById('seconds');
-
-        const eventDate = new Date('2026-01-29T08:00:00').getTime();
-
-        const countdownInterval = setInterval(function() {
-            const now = new Date().getTime();
-            const distance = eventDate - now;
-
-            if (distance < 0) {
-                clearInterval(countdownInterval);
-                countdownContainer.style.display = 'none';
-                return;
-            }
-
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            daysEl.innerText = days;
-            hoursEl.innerText = hours;
-            minutesEl.innerText = minutes;
-            secondsEl.innerText = seconds;
-        }, 1000);
     });
 </script>
 
