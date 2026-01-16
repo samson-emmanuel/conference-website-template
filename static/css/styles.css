@@ -1572,11 +1572,13 @@ p {
 .event-showcase {
 	padding: 20px;
 	background-color: #1e1e4a;
+    padding-bottom: 0;
+    margin-bottom: 0;
 }
 
 .showcase-grid {
-	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+	/* display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); */
 	gap: 20px;
 	margin: 30px auto;
 	max-width: 1700px;
@@ -1596,13 +1598,13 @@ p {
 	text-align: center;
 	transition: transform 0.3s;
 	overflow: visible;
-	margin-right: 20px !important;
-	padding: 20px;
-	/* width: 400px; */
+	padding: 15px;
+	width: auto;
+	/* align-content: auto; */
 }
 
 .profile-card img {
-	width: 40%;
+	width: 20%;
 	height: 40%;
 	object-fit: contain;
 }
