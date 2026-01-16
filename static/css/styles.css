@@ -202,6 +202,9 @@ section {
 
 /* Responsive Menu */
 @media (max-width: 768px) {
+	.navbar {
+		padding: 1rem;
+	}
 	.navbar .nav-links {
 		display: none;
 		flex-direction: column;
@@ -209,9 +212,9 @@ section {
 		text-align: center;
 		background-color: #26294d;
 		position: absolute;
-		top: 80px;
+		top: 70px; /* Adjusted top position */
 		left: 0;
-		padding: 1rem;
+		padding: 1rem 0; /* Adjusted padding */
 	}
 
 	.navbar .nav-links li {
@@ -226,28 +229,26 @@ section {
 		display: block;
 	}
 	.logo {
-		width: 150px;
+		width: 120px; /* Adjusted logo width */
 	}
 	.navbar .container {
-		/* flex-wrap: nowrap;
-		padding: 0 1rem; */
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
 		width: 100%;
-		flex-direction: row;
 	}
 
-	.logo {
-		flex-shrink: 0;
-		width: auto;
-	}
 	.navbar .logo {
 		margin-right: auto;
 	}
 	.hamburger {
 		margin-left: auto;
-		display: block;
+	}
+	.navbar .dropdown .dropdown-menu {
+		position: static; /* Make dropdown static on mobile */
+		background-color: transparent;
+		box-shadow: none;
+		padding-left: 20px; /* Indent dropdown items */
 	}
 }
 
@@ -381,6 +382,22 @@ section {
 		font-size: 0.9rem; /* Adjust button size */
 		padding: 8px 20px;
 	}
+}
+
+@media (max-width: 576px) {
+    .hero-text h1 {
+        font-size: 1.5rem;
+    }
+    .hero-text p {
+        font-size: 0.7rem;
+    }
+    #new-countdown-container {
+        position: relative; /* Change position to relative on small screens */
+        top: auto;
+        left: auto;
+        transform: none;
+        margin-top: 20px;
+    }
 }
 
 /* Section Styles */
@@ -1212,23 +1229,21 @@ button:focus {
 /* Gallery Grid */
 .gallery-grid {
 	display: grid;
-	grid-template-columns: repeat(4, 1fr); /* Default: 4 items in a row */
-	gap: 15px; /* Increased spacing for a cleaner layout */
+	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+	gap: 15px;
 	padding: 10px;
 	margin: 0 auto;
 	max-width: 1200px;
 }
 
 .gallery-item {
-	position: relative;
-	overflow: hidden;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	box-sizing: border-box;
-	border-radius: 8px; /* Add some rounding to images for aesthetics */
-	width: 100%; /* Ensure items stretch to fit the grid cell */
-	height: 200px; /* Fixed height for uniform display */
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /* Image Styling */
@@ -1464,16 +1479,14 @@ button:focus {
 
 @media screen and (max-width: 768px) {
 	.contact-form form {
-		display: block;
-		margin: 10px 1px 10px 0;
+		grid-template-columns: 1fr;
+        margin: 0;
 	}
 
-	.contact-form input {
-		width: 90%;
-		margin: 10px 0;
-	}
-	.contact-form textarea {
-		min-height: 200px;
+	.contact-form input,
+    .contact-form textarea {
+		width: 100%;
+		margin: 0;
 	}
 }
 
@@ -1504,6 +1517,12 @@ p {
 	max-width: 1700px;
 }
 
+@media (max-width: 768px) {
+    .showcase-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
 .profile-card {
 	position: relative;
 	background: #292a45;
@@ -1514,7 +1533,6 @@ p {
 	overflow: visible;
 	margin-right: 20px !important;
 	padding: 20px;
-	height: 700px;
 	/* width: 400px; */
 }
 
