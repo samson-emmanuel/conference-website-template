@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% block title %}Speaker Profile{% endblock %}
+
+{% block content %}
+<style>
+.speaker-profile-container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #282e63;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    color: #fff;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 40px;
+    align-items: center;
+}
+
+.speaker-profile-image img {
+    width: 100%;
+    border-radius: 50%;
+    border: 5px solid #50e3c2;
+}
+
+.speaker-profile-info h1 {
+    font-size: 2.5rem;
+    color: #50e3c2;
+    margin-bottom: 10px;
+}
+
+.speaker-profile-info h3 {
+    font-size: 1.5rem;
+    color: #fff;
+    margin-bottom: 20px;
+    font-weight: normal;
+}
+
+.speaker-profile-info p {
+    font-size: 1rem;
+    line-height: 1.6;
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.speaker-social-links {
+    display: flex;
+    gap: 15px;
+}
+
+.speaker-social-links a {
+    color: #fff;
+    font-size: 1.5rem;
+    transition: color 0.3s ease;
+}
+
+.speaker-social-links a:hover {
+    color: #50e3c2;
+}
+
+@media (max-width: 768px) {
+    .speaker-profile-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    .speaker-profile-image {
+        margin-bottom: 20px;
+    }
+    .speaker-social-links {
+        justify-content: center;
+    }
+}
+</style>
+
+<div class="speaker-profile-container">
+    <div class="speaker-profile-image">
+        <img src="/static/images/ceo.jpg" alt="Speaker Name">
+    </div>
+    <div class="speaker-profile-info">
+        <h1>Lolu Alade-Akinyemi</h1>
+        <h3>CEO, Lafarge Africa</h3>
+        <p>
+            Lolu Alade-Akinyemi is a visionary leader with a passion for driving innovation and excellence. With over 20 years of experience in the industry, he has a proven track record of expanding growth beyond limits and fostering a culture of teamwork and shared responsibility. His leadership is instrumental in steering the organization towards its strategic goals.
+        </p>
+        <div class="speaker-social-links">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+        </div>
+    </div>
+</div>
+{% endblock %}

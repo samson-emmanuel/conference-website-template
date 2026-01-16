@@ -20,7 +20,7 @@ div {
 body {
 	background: #26294d;
 	color: #fff;
-	font-size: 20;
+	font-size: 100%;
 }
 
 /* Typography */
@@ -48,7 +48,7 @@ section {
 @media screen and (max-width: 1024px) {
 	body {
 		background: #1f223b;
-		font-size: 90%;
+		font-size: 95%;
 	}
 	.logo img {
 		width: 60%;
@@ -58,29 +58,39 @@ section {
 @media screen and (max-width: 768px) {
 	body {
 		background: #1a1c34;
-		font-size: 85%;
+		font-size: 90%;
 		padding: 10px;
 	}
 
-	h2,
-	h3,
-	h4 {
-		font-size: 1.2rem;
+	h2 {
+		font-size: 1.8rem;
 	}
+    h3 {
+        font-size: 1.1rem;
+    }
+    h4 {
+        font-size: 1rem;
+    }
 }
 
 @media screen and (max-width: 480px) {
 	body {
 		background: #12131f;
-		font-size: 80%;
+		font-size: 85%;
 	}
 
-	h2,
-	h3,
-	h4 {
+	h2 {
 		text-align: center;
-		font-size: 1rem;
+		font-size: 1.5rem;
 	}
+    h3 {
+        text-align: center;
+        font-size: 1rem;
+    }
+    h4 {
+        text-align: center;
+        font-size: 0.9rem;
+    }
 }
 
 @media (max-width: 480px) {
@@ -551,8 +561,10 @@ p {
 /* Responsive Design */
 @media (max-width: 768px) {
 	.tab {
-		padding: 0.5rem 1rem;
+		width: 100%;
+		margin-bottom: 0.5rem; /* Add some spacing between stacked tabs */
 	}
+}
 
 	h2 {
 		font-size: 1.5rem;
@@ -561,7 +573,7 @@ p {
 	.speaker-card {
 		padding: 1rem;
 	}
-}
+
 
 /* Reset default button styling */
 .custom-button {
@@ -602,39 +614,92 @@ button:focus {
 
 /* about us section styling */
 .about {
-	background: transparent;
-	text-align: center;
-	max-width: 1500px;
+    background-color: #1e1f36; /* Darker background to stand out */
+    padding: 60px 20px; /* Increased padding */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+    margin: 40px auto; /* More margin to separate from other sections */
+    max-width: 1200px; /* Adjusted max-width */
+    text-align: center;
+    color: #e0e0e0; /* Default text color for the section */
 }
 
 .about h2 {
-	font-size: 2.5rem;
-	margin-bottom: 1rem;
-	color: #ffffff;
-	font-weight: 700;
-	position: relative;
-	display: inline-block;
+    font-size: 2.8rem; /* Slightly larger heading */
+    margin-bottom: 1.5rem; /* More space below heading */
+    color: #00aaff; /* Using an existing accent color */
+    font-weight: 700;
+    position: relative;
+    display: inline-block;
 }
 
 .about h2::after {
-	content: "";
-	position: absolute;
-	left: 50%;
-	bottom: -8px;
-	transform: translateX(-50%);
-	width: 60px;
-	height: 4px;
-	background-color: #cacaca;
-	border-radius: 2px;
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -8px;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background-color: #00aaff; /* Match accent color */
+    border-radius: 2px;
 }
 
 .about p {
-	font-size: 1.7rem;
-	color: #cacaca;
-	margin: 1.5rem 0;
-	max-width: 1500px;
-	line-height: 1.8;
-	padding: 0 2%;
+    font-size: 1.1rem; /* Adjusted paragraph font size */
+    color: #cfcfcf; /* Lighter text color */
+    margin: 1.5rem auto; /* Center paragraph and add margin */
+    max-width: 900px; /* Constrain paragraph width for readability */
+    line-height: 1.8;
+    padding: 0; /* Remove horizontal padding as max-width handles it */
+}
+
+.about ul {
+    list-style: none;
+    padding: 0;
+    margin: 20px auto;
+    max-width: 800px;
+    text-align: left;
+}
+
+.about ul li {
+    font-size: 1.1rem; /* Slightly larger font size */
+    color: #e0e0e0;
+    margin-bottom: 15px; /* More space between items */
+    padding-left: 30px; /* More padding for the icon */
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.about ul li:hover {
+    color: #00aaff; /* Accent color on hover */
+}
+
+.about ul li::before {
+    content: '\f058'; /* Font Awesome check-circle icon */
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900; /* Required for solid icons */
+    color: #00aaff;
+    position: absolute;
+    left: 0;
+    top: 5px;
+}
+
+/* Responsive adjustments for .about section */
+@media (max-width: 768px) {
+    .about {
+        padding: 40px 15px;
+        margin: 30px auto;
+    }
+    .about h2 {
+        font-size: 2.2rem;
+    }
+    .about p {
+        font-size: 1rem;
+    }
+    .about ul {
+        margin: 15px auto;
+    }
 }
 
 .about a button {
@@ -1525,7 +1590,7 @@ p {
 
 .profile-card {
 	position: relative;
-	background: #292a45;
+	/* background: #292a45; */
 	overflow: hidden;
 	border-radius: 10px;
 	text-align: center;
@@ -1537,9 +1602,9 @@ p {
 }
 
 .profile-card img {
-	width: 80%;
-	height: 80%;
-	object-fit: cover;
+	width: 40%;
+	height: 40%;
+	object-fit: contain;
 }
 
 .card-details {
@@ -3050,3 +3115,4 @@ h2 {
         padding: 10px;
     }
 }
+

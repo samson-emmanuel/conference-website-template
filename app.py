@@ -69,7 +69,7 @@ csrf = CSRFProtect(app)
 # limiter = Limiter(app=app, key_func=get_remote_address)
 
 # Load the data from the Excel file
-file_path = "static/2025_LC_DELEGATE_PROFILE.xlsx"
+file_path = "static/2026_LC_DELEGATE_PROFILE.xlsx"
 df = pd.read_excel(file_path, sheet_name="Getting to Know the Delegates")
 
 
@@ -682,6 +682,10 @@ def search_profiles():
 @app.route('/treasure_hunt')
 def treasure_hunt():
     return render_template('treasure_hunt.html')
+
+@app.route('/speaker1')
+def speaker1_page():
+    return render_template('speaker1.html')
 
 
 
