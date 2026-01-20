@@ -1,8 +1,5 @@
 .new-countdown-container {
-    position: absolute;
-    top: 70%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    position: relative; /* Changed from absolute */
     background-color: rgba(0, 0, 0, 0.8);
     padding: 30px 40px;
     border-radius: 15px;
@@ -11,10 +8,11 @@
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     max-width: 90%;
     box-sizing: border-box;
+    margin: 40px auto 0; /* Added margin for spacing and centering */
 }
 
 .countdown-heading {
-    font-size: 2rem;
+    font-size: 1.2rem;
     color: white;
     margin-bottom: 20px;
     font-weight: bold;
@@ -36,12 +34,12 @@
     flex-direction: column;
     align-items: center;
     line-height: 1;
-    font-size: 1.5rem; /* Label size */
+    font-size: 0.7rem; /* Label size */
     color: #a0a0a0; /* Muted color for labels */
 }
 
 #new-countdown span {
-    font-size: 5rem; /* Number size */
+    font-size: 2rem; /* Number size */
     font-weight: bold;
     margin-bottom: 10px;
     color: #00e5ff; /* Vibrant cyan for numbers */
@@ -50,14 +48,14 @@
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .countdown-heading {
-        font-size: 1.5rem;
+        font-size: 1rem;
         margin-bottom: 15px;
     }
     #new-countdown span {
-        font-size: 3rem;
+        font-size: 1.5rem;
     }
     #new-countdown > div {
-        font-size: 1rem;
+        font-size: 0.6rem;
     }
     #new-countdown {
         gap: 20px;
@@ -69,10 +67,10 @@
 
 @media (max-width: 480px) {
     #new-countdown span {
-        font-size: 2rem;
+        font-size: 1rem;
     }
     #new-countdown > div {
-        font-size: 0.8rem;
+        font-size: 0.5rem;
     }
     #new-countdown {
         gap: 15px;

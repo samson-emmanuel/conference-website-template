@@ -10,9 +10,38 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
         {% block styles %}{% endblock %}
-    </head>
-
-<body>
+        <style>
+            .schedule-date {
+                font-size: 1.1rem; /* Adjusted for better readability */
+                font-weight: bold;
+                margin-bottom: 10px;
+            }
+            .schedule-dress-code {
+                font-size: 0.9rem; /* Smaller font for dress code details */
+                line-height: 1.5;
+                margin-top: 10px;
+            }
+                            .details-button {
+                                background-color: #4a6fa5; /* Default background color */
+                                padding: 10px 15px; /* Added horizontal padding */
+                                font-size: 0.9rem;
+                                border: none;
+                                outline: none;
+                                text-transform: none;
+                                color: white;
+                                cursor: pointer;
+                                margin-bottom: 10px;
+                                border-radius: 5px; /* Added border-radius */
+                                transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+                            }
+                            .details-button:hover {
+                                background-color: #3c5277; /* Hover background color */
+                            }
+                            .schedule-toggle-content {
+                                font-size: 0.9rem; /* Default font size for toggled content */
+                            }
+                        </style>
+                    </head><body>
     <nav class="navbar">
         <div class="container">
             <a href="/" class="logo" id="logo"><img src="/static/images/lafarge-conference-logo - Copy.png" alt=""></a>
@@ -50,7 +79,7 @@
             <nav>
                 <ul class="footer-links">
                     <li><a href="/">Home</a></li>
-                    <li><a href="/about">About Us</a></li>
+                    <!-- <li><a href="/about">About Us</a></li> -->
                     <li><a href="/gallery">Gallery</a></li>
                     <li><a href="/contact">Contact</a></li>
                 </ul>

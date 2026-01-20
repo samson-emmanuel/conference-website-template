@@ -85,10 +85,10 @@ company-wide, and leader-led. </p>
 
 
 <section class="event-showcase">
-    <h2 style="color: white !important;">See Our Speakers</h2>
-    <p>
+    <h2 style="color: white !important;">The Keynote Speaker</h2>
+    <!-- <p>
         Know more about all our speakers
-    </p>
+    </p> -->
     <div class="showcase-grid">
         {# {% for speaker in speakers | reverse %}
         <div class="profile-card">
@@ -110,7 +110,7 @@ company-wide, and leader-led. </p>
         <div class="profile-card">
             <img src="/static/images/chairman.png" alt="Speaker Name">
             <div class="card-details">
-                <h3>GBENGA OYEBODE</h3>
+                <h3>GBENGA OYEBODE <i style="color: #35b297;">MFR</i></h3> <br>
                 <a href="/#">
                     <button class="cta-button">View Profile</button>
                 </a>
@@ -129,32 +129,24 @@ company-wide, and leader-led. </p>
         <!-- Tabs -->
         <div class="tabs">
             <div class="tab active" data-day="day1">
-                1st Day - 29 January, 2026 <br> <br>
-                A corporate casual style, complemented with any trousers or skirt of choice.<br>
-                Jacket: Blue, Grey, Black or Brown<br>
-                <i>No Denim allowed</i>
-                <button id="toggleButton"
-                    style="background-color: transparent; padding: 20px 5px 0 0; font-size: 14px; border: none; outline: none; text-transform: none; margin-bottom: 15px; color: white;">Click
-                    to view details</button>
-                <div id="content" style="display: none; font-size: 14px;">
-                    <span style="color: aqua;"> <strong>Dress Code Details:</strong></span> <br>
+                <p class="schedule-date">1st Day - 29 January, 2026</p>
+                <button id="toggleButton" class="details-button">Click to view details</button>
+                <div id="content" class="schedule-toggle-content" style="display: none;">
+                    <p class="schedule-dress-code"><span style="color: aqua;"> <strong>Dress Code Details:</strong></span> <br>
                     A corporate casual style, complemented with any trousers or skirt of choice.<br>
                     Jacket: Blue, Grey, Black or Brown<br>
-                    <i>No Denim allowed</i>
+                    <i>No Denim allowed</i></p>
                 </div>
             </div>
 
             <div class="tab" data-day="day2">
-                2nd Day - 30 January, 2026 <br> <br>
-                Branded polo paired with:
-                <button id="toggleButton2"
-                    style="background-color: transparent; padding: 20px 5px 0 0; font-size: 14px; border: none; outline: none; text-transform: none; margin-bottom: 15px; color: white;">Click
-                    to view details</button>
-                <div id="content2" style="display: none; font-size: 14px;">
-                    Branded polo paired with: <br>
+                <p class="schedule-date">2nd Day - 30 January, 2026</p>
+                <button id="toggleButton2" class="details-button">Click to view details</button>
+                <div id="content2" class="schedule-toggle-content" style="display: none;">
+                    <p class="schedule-dress-code">Branded polo paired with: <br>
                     Denim Trousers/Skirt - Blue, Black, White <br>
                     Chinos Trousers - Black, Carton Black <br>
-                    Skirts - Dark Blue, Black, Grey
+                    Skirts - Dark Blue, Black, Grey</p>
                 </div>
             </div>
         </div>
@@ -176,13 +168,13 @@ company-wide, and leader-led. </p>
                 <p><b>Welcoming and Overview of the Conference</b></p>
             </div>
             <div class="speaker-card">
-                <img src="/static/images/inika.jpg" alt="Speaker 3">
+                <img src="/static/images/all3.jpg" alt="Speaker 3">
                 <h3>Safety Team</h3>
                 <p>09:05 AM - 09:10 AM</p>
                 <p>Safety Moment</p>
             </div>
             <div class="speaker-card">
-                <img src="/static/images/others/gbemiga-owolabi.png" >
+                <img src="/static/images/gbemiga-owolabi.png" >
                 <h3>Gbemiga</h3>
                 <p>09:10 AM - 09:15 AM</p>
                 <p>Welcome address</p>
@@ -194,9 +186,10 @@ company-wide, and leader-led. </p>
                 <p>Looking back at 2025 - Celebration of Excellence (Reel)</p>
             </div>
             <div class="speaker-card">
-                <img src="/static/images/a3.jpg" >
+                <img src="/static/images/all2.jpg" >
                 <h3>Xu Gang</h3>
                 <p>09:35 AM - 09:45 AM</p>
+                <!-- <p>Experiential Hub</p> -->
                 <p><b>-Xu Gang</b> (VP International Business) <br><br><b>-Wang Jiajun</b>(Group VP, Industrial) <br><br><b>-Tang Jun</b>(Group VP Supply Chain)</p>
             </div>
             <div class="speaker-card">
@@ -251,7 +244,7 @@ company-wide, and leader-led. </p>
                 <p>"Operational Ambition Session - Logistics Presentation & Q&A"</p>
             </div>
             <div class="speaker-card">
-                <img src="/static/images/others/gbemiga-owolabi.png" alt="Speaker 6">
+                <img src="/static/images/gbemiga-owolabi.png" alt="Gbeminga Owolabi">
                 <h3>Gbeminga</h3>
                 <p>05:10 PM - 05:30 PM</p>
                 <p>Day 1 Reflection & Close</p>
@@ -284,7 +277,8 @@ company-wide, and leader-led. </p>
                 <p>08:15  AM - 10:45 AM</p>
                 <p>Plant Reliability</p>
                 <p>Products & Solutions</p>
-                <p>Plant Reliability	<b>Wang, XUANQIAN</b> <br><br>Products & Solutions	<b>Emmanuel Ilaboya</b> <br><br>Digital Innovation	<b>Tunji Adeleye</b> <br><br>People/Culture Hub (Chinese & Nigerian Culture Hub)	<b>Gbemiga Owolabi</b> <br><br>IT Demos (New systems)	<b>Sola Adio</b></p>
+                <p>Experiential Hub</b></p>
+                <!-- <p>Plant Reliability	<b>Wang, XUANQIAN</b> <br><br>Products & Solutions	<b>Emmanuel Ilaboya</b> <br><br>Digital Innovation	<b>Tunji Adeleye</b> <br><br>People/Culture Hub (Chinese & Nigerian Culture Hub)	<b>Gbemiga Owolabi</b> <br><br>IT Demos (New systems)	<b>Sola Adio</b></p> -->
             </div>
             <div class="speaker-card">
                 <img src="/static/images/all4.jpg">
@@ -631,7 +625,7 @@ company-wide, and leader-led. </p>
             if (id === 'content2' && imgPath.includes('day2a.png')) { // Check for Day 2 and the second image
                 const textDiv = document.createElement('p');
                 textDiv.textContent = 'Day 2, Evening Event - Comfortable & Relaxed Vibe';
-                textDiv.style.cssText = 'text-align: center; color: white; margin-top: 15px; font-weight: bold;';
+                textDiv.style.cssText = 'text-align: center; color: white; margin-top: 15px; font-weight: normal;';
                 contentDiv.parentElement.appendChild(textDiv);
             }
 
