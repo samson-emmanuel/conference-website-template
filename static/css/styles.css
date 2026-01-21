@@ -652,6 +652,7 @@ button:focus {
     max-width: 900px; /* Constrain paragraph width for readability */
     line-height: 1.8;
     padding: 0; /* Remove horizontal padding as max-width handles it */
+	text-align: left;
 }
 
 .about ul {
