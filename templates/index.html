@@ -135,7 +135,7 @@ company-wide, and leader-led. </p>
                     <p class="schedule-dress-code"><span style="color: aqua;"> <strong>Dress Code Details:</strong></span> <br>
                     A corporate casual style, complemented with any trousers or skirt of choice.<br>
                     Jacket: Blue, Grey, Black or Brown<br>
-                    <i>No Denim allowed</i></p>
+                    <i>No Denim allowed</i><br><i>Keep it Casual</i></p>
                 </div>
             </div>
 
@@ -462,7 +462,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // --- Day 1 ---
     const toggleButton1 = document.getElementById('toggleButton');
     const content1 = document.getElementById('content');
-    const imagePaths1 = ['/static/images/dresscode/day1.png'];
+    const imagePaths1 = ['/static/images/dresscode/day1.png', '/static/images/dresscode/day2evening.jpeg'];
     let images1 = [];
     let imageButton1;
 
@@ -484,11 +484,21 @@ document.addEventListener('DOMContentLoaded', function() {
         content1.parentElement.appendChild(imageButton1);
         
         // Create and append images for Day 1
-        imagePaths1.forEach(path => {
+        imagePaths1.forEach((path, index) => {
+             if (path.includes('day2evening.jpeg')) { 
+                const textDiv = document.createElement('p');
+                textDiv.innerHTML = 'Evening Event <br> Comfortable & Relaxed Vibe <br> (NO SHORT) <br> Keep it Casual';
+                textDiv.style.cssText = 'text-align: center; color: white; margin-top: 15px; font-size: smaller; font-weight: normal;';
+                content1.appendChild(textDiv);
+            }
             const img = document.createElement('img');
             img.src = path;
             img.alt = 'Dresscode Day 1';
-            img.style.cssText = 'display: none; width: 100%; margin: 10px auto;';
+            if (index === 1) { // Second image
+                img.style.cssText = 'display: none; width: 100%; margin: 10px auto;';
+            } else {
+                img.style.cssText = 'display: none; width: 100%; margin: 10px auto;';
+            }
             img.onclick = () => openModal(img.src);
             images1.push(img);
             content1.parentElement.appendChild(img);
