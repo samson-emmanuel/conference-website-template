@@ -481,27 +481,27 @@ document.addEventListener('DOMContentLoaded', function() {
         imageButton1 = document.createElement('button');
         imageButton1.textContent = 'View Image';
         imageButton1.className = 'details-button'; // Use existing class for styling
-        content1.parentElement.appendChild(imageButton1);
-        
-        // Create and append images for Day 1
+        content1.appendChild(imageButton1);
+
+        // Create and append images and text for Day 1
         imagePaths1.forEach((path, index) => {
-             if (path.includes('day2evening.jpeg')) { 
-                const textDiv = document.createElement('p');
-                textDiv.innerHTML = 'Evening Event <br> Comfortable & Relaxed Vibe <br> (NO SHORT) <br> Keep it Casual';
-                textDiv.style.cssText = 'text-align: center; color: white; margin-top: 15px; font-size: smaller; font-weight: normal;';
-                content1.appendChild(textDiv);
-            }
             const img = document.createElement('img');
             img.src = path;
-            img.alt = 'Dresscode Day 1';
-            if (index === 1) { // Second image
-                img.style.cssText = 'display: none; width: 100%; margin: 10px auto;';
-            } else {
-                img.style.cssText = 'display: none; width: 100%; margin: 10px auto;';
-            }
+            img.alt = `Dresscode Day 1 - ${index + 1}`;
+            img.style.cssText = 'display: none; width: 100%; margin: 10px auto;';
             img.onclick = () => openModal(img.src);
+
+            content1.appendChild(img);
             images1.push(img);
-            content1.parentElement.appendChild(img);
+
+            // Add evening text after the first image
+            if (index === 0) {
+                const textDiv = document.createElement('p');
+                textDiv.innerHTML = 'Evening Event <br> Comfortable & Relaxed Vibe <br> (No Shorts) <br> Keeping it Casual';
+                textDiv.style.cssText = 'text-align: center; color: white; margin-top: 15px; font-size: smaller; font-weight: normal; display: none;';
+                content1.appendChild(textDiv);
+                images1.push(textDiv); // Add to array to toggle visibility
+            }
         });
 
         // Add combined event listeners
@@ -531,27 +531,31 @@ document.addEventListener('DOMContentLoaded', function() {
         imageButton2 = document.createElement('button');
         imageButton2.textContent = 'View Image';
         imageButton2.className = 'details-button';
-        content2.parentElement.appendChild(imageButton2);
+        content2.appendChild(imageButton2); // Append to content2
 
         // Create and append images for Day 2
         imagePaths2.forEach((path, index) => {
-             if (path.includes('day2a.png')) { 
-                const textDiv = document.createElement('p');
-                textDiv.innerHTML = 'Evening Event <br> Comfortable & Relaxed Vibe <br> (No Shorts)';
-                textDiv.style.cssText = 'text-align: center; color: white; margin-top: 15px; font-size: smaller; font-weight: normal;'; // Added font-size and changed parentElement to content2
-                content2.appendChild(textDiv);
-            }
             const img = document.createElement('img');
             img.src = path;
-            img.alt = 'Dresscode Day 2';
-            if (index === 1) { // Second image
-                img.style.cssText = 'display: none; width: 100%; margin: 10px auto;';
-            } else {
-                img.style.cssText = 'display: none; width: 50%; margin: 10px auto;';
-            }
+            img.alt = `Dresscode Day 2 - ${index + 1}`;
             img.onclick = () => openModal(img.src);
-            images2.push(img);
-            content2.parentElement.appendChild(img);
+
+            if (index === 0) { // First image
+                img.style.cssText = 'display: none; width: 50%; margin: 10px auto;'; // Adjusted width for the first image
+                content2.appendChild(img);
+                images2.push(img);
+
+                // Create and append the text after the first image
+                const textDiv = document.createElement('p');
+                textDiv.innerHTML = 'Evening Event <br> Comfortable & Relaxed Vibe <br> (No Shorts) <br> Keeping it Casual';
+                textDiv.style.cssText = 'text-align: center; color: white; margin-top: 15px; font-size: smaller; font-weight: normal; display: none;';
+                content2.appendChild(textDiv);
+                images2.push(textDiv); // Add to array to toggle visibility
+            } else { // Second image
+                img.style.cssText = 'display: none; width: 100%; margin: 10px auto;';
+                content2.appendChild(img);
+                images2.push(img);
+            }
         });
 
         // Add combined event listeners
