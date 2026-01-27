@@ -69,7 +69,7 @@ csrf = CSRFProtect(app)
 # limiter = Limiter(app=app, key_func=get_remote_address)
 
 # Load the data from the Excel file
-file_path = "static/2026_LC_DELEGATE_PROFILE.xlsx"
+file_path = "static/2026_LC_DELEGATE_PROFILE2.xlsx"
 df = pd.read_excel(file_path, sheet_name="Getting to Know the Delegates")
 
 
@@ -690,7 +690,7 @@ def speaker1_page():
 
 
 def seating():
-    file_path = os.path.join(app.static_folder, "seating.xlsx")
+    file_path = os.path.join(app.static_folder, "seating1.xlsx")
     df = pd.read_excel(file_path, usecols=[0])  # Load only the first column (names)
     df = df.dropna().reset_index(drop=True)  # Remove empty rows and reset index
     return df.to_dict(orient='records')
