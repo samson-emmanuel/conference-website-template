@@ -46,6 +46,13 @@ ALLOWED_EXTENSIONS = {".jpg", ".jpeg", ".png", ".gif"}
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 app.secret_key = secrets.token_hex(32)  # Strong secret key
 
+# For production, use a message queue like Redis or RabbitMQ
+app.config['SOCKETIO_MESSAGE_QUEUE'] = os.environ.get('SOCKETIO_MESSAGE_QUEUE')
+
+# URL for the client to connect to the Socket.IO server
+SOCKET_IO_URL = os.environ.get('SOCKET_IO_URL', 'http://127.0.0.1:5000')
+
+
 # Flask-Mail Configuration
 
 
@@ -707,19 +714,19 @@ def feature_selection():
 
 @app.route('/industrial')
 def industrial():
-    return render_template('industrial.html')
+    return render_template('industrial.html', SOCKET_IO_URL=SOCKET_IO_URL)
 
 @app.route('/commercial')
 def commercial():
-    return render_template('commercial.html')
+    return render_template('commercial.html', SOCKET_IO_URL=SOCKET_IO_URL)
 
 @app.route('/logistics')
 def logistics():
-    return render_template('logistics.html')
+    return render_template('logistics.html', SOCKET_IO_URL=SOCKET_IO_URL)
 
 @app.route('/summary')
 def summary():
-    return render_template('summary.html')
+    return render_template('summary.html', SOCKET_IO_URL=SOCKET_IO_URL)
 
 @app.route('/schedule')
 def schedule():

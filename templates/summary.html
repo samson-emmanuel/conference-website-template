@@ -243,7 +243,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const socket = io();
+            const socket = io("{{ SOCKET_IO_URL }}");
 
             function updateSummaryTable(tableId, data) {
                 console.log('Updating table:', tableId, 'with data:', data);

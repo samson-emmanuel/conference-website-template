@@ -165,7 +165,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const PAGE_NAME = 'industrial';
-            const socket = io();
+            const socket = io("{{ SOCKET_IO_URL }}");
             const table = document.querySelector('table');
             const saveButton = document.getElementById('saveButton');
             const notification = document.getElementById('notification');
