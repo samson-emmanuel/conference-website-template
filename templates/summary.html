@@ -240,11 +240,8 @@
         <a href="/feature_selection" class="back-button">Go Back</a>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const socket = io("{{ SOCKET_IO_URL }}");
-
             function updateSummaryTable(tableId, data) {
                 console.log('Updating table:', tableId, 'with data:', data);
                 const table = document.getElementById(tableId);
@@ -275,20 +272,18 @@
                     .catch(error => console.error(`Error loading initial data for ${pageName}:`, error));
             }
 
-            // Load data for all tables
-            loadTableData('commercial', 'commercial-table');
-            loadTableData('industrial', 'industrial-table');
-            loadTableData('logistics', 'logistics-table');
+            function refreshAllTables() {
+                loadTableData('commercial', 'commercial-table');
+                loadTableData('industrial', 'industrial-table');
+                loadTableData('logistics', 'logistics-table');
+            }
 
-            // Listen for the data_updated event
-            socket.on('data_updated', function(eventData) {
-                const pageName = eventData.page;
-                const tableId = pageName + '-table';
-                const data = eventData.data;
-                updateSummaryTable(tableId, data);
-            });
+            // Load data for all tables initially
+            refreshAllTables();
+
+            // Auto-refresh every 5 seconds
+            setInterval(refreshAllTables, 5000);
         });
     </script>
-    <script src="/static/js/autorefresh.js"></script>
 </body>
 </html>

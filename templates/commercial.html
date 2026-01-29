@@ -163,11 +163,9 @@
     </div>
 
     <input type="hidden" id="csrf_token" value="{{ csrf_token() }}">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const PAGE_NAME = 'commercial';
-            const socket = io("{{ SOCKET_IO_URL }}");
             const table = document.querySelector('table');
             const saveButton = document.getElementById('saveButton');
             const notification = document.getElementById('notification');
@@ -216,28 +214,7 @@
                 }, 3000);
             }
 
-            // --- Socket.IO Functions ---
-
-            function emitData() {
-                const data = getTableData();
-                socket.emit('update_data', { page: PAGE_NAME, data: data });
-            }
-
-            socket.on('connect', () => {
-                console.log('Connected to server');
-            });
-
-            socket.on('data_updated', (data) => {
-                const currentData = JSON.stringify(getTableData());
-                if (data.page === PAGE_NAME && JSON.stringify(data.data) !== currentData) {
-                    console.log('Received data update:', data.data);
-                    updateTable(data.data);
-                }
-            });
-
             // --- Event Listeners ---
-
-            table.addEventListener('input', emitData);
 
             saveButton.addEventListener('click', function() {
                 saveButton.disabled = true;
@@ -286,6 +263,11 @@
             }
 
             loadInitialData();
+
+            // --- Auto-save ---
+            setInterval(() => {
+                saveButton.click();
+            }, 5000); // Auto-save every 5 seconds
         });
     </script>
     <!-- <script src="/static/js/autosave.js"></script> -->

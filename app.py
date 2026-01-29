@@ -27,11 +27,10 @@ import cloudinary.api
 from cloudinary.utils import cloudinary_url
 from config import Config
 from PIL import Image
-from sockets import init_app, socketio
+
 from io import BytesIO
 
 app = Flask(__name__)
-init_app(app)
 
 # Configuration
 DATABASE_CONFIG = {
@@ -869,4 +868,4 @@ def seat_page():
 if __name__ == "__main__":
     # app.run(debug=os.getenv("FLASK_DEBUG", "False").lower() == "true")
 
-    socketio.run(app, debug=os.getenv("FLASK_DEBUG", "False").lower() == "true")
+    app.run(debug=os.getenv("FLASK_DEBUG", "False").lower() == "true")
