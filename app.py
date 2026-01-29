@@ -55,9 +55,6 @@ cloudinary.config(
 )
 
 
-SOCKET_IO_URL = os.environ.get('SOCKET_IO_URL', 'http://127.0.0.1:5000')
-
-
 # Initialize Flask-Login
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -78,20 +75,7 @@ df = pd.read_excel(file_path, sheet_name="Getting to Know the Delegates")
 
 
 # Database Connection
-# def connect_to_database():
-#     try:
-#         db_user = os.getenv("DATABASE_USER")
-#         db_pass = os.getenv("DATABASE_PASSWORD")
-#         db_name = os.getenv("DATABASE_NAME")
-#         unix_socket = os.getenv("DATABASE_HOST")
 
-#         conn = mysql.connector.connect(
-#             user=db_user, password=db_pass, database=db_name, unix_socket=unix_socket
-#         )
-#         return conn
-#     except Exception as e:
-#         print(f"Database connection failed: {e}")
-#         return None
 
 
 
@@ -590,21 +574,7 @@ def previous_year_images():
 
 
 
-@app.route('/industrial')
-def industrial():
-    return render_template('industrial.html', SOCKET_IO_URL=SOCKET_IO_URL)
 
-@app.route('/commercial')
-def commercial():
-    return render_template('commercial.html', SOCKET_IO_URL=SOCKET_IO_URL)
-
-@app.route('/logistics')
-def logistics():
-    return render_template('logistics.html', SOCKET_IO_URL=SOCKET_IO_URL)
-
-@app.route('/summary')
-def summary():
-    return render_template('summary.html', SOCKET_IO_URL=SOCKET_IO_URL)
 
 
 
@@ -749,21 +719,21 @@ def speaker1_page():
 def feature_selection():
     return render_template('feature_selection.html')
 
-# @app.route('/industrial')
-# def industrial():
-#     return render_template('industrial.html')
+@app.route('/industrial')
+def industrial():
+    return render_template('industrial.html')
 
-# @app.route('/commercial')
-# def commercial():
-#     return render_template('commercial.html')
+@app.route('/commercial')
+def commercial():
+    return render_template('commercial.html')
 
-# @app.route('/logistics')
-# def logistics():
-#     return render_template('logistics.html')
+@app.route('/logistics')
+def logistics():
+    return render_template('logistics.html')
 
-# @app.route('/summary')
-# def summary():
-#     return render_template('summary.html')
+@app.route('/summary')
+def summary():
+    return render_template('summary.html')
 
 @app.route('/schedule')
 def schedule():
