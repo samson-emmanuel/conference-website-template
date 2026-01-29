@@ -27,10 +27,11 @@ import cloudinary.api
 from cloudinary.utils import cloudinary_url
 from config import Config
 from PIL import Image
-
+from sockets import init_app, socketio
 from io import BytesIO
 
 app = Flask(__name__)
+init_app(app)
 
 # Configuration
 DATABASE_CONFIG = {
@@ -75,25 +76,20 @@ df = pd.read_excel(file_path, sheet_name="Getting to Know the Delegates")
 
 
 # Database Connection
-
-
-
-
 def connect_to_database():
     try:
         db_user = os.getenv("DATABASE_USER")
         db_pass = os.getenv("DATABASE_PASSWORD")
         db_name = os.getenv("DATABASE_NAME")
-        db_host = os.getenv("DATABASE_HOST")
+        unix_socket = os.getenv("DATABASE_HOST")
 
         conn = mysql.connector.connect(
-            user=db_user, password=db_pass, database=db_name, host=db_host
+            user=db_user, password=db_pass, database=db_name, unix_socket=unix_socket
         )
         return conn
     except Exception as e:
         print(f"Database connection failed: {e}")
         return None
-
 
 
 # Initialize Database
@@ -571,16 +567,6 @@ def previous_year_images():
     return render_template("previous_year_images.html", images=images)
 
 
-
-
-
-
-
-
-
-
-
-
 @app.route("/ask")
 def ask():
     return render_template("ask.html")
@@ -719,21 +705,21 @@ def speaker1_page():
 def feature_selection():
     return render_template('feature_selection.html')
 
-# @app.route('/industrial')
-# def industrial():
-#     return render_template('industrial.html')
+@app.route('/industrial')
+def industrial():
+    return render_template('industrial.html')
 
-# @app.route('/commercial')
-# def commercial():
-#     return render_template('commercial.html')
+@app.route('/commercial')
+def commercial():
+    return render_template('commercial.html')
 
-# @app.route('/logistics')
-# def logistics():
-#     return render_template('logistics.html')
+@app.route('/logistics')
+def logistics():
+    return render_template('logistics.html')
 
-# @app.route('/summary')
-# def summary():
-#     return render_template('summary.html')
+@app.route('/summary')
+def summary():
+    return render_template('summary.html')
 
 @app.route('/schedule')
 def schedule():
@@ -838,4 +824,4 @@ def seat_page():
 if __name__ == "__main__":
     # app.run(debug=os.getenv("FLASK_DEBUG", "False").lower() == "true")
 
-    app.run(debug=os.getenv("FLASK_DEBUG", "False").lower() == "true")
+    socketio.run(app, debug=os.getenv("FLASK_DEBUG", "False").lower() == "true")
