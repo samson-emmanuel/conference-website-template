@@ -1,72 +1,4 @@
-// const setupCountdown = (id, eventTime) => {
-//     const timerElement = document.getElementById(id);
-//     const cardElement = timerElement.closest(".event-card");
-
-//     const eventDuration = 3 * 24 * 60 * 60 * 1000; // 3 days in milliseconds
-//     const endEventTime = eventTime + eventDuration;
-
-//     const updateTimer = () => {
-//         const now = new Date().getTime();
-
-//         if (now < eventTime) {
-//             // Countdown before the event starts
-//             const timeLeft = eventTime - now;
-
-//             const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-//             const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-//             const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-//             const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-
-//             timerElement.innerHTML = `
-//                 <div class="time-box"><span>${days}</span><small>Days</small></div>
-//                 <div class="time-box"><span>${hours}</span><small>Hours</small></div>
-//                 <div class="time-box"><span>${minutes}</span><small>Minutes</small></div>
-//                 <div class="time-box"><span>${seconds}</span><small>Seconds</small></div>
-//             `;
-
-//             cardElement.classList.add("active");
-//             cardElement.classList.remove("expired", "happening-now");
-//         } else if (now >= eventTime && now <= endEventTime) {
-//             // Count up after the event starts
-//             const timeSinceEventStart = now - eventTime;
-
-//             const days = Math.floor(timeSinceEventStart / (1000 * 60 * 60 * 24));
-//             const hours = Math.floor((timeSinceEventStart % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-//             const minutes = Math.floor((timeSinceEventStart % (1000 * 60 * 60)) / (1000 * 60));
-//             const seconds = Math.floor((timeSinceEventStart % (1000 * 60)) / 1000);
-
-//             timerElement.style.color = "blue";
-//             timerElement.innerHTML = `
-//                 <div class="time-box"><span>${days}</span><small>Days</small></div>
-//                 <div class="time-box"><span>${hours}</span><small>Hours</small></div>
-//                 <div class="time-box"><span>${minutes}</span><small>Minutes</small></div>
-//                 <div class="time-box"><span>${seconds}</span><small>Seconds</small></div>
-//             `;
-
-//             cardElement.classList.add("happening-now");
-//             cardElement.classList.remove("expired", "active");
-//         } else if (now > endEventTime) {
-//             // Event has ended
-//             timerElement.innerHTML = "Event Ended!";
-//             timerElement.style.color = "red";
-//             cardElement.classList.add("expired");
-//             cardElement.classList.remove("happening-now", "active");
-//             clearInterval(timerInterval);
-//         }
-//     };
-
-//     updateTimer();
-//     const timerInterval = setInterval(updateTimer, 1000);
-// };
-
-// // Example usage
-// setupCountdown("afternoon-session-timer1", new Date("2025-01-29T14:00:00").getTime());
-
-
-
-
-
-    const setupCountdown = (timerId, eventTime) => {
+const setupCountdown = (timerId, eventTime) => {
         const timerElement = document.getElementById(timerId);
 
         const updateTimer = () => {
@@ -96,92 +28,50 @@
     };
 
     // Initialize the countdown timer
-setupCountdown("countdown-timer", new Date("2025-01-29T14:00:00").getTime());
+// setupCountdown("countdown-timer", new Date("2026-01-29T08:00:00").getTime());
     
 
 
 
 const setupCountUp = (timerId, startTime, endTime) => {
     const timerElement = document.getElementById(timerId);
-    const headerElement = document.getElementById("event-header");
+    const floatingContainer = document.getElementById("floating-container");
 
     const updateTimer = () => {
         const now = new Date().getTime();
 
         if (now >= startTime && now <= endTime) {
-            let elapsedTime = now - startTime;
+            if (floatingContainer) floatingContainer.classList.add("visible");
+            const elapsedTime = now - startTime;
 
-            // Show timer and header
-            timerElement.style.display = "block";
-            headerElement.style.display = "block";
+            const days = Math.floor(elapsedTime / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((elapsedTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((elapsedTime % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((elapsedTime % (1000 * 60)) / 1000);
 
-            // Handle Day 1 (ends at 11:59 PM of the same day)
-            const day1End = new Date(startTime);
-            day1End.setHours(23, 59, 59, 999);
-
-            let days, hours, minutes, seconds;
-
-            if (now <= day1End.getTime()) {
-                // Calculate time for Day 1
-                days = 0;
-                hours = Math.floor((elapsedTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                minutes = Math.floor((elapsedTime % (1000 * 60 * 60)) / (1000 * 60));
-                seconds = Math.floor((elapsedTime % (1000 * 60)) / 1000);
-            } else {
-                // Handle Day 2 onwards
-                elapsedTime = now - day1End.getTime();
-
-                // Day 2 (normal 24-hour day)
-                const day2End = new Date(day1End);
-                day2End.setDate(day2End.getDate() + 1);
-
-                if (now <= day2End.getTime()) {
-                    days = 1;
-                    hours = Math.floor((elapsedTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                    minutes = Math.floor((elapsedTime % (1000 * 60 * 60)) / (1000 * 60));
-                    seconds = Math.floor((elapsedTime % (1000 * 60)) / 1000);
-                } else {
-                    // Handle Day 3 (ends at 11:00 PM)
-                    const day3End = new Date(day2End);
-                    day3End.setHours(23, 0, 0, 0);
-
-                    if (now <= day3End.getTime()) {
-                        elapsedTime = now - day2End.getTime();
-                        days = 2;
-                        hours = Math.floor((elapsedTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                        minutes = Math.floor((elapsedTime % (1000 * 60 * 60)) / (1000 * 60));
-                        seconds = Math.floor((elapsedTime % (1000 * 60)) / 1000);
-                    } else {
-                        // Hide timer and header after Day 3 ends
-                        timerElement.style.display = "none";
-                        headerElement.style.display = "none";
-                        clearInterval(interval);
-                        return;
-                    }
-                }
+            if (timerElement) {
+                timerElement.innerHTML = `
+                    <div class="time-box"><span>${days}</span><small>Days</small></div>
+                    <div class="time-box"><span>${hours}</span><small>Hours</small></div>
+                    <div class="time-box"><span>${minutes}</span><small>Minutes</small></div>
+                    <div class="time-box"><span>${seconds}</span><small>Seconds</small></div>
+                `;
             }
-
-            timerElement.innerHTML = `
-                <div class="time-box"><span>${days}</span><small>Days</small></div>
-                <div class="time-box"><span>${hours}</span><small>Hours</small></div>
-                <div class="time-box"><span>${minutes}</span><small>Minutes</small></div>
-                <div class="time-box"><span>${seconds}</span><small>Seconds</small></div>
-            `;
         } else {
-            // Hide timer and header when the event is not active
-            timerElement.style.display = "none";
-            headerElement.style.display = "none";
-            clearInterval(interval);
+            if (floatingContainer) floatingContainer.classList.remove("visible");
+            if (now > endTime) {
+                clearInterval(interval);
+            }
         }
     };
 
-    updateTimer();
     const interval = setInterval(updateTimer, 1000);
+    updateTimer(); // Initial call to set the state correctly
 };
 
-// Initialize the count-up timer
+// Initialize the count-up timer for the 3-day event
 setupCountUp(
     "count-up-timer",
-    new Date("2026-01-29T08:00:00").getTime(), // Start at 2 PM
-    new Date("2026-01-30T18:00:00").getTime() // End at 11 PM on the 3rd day
-);    
+    new Date("2026-01-29T08:00:00").getTime(), // Day 1: Starts Jan 29, 8 AM
+    new Date("2026-01-31T23:00:00").getTime()  // Day 3: Ends Jan 31, 11 PM
+);

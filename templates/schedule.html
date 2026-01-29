@@ -1,15 +1,181 @@
 {% extends "base.html" %}
+
+{% block title %}Conference Schedule{% endblock %}
+
+{% block styles %}
+<style>
+    h1 {
+      font-size: 2.1rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      text-align: center;
+      margin-bottom: 1.8rem;
+      color: var(--text);
+    }
+
+    .subtitle {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      margin-bottom: 2.5rem;
+      line-height: 1.5;
+    }
+
+    .table-wrapper {
+      overflow-x: auto;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      margin-bottom: 2.5rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      min-width: 900px; /* forces horizontal scroll on small screens if needed */
+    }
+
+    th, td {
+      padding: 1rem 1.25rem;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.97rem;
+      line-height: 1.5;
+    }
+
+    th {
+      background: var(--header);
+      font-weight: 600;
+      color: var(--text);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      font-size: 0.85rem;
+    }
+
+    td {
+      background: var(--card);
+      color: var(--text);
+      transition: background 0.2s ease;
+    }
+
+    tr:hover td {
+      background: #1e293b;
+    }
+
+    /* Color-coded tracks – subtle background tints */
+    td:nth-child(2) { background: rgba(107, 114, 128, 0.08); }   /* GRAY */
+    td:nth-child(3) { background: rgba(96, 165, 250, 0.08); }   /* BLUE */
+    td:nth-child(4) { background: rgba(52, 211, 153, 0.08); }   /* GREEN */
+    td:nth-child(5) { background: rgba(248, 113, 113, 0.08); }  /* RED */
+    td:nth-child(6) { background: rgba(251, 191, 36, 0.08); }   /* YELLOW */
+
+    .time-cell {
+      font-weight: 600;
+      color: var(--text-muted);
+      white-space: nowrap;
+      background: var(--header) !important;
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.9rem 2.2rem;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: white;
+      background: #475569;
+      border: none;
+      border-radius: 12px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      margin: 0 auto;
+    }
+
+    .back-btn:hover {
+      background: #64748b;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px -8px rgba(100, 116, 139, 0.4);
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 2rem 1.5rem;
+      }
+      h1 {
+        font-size: 1.8rem;
+      }
+      th, td {
+        padding: 0.9rem 1rem;
+      }
+    }
+</style>
+{% endblock %}
+
 {% block content %}
-<section class="schedule">
-    <h2>Event Schedule</h2>
-    <p>Here is the schedule for our upcoming event.</p>
-    <div class="schedule-timeline">
-        {% for item in schedule %}
-        <div class="schedule-item">
-            <h3>{{ item.time }}</h3>
-            <p>{{ item.activity }}</p>
-        </div>
-        {% endfor %}
+  <div class="container">
+    <h1>Conference Schedule</h1>
+    <p class="subtitle">Parallel tracks running from 8:20 AM. Select your preferred stream or explore all sessions.</p>
+
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>TIME SLOT</th>
+            <th>GRAY</th>
+            <th>BLUE</th>
+            <th>GREEN</th>
+            <th>RED</th>
+            <th>YELLOW</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="time-cell">8:20 – 8:45</td>
+            <td>PLANT RELIABILITY</td>
+            <td>PRODUCT & SOLUTIONS</td>
+            <td>DIGITAL INNOVATION</td>
+            <td>CULTURE HUB</td>
+            <td>IT & NEW SYSTEMS</td>
+          </tr>
+          <tr>
+            <td class="time-cell">8:50 – 9:15</td>
+            <td>PRODUCT & SOLUTIONS</td>
+            <td>DIGITAL INNOVATION</td>
+            <td>CULTURE HUB</td>
+            <td>IT & NEW SYSTEMS</td>
+            <td>PLANT RELIABILITY</td>
+          </tr>
+          <tr>
+            <td class="time-cell">9:20 – 9:45</td>
+            <td>DIGITAL INNOVATION</td>
+            <td>CULTURE HUB</td>
+            <td>IT & NEW SYSTEMS</td>
+            <td>PLANT RELIABILITY</td>
+            <td>PRODUCT & SOLUTIONS</td>
+          </tr>
+          <tr>
+            <td class="time-cell">9:50 – 10:15</td>
+            <td>CULTURE HUB</td>
+            <td>IT & NEW SYSTEMS</td>
+            <td>PLANT RELIABILITY</td>
+            <td>PRODUCT & SOLUTIONS</td>
+            <td>DIGITAL INNOVATION</td>
+          </tr>
+          <tr>
+            <td class="time-cell">10:20 – 10:45</td>
+            <td>IT & NEW SYSTEMS</td>
+            <td>PLANT RELIABILITY</td>
+            <td>PRODUCT & SOLUTIONS</td>
+            <td>DIGITAL INNOVATION</td>
+            <td>CULTURE HUB</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-</section>
+  </div>
 {% endblock %}

@@ -1,8 +1,6 @@
 {% extends 'base.html' %}
 
 {% block title %}Home{% endblock %}
-<div id="floating-text"></div>
-
 
 {% block styles %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/countdown.css') }}">
@@ -17,10 +15,10 @@
             <p style="font-size: 20px;"><span style="font-weight: bolder; color: aqua; font-size: 18px;">Theme: </span> <br>Innovation & Excellence: Exponential Growth<br>Through Disciplined Execution</p>
             <h1>Lafarge Africa <br>Leadership <br>Conference <br> 2026</h1>
             
-            <section class="countdown-overlay">
+            {# <section class="countdown-overlay">
                 <div id="countdown-timer" class="countdown-timer"></div>
-            </section>
-            <div id="new-countdown-container" class="new-countdown-container">
+            </section> #}
+{# <div id="new-countdown-container" class="new-countdown-container">
                 <h3 class="countdown-heading">COUNT DOWN</h3>
                 <div id="new-countdown">
                     <div><span id="days"></span> Days</div>
@@ -28,7 +26,7 @@
                     <div><span id="minutes"></span> Minutes</div>
                     <div><span id="seconds"></span> Seconds</div>
                 </div>
-            </div>
+            </div> #}
         </div>
     </div>
 </section>
@@ -73,13 +71,10 @@ company-wide, and leader-led. </p>
     </div>
 </section>
 
-<section class="countdowns">
-    <h2 id="event-header" style="display: none;">Event Timer</h2>
-</section>
-
-<section class="count-up">
-    <div id="count-up-timer" class="count-up-timer"></div>
-</section>
+<div id="floating-container" class="floating-container">
+    <h2 id="event-header"></h2>
+    <div id="count-up-timer" class="floating-countup-timer"></div>
+</div>
 
 
 
@@ -224,7 +219,7 @@ company-wide, and leader-led. </p>
             <div class="speaker-card">
                 <img src="/static/images/Gbenga Onimowo.png" alt="">
                 <h3>Operational Ambition Session - Commercial</h3>
-                <p>11:40AM - 01:10 AM</p>
+                <p>11:40AM - 01:10 PM</p>
                 <p>Gbenga</p>
             </div>
             <div class="speaker-card">
@@ -564,7 +559,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 </script>
-<script>
+{# <script>
     document.addEventListener('DOMContentLoaded', function() {
         const countdownContainer = document.getElementById('new-countdown-container');
         const daysEl = document.getElementById('days');
@@ -606,7 +601,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function closeModal() {
         document.getElementById("imageModal").style.display = "none";
     }
-</script>
+</script> #}
 
 <!-- Image Modal -->
 <div id="imageModal" class="modal" onclick="closeModal()">
@@ -652,5 +647,87 @@ document.addEventListener('DOMContentLoaded', function() {
         cursor: pointer;
     }
 </style>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const days = [
+        { id: "day1", date: "2026-01-29" },
+        { id: "day2", date: "2026-01-30" },
+    ];
+
+    const headerElement = document.getElementById("event-header");
+
+    function parseTimeRange(timeRange, date) {
+        const timePattern = /(\d{1,2}:\d{2})\s*(AM|PM)\s*-\s*(\d{1,2}:\d{2})\s*(AM|PM)/i;
+        const match = timeRange.match(timePattern);
+
+        if (!match) return null;
+
+        const [, startTimeStr, startPeriod, endTimeStr, endPeriod] = match;
+
+        const parseTime = (timeStr, period) => {
+            let [hours, minutes] = timeStr.split(':').map(Number);
+            if (period.toUpperCase() === 'PM' && hours !== 12) {
+                hours += 12;
+            }
+            if (period.toUpperCase() === 'AM' && hours === 12) {
+                hours = 0;
+            }
+            const d = new Date(`${date}T00:00:00`);
+            d.setHours(hours, minutes, 0, 0);
+            return d;
+        };
+
+        const startTime = parseTime(startTimeStr, startPeriod);
+        let endTime = parseTime(endTimeStr, endPeriod);
+
+        // Handle overnight events where end time is on the next day
+        if (endTime < startTime) {
+            endTime.setDate(endTime.getDate() + 1);
+        }
+
+
+        return { startTime, endTime };
+    }
+
+    function updateHappeningNow() {
+        if (!headerElement) return;
+
+        const now = new Date();
+        let activeEventTitle = "";
+
+        days.forEach(({ id, date }) => {
+            const container = document.getElementById(id);
+            if (!container) return;
+
+            const speakerCards = container.querySelectorAll(".speaker-card");
+
+            speakerCards.forEach(card => {
+                const timeElement = Array.from(card.querySelectorAll("p")).find(p => /(\d{1,2}:\d{2})\s*(AM|PM)\s*-\s*\d{1,2}:\d{2}\s*(AM|PM)/i.test(p.textContent));
+                if (timeElement) {
+                    const timeRange = parseTimeRange(timeElement.textContent, date);
+                    if (timeRange && now >= timeRange.startTime && now <= timeRange.endTime) {
+                        const titleElement = card.querySelector("h3");
+                        if (titleElement) {
+                            activeEventTitle = titleElement.textContent;
+                        }
+                    }
+                }
+            });
+        });
+
+        if (activeEventTitle) {
+            headerElement.innerHTML = `Happening Now: ${activeEventTitle}`;
+            headerElement.classList.add("event-header-visible");
+        } else {
+            headerElement.classList.remove("event-header-visible");
+        }
+    }
+
+    // Update every 10 seconds
+    setInterval(updateHappeningNow, 10000);
+    updateHappeningNow(); // Initial call
+});
+</script>
 
 {% endblock %}

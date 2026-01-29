@@ -27,9 +27,11 @@ import cloudinary.api
 from cloudinary.utils import cloudinary_url
 from config import Config
 from PIL import Image
+from sockets import init_app, socketio
 from io import BytesIO
 
 app = Flask(__name__)
+init_app(app)
 
 # Configuration
 DATABASE_CONFIG = {
@@ -134,6 +136,18 @@ def initialize_database():
             CREATE TABLE IF NOT EXISTS questions (
                 id INT AUTO_INCREMENT PRIMARY KEY,
                 question TEXT NOT NULL
+            )
+            """
+        )
+        cursor.execute(
+            """
+            CREATE TABLE IF NOT EXISTS cell_data (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                page_name VARCHAR(255) NOT NULL,
+                row_index INT NOT NULL,
+                col_index INT NOT NULL,
+                cell_value TEXT,
+                UNIQUE KEY unique_cell (page_name, row_index, col_index)
             )
             """
         )
@@ -687,6 +701,112 @@ def treasure_hunt():
 def speaker1_page():
     return render_template('speaker1.html')
 
+@app.route('/feature_selection')
+def feature_selection():
+    return render_template('feature_selection.html')
+
+@app.route('/industrial')
+def industrial():
+    return render_template('industrial.html')
+
+@app.route('/commercial')
+def commercial():
+    return render_template('commercial.html')
+
+@app.route('/logistics')
+def logistics():
+    return render_template('logistics.html')
+
+@app.route('/summary')
+def summary():
+    return render_template('summary.html')
+
+@app.route('/schedule')
+def schedule():
+    return render_template('schedule.html')
+
+
+
+@app.route("/save_data", methods=["POST"])
+def save_data():
+    try:
+        payload = request.get_json()
+        page_name = payload.get("page")
+        data = payload.get("data")
+
+        if not page_name or data is None:
+            return jsonify({"status": "error", "message": "Missing page or data"}), 400
+
+        conn = connect_to_database()
+        if not conn:
+            return jsonify({"status": "error", "message": "Database connection failed"}), 500
+
+        cursor = conn.cursor()
+        
+        # First, clear old data for the page to handle deletions
+        # cursor.execute("DELETE FROM cell_data WHERE page_name = %s", (page_name,))
+
+        # Then, insert new data
+        for row_idx, row in enumerate(data):
+            for col_idx, cell_value in enumerate(row):
+                # Using INSERT ... ON DUPLICATE KEY UPDATE to insert or update cell data
+                cursor.execute(
+                    """
+                    INSERT INTO cell_data (page_name, row_index, col_index, cell_value)
+                    VALUES (%s, %s, %s, %s)
+                    ON DUPLICATE KEY UPDATE cell_value = VALUES(cell_value)
+                    """,
+                    (page_name, row_idx, col_idx, cell_value)
+                )
+
+        conn.commit()
+        cursor.close()
+        conn.close()
+
+        return jsonify({"status": "success", "message": "Data saved successfully"})
+
+    except Exception as e:
+        app.logger.error(f"Error in /save_data: {e}")
+        return jsonify({"status": "error", "message": "An internal error occurred"}), 500
+
+
+@app.route("/load_data/<page_name>")
+def load_data(page_name):
+    try:
+        conn = connect_to_database()
+        if not conn:
+            return jsonify({"status": "error", "message": "Database connection failed"}), 500
+
+        cursor = conn.cursor(dictionary=True)
+        cursor.execute("SELECT row_index, col_index, cell_value FROM cell_data WHERE page_name = %s ORDER BY row_index, col_index", (page_name,))
+        
+        results = cursor.fetchall()
+        cursor.close()
+        conn.close()
+
+        # Reconstruct the potentially jagged 2D array for the frontend
+        data = []
+        if results:
+            # Group cells by row_index
+            rows = {}
+            for r in results:
+                row_idx = r['row_index']
+                if row_idx not in rows:
+                    rows[row_idx] = []
+                # Append a tuple of (col_index, value)
+                rows[row_idx].append((r['col_index'], r['cell_value']))
+
+            # Sort and build the final jagged array
+            for row_idx in sorted(rows.keys()):
+                # Sort cells by col_index to ensure correct order
+                sorted_cells = sorted(rows[row_idx], key=lambda x: x[0])
+                data.append([cell[1] for cell in sorted_cells])
+
+        return jsonify(data)
+
+    except Exception as e:
+        app.logger.error(f"Error in /load_data/{page_name}: {e}")
+        return jsonify({"status": "error", "message": "An internal error occurred"}), 500
 
 
 def seating():
@@ -702,4 +822,6 @@ def seat_page():
 
 
 if __name__ == "__main__":
-    app.run(debug=os.getenv("FLASK_DEBUG", "False").lower() == "true")
+    # app.run(debug=os.getenv("FLASK_DEBUG", "False").lower() == "true")
+
+    socketio.run(app, debug=os.getenv("FLASK_DEBUG", "False").lower() == "true")

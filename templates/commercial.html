@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commercial Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #e0f2ff;
+            margin: 0;
+            padding: 10px; /* Add some padding for smaller screens */
+            box-sizing: border-box; /* Include padding in element's total width and height */
+        }
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 100%; /* Make container full width on small screens */
+            max-width: 1200px; /* Max width for larger screens */
+            box-sizing: border-box;
+        }
+        h1 {
+            color: #007bff;
+            margin-bottom: 20px;
+        }
+        p {
+            color: #555;
+            font-size: 18px;
+        }
+        .back-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #6c757d;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        .back-button:hover {
+            background-color: #5a6268;
+        }
+        .table-responsive {
+            overflow-x: auto; /* Enable horizontal scrolling for the table */
+            margin-top: 20px;
+        }
+        table {
+            width: 100%;
+            min-width: 800px; /* Ensure table doesn't get too narrow */
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+            white-space: nowrap; /* Prevent text wrapping in table cells */
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .save-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        .save-button:hover {
+            background-color: #0069d9;
+        }
+        .notification {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 5px;
+            color: #fff;
+            display: none; /* Hidden by default */
+        }
+        .notification.success {
+            background-color: #28a745;
+        }
+        .notification.error {
+            background-color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to Commercial!</h1>
+        <p>This is a placeholder page for Commercial.</p>
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Function</th>
+                        <th>Business Priorities</th>
+                        <th>Finance</th>
+                        <th>Procurement</th>
+                        <th>O&HR</th>
+                        <th>IT</th>
+                        <th>CPA&SD</th>
+                        <th>SHE</th>
+                        <th>Legal</th>
+                        <th>Security</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td rowspan="3">Commercial</td>
+                        <td>Priority 1</td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                    </tr>
+                    <tr>
+                        <td>Priority 2</td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                    </tr>
+                    <tr>
+                        <td>Priority 3</td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <button id="saveButton" class="save-button">Save</button>
+        <div id="notification" class="notification"></div>
+        <a href="/feature_selection" class="back-button">Go Back</a>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const PAGE_NAME = 'commercial';
+            const socket = io();
+            const table = document.querySelector('table');
+            const saveButton = document.getElementById('saveButton');
+            const notification = document.getElementById('notification');
+
+            // --- Data Functions ---
+
+            // Gets data from the editable cells of the table into a 2D array
+            function getTableData() {
+                const data = [];
+                const editableCells = table.querySelectorAll('td[contenteditable="true"]');
+                const numRows = 3;
+                const numCols = 8;
+                for (let i = 0; i < numRows; i++) {
+                    const rowData = [];
+                    for (let j = 0; j < numCols; j++) {
+                        rowData.push(editableCells[i * numCols + j].textContent);
+                    }
+                    data.push(rowData);
+                }
+                return data;
+            }
+
+            // Populates the table with a 2D data array
+            function updateTable(data) {
+                if (!data) return;
+                const bodyRows = table.querySelectorAll('tbody tr');
+                bodyRows.forEach((tr, i) => {
+                    const editableTds = Array.from(tr.querySelectorAll('td')).slice(2);
+                    editableTds.forEach((td, j) => {
+                        if(data[i] && data[i][j] !== undefined) {
+                            td.textContent = data[i][j] || "";
+                        }
+                    });
+                });
+            }
+            
+            // Shows a status notification
+            function showNotification(message, type) {
+                notification.textContent = message;
+                notification.className = 'notification ' + type;
+                notification.style.display = 'block';
+                setTimeout(() => {
+                    notification.style.display = 'none';
+                }, 3000);
+            }
+
+            // --- Socket.IO Functions ---
+
+            function emitData() {
+                const data = getTableData();
+                socket.emit('update_data', { page: PAGE_NAME, data: data });
+            }
+
+            socket.on('connect', () => {
+                console.log('Connected to server');
+            });
+
+            socket.on('data_updated', (data) => {
+                const currentData = JSON.stringify(getTableData());
+                if (data.page === PAGE_NAME && JSON.stringify(data.data) !== currentData) {
+                    console.log('Received data update:', data.data);
+                    updateTable(data.data);
+                }
+            });
+
+            // --- Event Listeners ---
+
+            table.addEventListener('input', emitData);
+
+            saveButton.addEventListener('click', function() {
+                saveButton.disabled = true;
+                saveButton.textContent = 'Saving...';
+                
+                const dataToSave = getTableData();
+                
+                fetch('/save_data', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ page: PAGE_NAME, data: dataToSave }),
+                })
+                .then(response => response.json())
+                .then(result => {
+                    if (result.status === 'success') {
+                        showNotification('Data saved successfully!', 'success');
+                    } else {
+                        showNotification('Error saving data: ' + result.message, 'error');
+                    }
+                })
+                .catch(error => {
+                    console.error('Save error:', error);
+                    showNotification('An unexpected error occurred.', 'error');
+                })
+                .finally(() => {
+                    saveButton.disabled = false;
+                    saveButton.textContent = 'Save';
+                });
+            });
+
+            // --- Initial Load ---
+
+            function loadInitialData() {
+                fetch(`/load_data/${PAGE_NAME}`)
+                .then(response => response.json())
+                .then(data => {
+                    console.log("Loaded initial data:", data);
+                    if (data) {
+                        updateTable(data);
+                    }
+                })
+                .catch(error => console.error('Error loading initial data:', error));
+            }
+
+            loadInitialData();
+        });
+    </script>
+</body>
+</html>
