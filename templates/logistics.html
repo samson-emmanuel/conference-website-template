@@ -158,7 +158,8 @@
         </div>
         <button id="saveButton" class="save-button">Save</button>
         <div id="notification" class="notification"></div>
-        <a href="/feature_selection" class="back-button">Go Back</a>
+       <p>Note: Home button takes you out of this section</p>
+        <a href="/" class="back-button">Home Page</a>
     </div>
 
     <input type="hidden" id="csrf_token" value="{{ csrf_token() }}">
@@ -287,5 +288,6 @@
             loadInitialData();
         });
     </script>
+    <script src="/static/js/autosave.js"></script>
 </body>
 </html>

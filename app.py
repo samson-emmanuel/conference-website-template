@@ -766,6 +766,10 @@ def summary():
 def schedule():
     return render_template('schedule.html')
 
+@app.route('/accountability')
+def accountability():
+    return render_template('accountability_cluster.html')
+
 
 
 @app.route("/save_data", methods=["POST"])

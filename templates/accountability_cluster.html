@@ -1,0 +1,373 @@
+{% extends "base.html" %}
+
+{% block title %}Accountability Cluster{% endblock %}
+
+{% block styles %}
+<style>
+    :root {
+      --primary: #3b82f6;       /* accent color for buttons */
+      --text: #e2e8f0;
+      --text-muted: #94a3b8;
+      --card: #0f172a;
+      --header: #1e293b;
+      --border: #334155;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2.5rem 1rem;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 5vw, 2.6rem);
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      text-align: center;
+      margin-bottom: 0.8rem;
+      color: var(--text);
+    }
+
+    .subtitle {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      max-width: 720px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.6;
+    }
+
+    .cluster-wrapper {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      box-shadow: 0 10px 30px -12px rgba(0,0,0,0.4);
+      padding: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .cluster-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .cluster-card {
+      background: var(--header);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      transition: all 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cluster-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 40px -12px rgba(0,0,0,0.5);
+      border-color: rgba(59, 130, 246, 0.4);
+    }
+
+    .cluster-number {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      background: rgba(30, 41, 59, 0.7);
+      padding: 0.35rem 0.7rem;
+      border-radius: 999px;
+    }
+
+    .cluster-name {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text);
+      margin: 0 0 0.5rem;
+      line-height: 1.3;
+    }
+
+    .cluster-role {
+      font-size: 1rem;
+      font-weight: 500;
+      color: #cbd5e1;
+      margin: 0 0 0.75rem;
+      display: block;
+    }
+
+    .cluster-dept {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      padding: 0.4rem 0.9rem;
+      border-radius: 999px;
+      display: inline-block;
+      font-weight: 500;
+    }
+
+    /* Department color coding – subtle but scannable */
+    .dept-ceo { background: rgba(251, 191, 36, 0.15); color: #fbbf24; }          /* YELLOW */
+    .dept-finance-it { background: rgba(59, 130, 246, 0.15); color: #3b82f6; }   /* BLUE */
+    .dept-commercial { background: rgba(239, 68, 68, 0.15); color: #ef4444; }   /* RED */
+    .dept-industrial { background: rgba(34, 197, 94, 0.15); color: #22c55e; }   /* GREEN */
+    .dept-logistics { background: rgba(148, 163, 184, 0.15); color: #94a3b8; }  /* GRAY */
+    .dept-ohr { background: rgba(168, 85, 247, 0.15); color: #a855f7; }         /* PURPLE for O&HR */
+    .dept-procurement { background: rgba(249, 115, 22, 0.15); color: #f97316; } /* ORANGE */
+    .dept-security { background: rgba(99, 102, 241, 0.15); color: #6366f1; }
+    .dept-cpa-sd { background: rgba(6, 182, 212, 0.15); color: #06b6d4; } /* CYAN for CPA&SD */
+    .dept-others { background: rgba(107, 114, 128, 0.15); color: #6b7280; }
+
+    .summary-section {
+      background: var(--header);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.8rem;
+      margin-top: 2rem;
+    }
+
+    .summary-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 1.2rem;
+      text-align: center;
+    }
+
+    .summary-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .summary-table th, .summary-table td {
+      padding: 0.9rem 1rem;
+      text-align: center;
+      border: 1px solid var(--border);
+      font-size: 0.98rem;
+    }
+
+    .summary-table th {
+      background: rgba(30, 41, 59, 0.7);
+      font-weight: 600;
+      color: var(--text);
+      text-transform: uppercase;
+      font-size: 0.85rem;
+    }
+
+    .summary-table tfoot td {
+      font-weight: 700;
+      background: rgba(59, 130, 246, 0.1);
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 1rem 2.4rem;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: white;
+      background: var(--primary);
+      border: none;
+      border-radius: 12px;
+      text-decoration: none;
+      transition: all 0.25s ease;
+      margin: 2rem auto 0;
+      box-shadow: 0 4px 14px rgba(59,130,246,0.25);
+    }
+
+    .back-btn:hover {
+      background: #2563eb;
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(59,130,246,0.35);
+    }
+
+    @media (max-width: 768px) {
+      .container { padding: 2rem 1rem; }
+      h1 { font-size: 2.1rem; }
+      .cluster-grid { gap: 1.25rem; }
+      .cluster-card { padding: 1.3rem; }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <h1>Accountability Cluster</h1>
+    <p class="subtitle">Key personnel and accountability assignments across departments. Use this reference for ownership, escalation, and cross-functional alignment.</p>
+
+    <div class="cluster-wrapper">
+      <div class="cluster-grid">
+        {% set people = [
+          {"num":1, "name":"ALADE-AKINYEMI, LOLU", "role":"CEO", "dept":"ceo", "display_dept":"CEO"},
+          {"num":2, "name":"KE, ZHIGANG", "role":"FINANCE & IT", "dept":"finance-it", "display_dept":"FINANCE & IT"},
+          {"num":3, "name":"GRAHAM-DOUGLAS, VIOLA IBISO", "role":"COMMUNICATIONS, PUBLIC AFFAIRS & SUSTAINABILITY DEVELOPMENT", "dept":"cpa-sd", "display_dept":"CPA&SD"},
+          {"num":4, "name":"ONIMOWO, GBENGA GABRIEL", "role":"COMMERCIAL", "dept":"commercial", "display_dept":"COMMERCIAL"},
+          {"num":5, "name":"AGBONLAHOR, ABHULIMEN", "role":"INDUSTRIAL", "dept":"industrial", "display_dept":"INDUSTRIAL"},
+          {"num":6, "name":"EGBUNIKE, OLUCHI", "role":"LOGISTICS", "dept":"logistics", "display_dept":"LOGISTICS"},
+          {"num":7, "name":"MAHMOUD, RASHIDAT", "role":"O&HR", "dept":"ohr", "display_dept":"O&HR"},
+          {"num":8, "name":"ADEJIMI, ADEWALE", "role":"PROCUREMENT", "dept":"procurement", "display_dept":"PROCUREMENT"},
+          {"num":9, "name":"ADEGBOYE, OLUSESAN", "role":"SECURITY", "dept":"security", "display_dept":"SECURITY"},
+          {"num":10, "name":"OGUNLEYE, OLAYINKA", "role":"FINANCE & IT", "dept":"finance-it", "display_dept":"FINANCE & IT"},
+          {"num":11, "name":"AJIBADE, ADEYEMI", "role":"COMMERCIAL", "dept":"commercial", "display_dept":"COMMERCIAL"},
+          {"num":12, "name":"BALOGUN, OLALEKAN", "role":"INDUSTRIAL", "dept":"industrial", "display_dept":"INDUSTRIAL"},
+          {"num":13, "name":"DAWODU, OLASUKANMI", "role":"LOGISTICS", "dept":"logistics", "display_dept":"LOGISTICS"},
+          {"num":14, "name":"ENAKHE, EMMANUEL", "role":"O&HR", "dept":"ohr", "display_dept":"O&HR"},
+          {"num":15, "name":"FATAI, TAJUDEEN", "role":"PROCUREMENT", "dept":"procurement", "display_dept":"PROCUREMENT"},
+          {"num":16, "name":"GAFAR, ABIBU", "role":"SECURITY", "dept":"security", "display_dept":"SECURITY"},
+          {"num":17, "name":"IMORU, OLATUNJI", "role":"FINANCE & IT", "dept":"finance-it", "display_dept":"FINANCE & IT"},
+          {"num":18, "name":"JEGEDE, OLUSEGUN", "role":"COMMERCIAL", "dept":"commercial", "display_dept":"COMMERCIAL"},
+          {"num":19, "name":"KADIRI, OLAYIWOLA", "role":"INDUSTRIAL", "dept":"industrial", "display_dept":"INDUSTRIAL"},
+          {"num":20, "name":"LAWSON, ADEDOYIN", "role":"LOGISTICS", "dept":"logistics", "display_dept":"LOGISTICS"},
+          {"num":21, "name":"MUSA, ABDULKAREEM", "role":"O&HR", "dept":"ohr", "display_dept":"O&HR"},
+          {"num":22, "name":"ODUNSI, OLALEKAN", "role":"PROCUREMENT", "dept":"procurement", "display_dept":"PROCUREMENT"},
+          {"num":23, "name":"OGUNYEMI, OLADIPO", "role":"SECURITY", "dept":"security", "display_dept":"SECURITY"},
+          {"num":24, "name":"OKE, OLUSOLA", "role":"FINANCE & IT", "dept":"finance-it", "display_dept":"FINANCE & IT"},
+          {"num":25, "name":"OLADEPO, OLALEKAN", "role":"COMMERCIAL", "dept":"commercial", "display_dept":"COMMERCIAL"},
+          {"num":26, "name":"OMOLE, OLAYIWOLA", "role":"INDUSTRIAL", "dept":"industrial", "display_dept":"INDUSTRIAL"},
+          {"num":27, "name":"OSENI, OLASUNKANMI", "role":"LOGISTICS", "dept":"logistics", "display_dept":"LOGISTICS"},
+          {"num":28, "name":"QUADRI, OLALEKAN", "role":"O&HR", "display_dept":"O&HR"},
+          {"num":29, "name":"SALAMI, OLADIPO", "role":"PROCUREMENT", "dept":"procurement", "display_dept":"PROCUREMENT"},
+          {"num":30, "name":"TIJANI, OLAYIWOLA", "role":"SECURITY", "dept":"security", "display_dept":"SECURITY"},
+          {"num":31, "name":"UMAR, ABDULKAREEM", "role":"FINANCE & IT", "dept":"finance-it", "display_dept":"FINANCE & IT"},
+          {"num":32, "name":"YUSUF, OLALEKAN", "role":"COMMERCIAL", "dept":"commercial", "display_dept":"COMMERCIAL"},
+          {"num":33, "name":"ZAKARI, OLAYIWOLA", "role":"INDUSTRIAL", "dept":"industrial", "display_dept":"INDUSTRIAL"},
+          {"num":34, "name":"ALIYU, ABDULKAREEM", "role":"LOGISTICS", "display_dept":"LOGISTICS"},
+          {"num":35, "name":"BELLO, OLALEKAN", "role":"O&HR", "display_dept":"O&HR"},
+          {"num":36, "name":"DAHIRU, OLAYIWOLA", "role":"PROCUREMENT", "display_dept":"PROCUREMENT"},
+          {"num":37, "name":"GARBA, ABDULKAREEM", "role":"SECURITY", "display_dept":"SECURITY"},
+          {"num":38, "name":"IBRAHIM, OLALEKAN", "role":"FINANCE & IT", "display_dept":"FINANCE & IT"},
+          {"num":39, "name":"JIBRIN, OLAYIWOLA", "role":"COMMERCIAL", "display_dept":"COMMERCIAL"},
+          {"num":40, "name":"KABIRU, ABDULKAREEM", "role":"INDUSTRIAL", "display_dept":"INDUSTRIAL"},
+          {"num":41, "name":"LATEEF, OLALEKAN", "role":"LOGISTICS", "display_dept":"LOGISTICS"},
+          {"num":42, "name":"MOHAMMED, OLAYIWOLA", "role":"O&HR", "display_dept":"O&HR"},
+          {"num":43, "name":"NURUDEEN, ABDULKAREEM", "role":"PROCUREMENT", "display_dept":"PROCUREMENT"},
+          {"num":44, "name":"OLANREWAJU, OLALEKAN", "role":"SECURITY", "display_dept":"SECURITY"},
+          {"num":45, "name":"QUADRI, OLAYIWOLA", "role":"FINANCE & IT", "display_dept":"FINANCE & IT"},
+          {"num":46, "name":"RAFIU, ABDULKAREEM", "role":"COMMERCIAL", "display_dept":"COMMERCIAL"},
+          {"num":47, "name":"SAHEED, OLALEKAN", "role":"INDUSTRIAL", "display_dept":"INDUSTRIAL"},
+          {"num":48, "name":"TAOFIK, OLAYIWOLA", "role":"LOGISTICS", "display_dept":"LOGISTICS"},
+          {"num":49, "name":"UZAIRU, ABDULKAREEM", "role":"O&HR", "display_dept":"O&HR"},
+          {"num":50, "name":"WAHEED, OLALEKAN", "role":"PROCUREMENT", "display_dept":"PROCUREMENT"},
+          {"num":51, "name":"YAKUBU, OLAYIWOLA", "role":"SECURITY", "display_dept":"SECURITY"},
+          {"num":52, "name":"ZULKIFLI, ABDULKAREEM", "role":"FINANCE & IT", "display_dept":"FINANCE & IT"},
+          {"num":53, "name":"ABUBAKAR, OLALEKAN", "role":"COMMERCIAL", "display_dept":"COMMERCIAL"},
+          {"num":54, "name":"BASHIRU, OLAYIWOLA", "role":"INDUSTRIAL", "display_dept":"INDUSTRIAL"},
+          {"num":55, "name":"DAUDA, ABDULKAREEM", "role":"LOGISTICS", "display_dept":"LOGISTICS"},
+          {"num":56, "name":"AMINU, OLALEKAN", "role":"O&HR", "display_dept":"O&HR"},
+          {"num":57, "name":"BELLO, OLAYIWOLA", "role":"PROCUREMENT", "display_dept":"PROCUREMENT"},
+          {"num":58, "name":"ADAMU, ABDULKAREEM", "role":"SECURITY", "display_dept":"SECURITY"},
+          {"num":59, "name":"SANI, OLALEKAN", "role":"FINANCE & IT", "display_dept":"FINANCE & IT"},
+          {"num":60, "name":"MUSA, OLAYIWOLA", "role":"COMMERCIAL", "display_dept":"COMMERCIAL"},
+          {"num":61, "name":"HARUNA, ABDULKAREEM", "role":"INDUSTRIAL", "display_dept":"INDUSTRIAL"},
+          {"num":62, "name":"MANSUR, OLALEKAN", "role":"LOGISTICS", "display_dept":"LOGISTICS"},
+          {"num":63, "name":"RASHID, OLAYIWOLA", "role":"O&HR", "display_dept":"O&HR"},
+          {"num":64, "name":"ESAN, ADEDEJI OLASUNKANMI", "role":"INDUSTRIAL", "dept":"industrial", "display_dept":"INDUSTRIAL"}
+        ] %}
+
+        {% for person in people %}
+          <div class="cluster-card">
+            <div class="cluster-number">#{{ person.num }}</div>
+            <div class="cluster-name">{{ person.name }}</div>
+            <div class="cluster-role">{{ person.role }}</div>
+            <span class="cluster-dept dept-{{ person.dept|lower|replace(' ', '-')|replace('&', '') }}">
+              {{ person.display_dept }}
+            </span>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="summary-section">
+      <div class="summary-title">Cluster Summary by Department</div>
+      <table class="summary-table">
+        <thead>
+          <tr>
+            <th>DEPARTMENT</th>
+            <th>FUNCTION 1</th>
+            <th>FUNCTION 2</th>
+            <th>FUNCTION 3</th>
+            <th>TOTAL</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>CEO</td>
+            <td>1</td>
+            <td>1</td>
+            <td>–</td>
+            <td>2</td>
+          </tr>
+          <tr>
+            <td>FINANCE & IT</td>
+            <td>3</td>
+            <td>3</td>
+            <td>3</td>
+            <td>9</td>
+          </tr>
+          <tr>
+            <td>CPA&SD</td>
+            <td>1</td>
+            <td>–</td>
+            <td>–</td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <td>COMMERCIAL</td>
+            <td>3</td>
+            <td>3</td>
+            <td>3</td>
+            <td>9</td>
+          </tr>
+          <tr>
+            <td>INDUSTRIAL</td>
+            <td>3</td>
+            <td>3</td>
+            <td>3</td>
+            <td>9</td>
+          </tr>
+          <tr>
+            <td>LOGISTICS</td>
+            <td>3</td>
+            <td>3</td>
+            <td>3</td>
+            <td>9</td>
+          </tr>
+          <tr>
+            <td>O&HR</td>
+            <td>3</td>
+            <td>3</td>
+            <td>3</td>
+            <td>9</td>
+          </tr>
+          <tr>
+            <td>PROCUREMENT</td>
+            <td>3</td>
+            <td>3</td>
+            <td>2</td>
+            <td>8</td>
+          </tr>
+          <tr>
+            <td>SECURITY</td>
+            <td>3</td>
+            <td>3</td>
+            <td>2</td>
+            <td>8</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td>TOTAL</td>
+            <td>23</td>
+            <td>22</td>
+            <td>19</td>
+            <td>64</td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+
+    <div style="text-align: center;">
+      <a href="{{ url_for('feature_selection') }}" class="back-btn">← Back to Overview</a>
+    </div>
+  </div>
+{% endblock %}
