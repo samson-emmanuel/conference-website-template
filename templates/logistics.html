@@ -161,6 +161,7 @@
         <a href="/feature_selection" class="back-button">Go Back</a>
     </div>
 
+    <input type="hidden" id="csrf_token" value="{{ csrf_token() }}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -169,6 +170,8 @@
             const table = document.querySelector('table');
             const saveButton = document.getElementById('saveButton');
             const notification = document.getElementById('notification');
+
+            const csrfToken = document.getElementById('csrf_token').value;
 
             // --- Data Functions ---
 
@@ -245,6 +248,7 @@
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
+                        'X-CSRFToken': csrfToken
                     },
                     body: JSON.stringify({ page: PAGE_NAME, data: dataToSave }),
                 })
