@@ -719,7 +719,21 @@ def speaker1_page():
 def feature_selection():
     return render_template('feature_selection.html')
 
+# @app.route('/industrial')
+# def industrial():
+#     return render_template('industrial.html')
 
+# @app.route('/commercial')
+# def commercial():
+#     return render_template('commercial.html')
+
+# @app.route('/logistics')
+# def logistics():
+#     return render_template('logistics.html')
+
+# @app.route('/summary')
+# def summary():
+#     return render_template('summary.html')
 
 @app.route('/schedule')
 def schedule():
