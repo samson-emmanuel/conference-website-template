@@ -1,9 +1,9 @@
 from flask_socketio import SocketIO, emit
 
-socketio = SocketIO(cors_allowed_origins="*")
+socketio = SocketIO()
 
 def init_app(app):
-    socketio.init_app(app, message_queue=app.config.get('SOCKETIO_MESSAGE_QUEUE'))
+    socketio.init_app(app, cors_allowed_origins="*", message_queue=app.config.get('SOCKETIO_MESSAGE_QUEUE'))
 
 
 @socketio.on('connect')

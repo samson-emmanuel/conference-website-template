@@ -85,31 +85,14 @@ df = pd.read_excel(file_path, sheet_name="Getting to Know the Delegates")
 # Database Connection
 def connect_to_database():
     try:
-        # Use the Config object which is populated by pydantic-settings from the .env file
-        db_user = Config.DATABASE_USER
-        db_pass = Config.DATABASE_PASSWORD
-        db_name = Config.DATABASE_NAME
-        db_host = Config.DATABASE_HOST
+        db_user = os.getenv("DATABASE_USER")
+        db_pass = os.getenv("DATABASE_PASSWORD")
+        db_name = os.getenv("DATABASE_NAME")
+        unix_socket = os.getenv("DATABASE_HOST")
 
-        # Determine if connecting via Unix socket or TCP/IP
-        if os.getenv("USE_PUBLIC_IP_FOR_DB", "False").lower() == "true":
-            # Connect via TCP/IP
-            conn = mysql.connector.connect(
-                user=db_user,
-                password=db_pass,
-                database=db_name,
-                host=db_host, # Use host for TCP/IP
-                auth_plugin='mysql_native_password'
-            )
-        else:
-            # Connect via Unix socket
-            conn = mysql.connector.connect(
-                user=db_user,
-                password=db_pass,
-                database=db_name,
-                unix_socket=db_host, # Use unix_socket for Unix socket path
-                auth_plugin='mysql_native_password'
-            )
+        conn = mysql.connector.connect(
+            user=db_user, password=db_pass, database=db_name, unix_socket=unix_socket
+        )
         return conn
     except Exception as e:
         print(f"Database connection failed: {e}")
@@ -752,7 +735,6 @@ def schedule():
 
 
 @app.route("/save_data", methods=["POST"])
-@csrf.exempt
 def save_data():
     try:
         payload = request.get_json()
