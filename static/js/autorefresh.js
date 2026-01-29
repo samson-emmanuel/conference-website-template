@@ -1,4 +1,4 @@
-
+/*
 const AUTOREFRESH_INTERVAL = 60000; // 1 minute
 
 /**
@@ -12,3 +12,4 @@ function refreshPage() {
 // Start the auto-refresh interval.
 console.log('[Autorefresh] Service started. Page will refresh every 1 minute.');
 setInterval(refreshPage, AUTOREFRESH_INTERVAL);
+*/

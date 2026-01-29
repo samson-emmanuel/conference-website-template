@@ -1,4 +1,4 @@
-
+/*
 const AUTOSAVE_INTERVAL = 60000; // 1 minute
 
 /**
@@ -58,3 +58,4 @@ document.addEventListener('DOMContentLoaded', () => {
   setInterval(saveData, AUTOSAVE_INTERVAL);
   console.log('[Autosave] Service started. Data will be saved every 1 minute.');
 });
+*/
