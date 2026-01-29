@@ -4,7 +4,6 @@ import os
 import secrets
 import pandas as pd
 import mysql.connector
-from mysql.connector import errorcode
 from flask_login import (
     LoginManager,
     UserMixin,
@@ -17,6 +16,8 @@ from flask_mail import Mail, Message
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_wtf.csrf import CSRFProtect, validate_csrf
 from wtforms import ValidationError
+
+from dotenv import load_dotenv
 
 # from flask_limiter import Limiter
 # from flask_limiter.util import get_remote_address
@@ -32,6 +33,10 @@ from io import BytesIO
 
 app = Flask(__name__)
 init_app(app)
+
+
+load_dotenv() 
+
 
 # Configuration
 DATABASE_CONFIG = {
@@ -88,10 +93,10 @@ def connect_to_database():
         db_user = os.getenv("DATABASE_USER")
         db_pass = os.getenv("DATABASE_PASSWORD")
         db_name = os.getenv("DATABASE_NAME")
-        unix_socket = os.getenv("DATABASE_HOST")
+        db_host = os.getenv("DATABASE_HOST")
 
         conn = mysql.connector.connect(
-            user=db_user, password=db_pass, database=db_name, unix_socket=unix_socket
+            user=db_user, password=db_pass, database=db_name, host=db_host
         )
         return conn
     except Exception as e:
