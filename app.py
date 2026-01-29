@@ -39,7 +39,7 @@ DATABASE_CONFIG = {
     "user": Config.DATABASE_USER,
     "password": Config.DATABASE_PASSWORD,
     "database": Config.DATABASE_NAME,
-    "auth_plugin": "mysql_native_password",  # Explicitly specify the plugin
+    # "auth_plugin": "mysql_native_password",  # Explicitly specify the plugin
 }
 UPLOAD_FOLDER = "static/uploads"
 ALLOWED_EXTENSIONS = {".jpg", ".jpeg", ".png", ".gif"}
