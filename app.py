@@ -39,19 +39,12 @@ DATABASE_CONFIG = {
     "user": Config.DATABASE_USER,
     "password": Config.DATABASE_PASSWORD,
     "database": Config.DATABASE_NAME,
-    # "auth_plugin": "mysql_native_password",  # Explicitly specify the plugin
+    "auth_plugin": "mysql_native_password",  # Explicitly specify the plugin
 }
 UPLOAD_FOLDER = "static/uploads"
 ALLOWED_EXTENSIONS = {".jpg", ".jpeg", ".png", ".gif"}
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 app.secret_key = secrets.token_hex(32)  # Strong secret key
-
-# For production, use a message queue like Redis or RabbitMQ
-app.config['SOCKETIO_MESSAGE_QUEUE'] = os.environ.get('SOCKETIO_MESSAGE_QUEUE')
-
-# URL for the client to connect to the Socket.IO server
-SOCKET_IO_URL = os.environ.get('SOCKET_IO_URL', 'http://127.0.0.1:5000')
-
 
 # Flask-Mail Configuration
 
@@ -83,54 +76,20 @@ df = pd.read_excel(file_path, sheet_name="Getting to Know the Delegates")
 
 
 # Database Connection
-# def connect_to_database():
-#     try:
-#         # Use the Config object which is populated by pydantic-settings from the .env file
-#         db_user = Config.DATABASE_USER
-#         db_pass = Config.DATABASE_PASSWORD
-#         db_name = Config.DATABASE_NAME
-#         db_host = Config.DATABASE_HOST
-
-#         # Determine if connecting via Unix socket or TCP/IP
-#         if os.getenv("USE_PUBLIC_IP_FOR_DB", "False").lower() == "true":
-#             # Connect via TCP/IP
-#             conn = mysql.connector.connect(
-#                 user=db_user,
-#                 password=db_pass,
-#                 database=db_name,
-#                 host=db_host, # Use host for TCP/IP
-#                 auth_plugin='mysql_native_password'
-#             )
-#         else:
-#             # Connect via Unix socket
-#             conn = mysql.connector.connect(
-#                 user=db_user,
-#                 password=db_pass,
-#                 database=db_name,
-#                 unix_socket=db_host, # Use unix_socket for Unix socket path
-#                 auth_plugin='mysql_native_password'
-#             )
-#         return conn
-#     except Exception as e:
-#         print(f"Database connection failed: {e}")
-#         return None
-
-
 def connect_to_database():
     try:
         db_user = os.getenv("DATABASE_USER")
         db_pass = os.getenv("DATABASE_PASSWORD")
         db_name = os.getenv("DATABASE_NAME")
-        db_host = os.getenv("DATABASE_HOST")
+        unix_socket = os.getenv("DATABASE_HOST")
 
         conn = mysql.connector.connect(
-            user=db_user, password=db_pass, database=db_name, host=db_host
+            user=db_user, password=db_pass, database=db_name, unix_socket=unix_socket
         )
         return conn
     except Exception as e:
         print(f"Database connection failed: {e}")
         return None
-
 
 
 # Initialize Database
@@ -748,32 +707,27 @@ def feature_selection():
 
 @app.route('/industrial')
 def industrial():
-    return render_template('industrial.html', SOCKET_IO_URL=SOCKET_IO_URL)
+    return render_template('industrial.html')
 
 @app.route('/commercial')
 def commercial():
-    return render_template('commercial.html', SOCKET_IO_URL=SOCKET_IO_URL)
+    return render_template('commercial.html')
 
 @app.route('/logistics')
 def logistics():
-    return render_template('logistics.html', SOCKET_IO_URL=SOCKET_IO_URL)
+    return render_template('logistics.html')
 
 @app.route('/summary')
 def summary():
-    return render_template('summary.html', SOCKET_IO_URL=SOCKET_IO_URL)
+    return render_template('summary.html')
 
 @app.route('/schedule')
 def schedule():
     return render_template('schedule.html')
 
-@app.route('/accountability')
-def accountability():
-    return render_template('accountability_cluster.html')
-
 
 
 @app.route("/save_data", methods=["POST"])
-@csrf.exempt
 def save_data():
     try:
         payload = request.get_json()
