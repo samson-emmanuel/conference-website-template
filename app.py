@@ -17,6 +17,7 @@ from flask_mail import Mail, Message
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_wtf.csrf import CSRFProtect, validate_csrf
 from wtforms import ValidationError
+import logging
 
 # from flask_limiter import Limiter
 # from flask_limiter.util import get_remote_address
@@ -739,16 +740,23 @@ def schedule():
 @csrf.exempt
 def save_data():
     try:
+        logging.info("Received request to /save_data")
         payload = request.get_json()
+        logging.info(f"Payload: {payload}")
+
         page_name = payload.get("page")
         data = payload.get("data")
 
         if not page_name or data is None:
+            logging.warning("Missing page or data in payload")
             return jsonify({"status": "error", "message": "Missing page or data"}), 400
 
+        logging.info("Connecting to database...")
         conn = connect_to_database()
         if not conn:
+            logging.error("Database connection failed")
             return jsonify({"status": "error", "message": "Database connection failed"}), 500
+        logging.info("Database connection successful")
 
         cursor = conn.cursor()
         
@@ -756,6 +764,7 @@ def save_data():
         # cursor.execute("DELETE FROM cell_data WHERE page_name = %s", (page_name,))
 
         # Then, insert new data
+        logging.info("Executing database insertions...")
         for row_idx, row in enumerate(data):
             for col_idx, cell_value in enumerate(row):
                 # Using INSERT ... ON DUPLICATE KEY UPDATE to insert or update cell data
@@ -767,15 +776,17 @@ def save_data():
                     """,
                     (page_name, row_idx, col_idx, cell_value)
                 )
+        logging.info("Database insertions complete")
 
         conn.commit()
         cursor.close()
         conn.close()
+        logging.info("Data saved successfully")
 
         return jsonify({"status": "success", "message": "Data saved successfully"})
 
     except Exception as e:
-        app.logger.error(f"Error in /save_data: {e}")
+        logging.exception(f"Error in /save_data: {e}")
         return jsonify({"status": "error", "message": "An internal error occurred"}), 500
 
 
@@ -783,9 +794,12 @@ def save_data():
 @csrf.exempt
 def load_data(page_name):
     try:
+        logging.info(f"Received request to /load_data for page: {page_name}")
         conn = connect_to_database()
         if not conn:
+            logging.error("Database connection failed for /load_data")
             return jsonify({"status": "error", "message": "Database connection failed"}), 500
+        logging.info("Database connection successful for /load_data")
 
         cursor = conn.cursor(dictionary=True)
         cursor.execute("SELECT row_index, col_index, cell_value FROM cell_data WHERE page_name = %s ORDER BY row_index, col_index", (page_name,))
@@ -793,6 +807,7 @@ def load_data(page_name):
         results = cursor.fetchall()
         cursor.close()
         conn.close()
+        logging.info(f"Successfully fetched data for page {page_name}")
 
         # Reconstruct the potentially jagged 2D array for the frontend
         data = []
@@ -811,11 +826,11 @@ def load_data(page_name):
                 # Sort cells by col_index to ensure correct order
                 sorted_cells = sorted(rows[row_idx], key=lambda x: x[0])
                 data.append([cell[1] for cell in sorted_cells])
-
+        logging.info(f"Data reconstructed for page {page_name}: {data}")
         return jsonify(data)
 
     except Exception as e:
-        app.logger.error(f"Error in /load_data/{page_name}: {e}")
+        logging.exception(f"Error in /load_data/{page_name}: {e}")
         return jsonify({"status": "error", "message": "An internal error occurred"}), 500
 
 
