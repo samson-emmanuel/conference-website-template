@@ -222,6 +222,14 @@
                 
                 const dataToSave = getTableData();
                 
+                fetch('/save_data', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': csrfToken
+                    },
+                    body: JSON.stringify({ page: PAGE_NAME, data: dataToSave }),
+                })
                 .then(response => response.json())
                 .then(result => {
                     if (result.status === 'success') {

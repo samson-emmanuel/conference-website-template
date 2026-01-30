@@ -28,11 +28,9 @@ import cloudinary.api
 from cloudinary.utils import cloudinary_url
 from config import Config
 from PIL import Image
-from sockets import init_app, socketio
 from io import BytesIO
 
 app = Flask(__name__)
-init_app(app)
 
 # Configuration
 DATABASE_CONFIG = {
@@ -84,20 +82,35 @@ def connect_to_database():
         db_name = os.getenv("DATABASE_NAME")
         db_host = os.getenv("DATABASE_HOST")
 
+        logging.info(f"Attempting to connect to database host: {db_host}")
+
         # Check if running in Google App Engine environment
         if os.getenv('GAE_ENV', '').startswith('standard'):
+            logging.info("Running in GAE environment, connecting via TCP.")
             # Connect using TCP
             conn = mysql.connector.connect(
-                user=db_user, password=db_pass, database=db_name, host=db_host
+                user=db_user, password=db_pass, database=db_name, host=db_host,
+                connect_timeout=10
             )
         else:
+            logging.info("Not in GAE environment, connecting via Unix socket.")
             # Connect using Unix socket for local development
             conn = mysql.connector.connect(
                 user=db_user, password=db_pass, database=db_name, unix_socket=db_host
             )
+        logging.info("Database connection successful.")
         return conn
+    except mysql.connector.Error as err:
+        logging.error(f"Database connection failed with error: {err}")
+        if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
+            logging.error("Something is wrong with your user name or password")
+        elif err.errno == errorcode.ER_BAD_DB_ERROR:
+            logging.error("Database does not exist")
+        else:
+            logging.error(err)
+        return None
     except Exception as e:
-        print(f"Database connection failed: {e}")
+        logging.error(f"An unexpected error occurred during database connection: {e}")
         return None
 
 
@@ -175,6 +188,8 @@ def initialize_database():
         conn.commit()
         cursor.close()
         conn.close()
+    else:
+        logging.error("Could not connect to the database, so initialization is skipped.")
 
 
 initialize_database()
@@ -847,6 +862,4 @@ def seat_page():
 
 
 if __name__ == "__main__":
-    # app.run(debug=os.getenv("FLASK_DEBUG", "False").lower() == "true")
-
-    socketio.run(app, debug=os.getenv("FLASK_DEBUG", "False").lower() == "true")
+    app.run(debug=os.getenv("FLASK_DEBUG", "False").lower() == "true")
