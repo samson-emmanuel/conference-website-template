@@ -81,11 +81,19 @@ def connect_to_database():
         db_user = os.getenv("DATABASE_USER")
         db_pass = os.getenv("DATABASE_PASSWORD")
         db_name = os.getenv("DATABASE_NAME")
-        unix_socket = os.getenv("DATABASE_HOST")
+        db_host = os.getenv("DATABASE_HOST")
 
-        conn = mysql.connector.connect(
-            user=db_user, password=db_pass, database=db_name, unix_socket=unix_socket
-        )
+        # Check if running in Google App Engine environment
+        if os.getenv('GAE_ENV', '').startswith('standard'):
+            # Connect using TCP
+            conn = mysql.connector.connect(
+                user=db_user, password=db_pass, database=db_name, host=db_host
+            )
+        else:
+            # Connect using Unix socket for local development
+            conn = mysql.connector.connect(
+                user=db_user, password=db_pass, database=db_name, unix_socket=db_host
+            )
         return conn
     except Exception as e:
         print(f"Database connection failed: {e}")
