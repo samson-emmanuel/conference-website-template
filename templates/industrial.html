@@ -230,12 +230,22 @@
                     },
                     body: JSON.stringify({ page: PAGE_NAME, data: dataToSave }),
                 })
-                .then(response => response.json())
-                .then(result => {
-                    if (result.status === 'success') {
-                        showNotification('Data saved successfully!', 'success');
+                .then(response => {
+                    if (response.headers.get('Content-Type').includes('application/json')) {
+                        return response.json();
                     } else {
-                        showNotification('Error saving data: ' + result.message, 'error');
+                        // Redirect to login page if response is not JSON
+                        window.location.href = '/login';
+                        return null;
+                    }
+                })
+                .then(result => {
+                    if (result) {
+                        if (result.status === 'success') {
+                            showNotification('Data saved successfully!', 'success');
+                        } else {
+                            showNotification('Error saving data: ' + result.message, 'error');
+                        }
                     }
                 })
                 .catch(error => {
@@ -252,11 +262,21 @@
 
             function loadInitialData() {
                 fetch(`/load_data/${PAGE_NAME}`)
-                .then(response => response.json())
+                .then(response => {
+                    if (response.headers.get('Content-Type').includes('application/json')) {
+                        return response.json();
+                    } else {
+                        // Redirect to login page if response is not JSON
+                        window.location.href = '/login';
+                        return null;
+                    }
+                })
                 .then(data => {
-                    console.log("Loaded initial data:", data);
                     if (data) {
-                        updateTable(data);
+                        console.log("Loaded initial data:", data);
+                        if (data) {
+                            updateTable(data);
+                        }
                     }
                 })
                 .catch(error => console.error('Error loading initial data:', error));
