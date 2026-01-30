@@ -736,7 +736,7 @@ def schedule():
 
 
 @app.route("/save_data", methods=["POST"])
-@login_required
+@csrf.exempt
 def save_data():
     try:
         payload = request.get_json()
@@ -780,7 +780,7 @@ def save_data():
 
 
 @app.route("/load_data/<page_name>")
-@login_required
+@csrf.exempt
 def load_data(page_name):
     try:
         conn = connect_to_database()
