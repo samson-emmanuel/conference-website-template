@@ -222,15 +222,11 @@
                 
                 const dataToSave = getTableData();
                 
-                fetch('/save_data', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRFToken': csrfToken
-                    },
-                    body: JSON.stringify({ page: PAGE_NAME, data: dataToSave }),
-                })
                 .then(response => {
+                    if (response.redirected) {
+                        window.location.href = response.url;
+                        return null;
+                    }
                     if (response.headers.get('Content-Type').includes('application/json')) {
                         return response.json();
                     } else {
@@ -263,6 +259,10 @@
             function loadInitialData() {
                 fetch(`/load_data/${PAGE_NAME}`)
                 .then(response => {
+                    if (response.redirected) {
+                        window.location.href = response.url;
+                        return null;
+                    }
                     if (response.headers.get('Content-Type').includes('application/json')) {
                         return response.json();
                     } else {
